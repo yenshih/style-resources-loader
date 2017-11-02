@@ -57,5 +57,5 @@ npm i style-resources-loader -D
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**[`resources`]**|`{string | string[]}`|`/`|Path to resources.|
-|**[`injector`]**|`{'prepend' | 'append' | (source: string, resource: string) => string}`|`'prepend'`|Indicate how the loader inject resources. You can write your own injector and control the resource injection precisely.|
+|**`resources`**|`{string \| string[]}`|`/`|Path to resources.|
+|**`injector`**|`{'prepend' \| 'append' \| (source: string, resource: string) => string}`|`'prepend'`|Indicate how the loader inject resources. You can write your own injector and control the resource injection precisely.|
