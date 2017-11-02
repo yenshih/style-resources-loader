@@ -1,23 +1,23 @@
 {
     "extends": [
-      "tslint:latest",
-      "tslint-config-airbnb"
+        "tslint:latest",
+        "tslint-config-airbnb"
     ],
     "rules": {
-      "import-name": [false],
-      "interface-name": [true, "never-prefix"],
-      "jsx-boolean-value": [true, "never"],
-      "jsx-no-multiline-js": [false],
-      "max-line-length": [true, 120],
-      "member-ordering": [false],
-      "no-shadowed-variable": [false],
-      "no-unused-expression": [true, "allow-fast-null-checks"],
-      "object-literal-sort-keys": [false],
-      "ordered-imports": [false],
-      "prefer-array-literal": [false],
-      "strict-boolean-expressions": [false],
-      "ter-indent": [true, 4, {
-        "SwitchCase": 1
-      }]
+        "import-name": [false],
+        "interface-name": [true, "never-prefix"],
+        "jsx-boolean-value": [true, "never"],
+        "jsx-no-multiline-js": [false],
+        "max-line-length": [true, 120],
+        "member-ordering": [false],
+        "no-shadowed-variable": [false],
+        "no-unused-expression": [true, "allow-fast-null-checks"],
+        "object-literal-sort-keys": [false],
+        "ordered-imports": [false],
+        "prefer-array-literal": [false],
+        "strict-boolean-expressions": [false],
+        "ter-indent": [true, 4, {
+            "SwitchCase": 1
+        }]
     }
-  }
+}
