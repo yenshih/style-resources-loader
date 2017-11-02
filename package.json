@@ -1,6 +1,6 @@
 {
   "name": "style-resources-loader",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CSS preprocessor resources loader for webpack",
   "main": "lib/index.js",
   "files": [
@@ -14,7 +14,8 @@
     "test": "jest --colors",
     "test:coverage": "npm test -- --coverage",
     "start": "npm test -- --watch",
-    "build": "tsc -m commonjs --outDir lib -d"
+    "build": "tsc --outDir lib -d",
+    "prepare": "npm run clean && npm run lint && npm run test && npm run build"
   },
   "repository": {
     "type": "git",

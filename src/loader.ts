@@ -1,18 +1,18 @@
-import { readFile } from 'fs';
-import { resolve, relative, dirname } from 'path';
-import { promisify } from 'util';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as util from 'util';
 
+import * as glob from 'glob';
 import { loader } from 'webpack';
 import { getOptions } from 'loader-utils';
-import { sync } from 'glob';
 
-export type StyleResourcesLoaderInjectorKeys = 'prepend' | 'append';
+export type StyleResourceInjectorKeys = 'prepend' | 'append';
 
-export type StyleResourcesLoaderInjector = (source: string | Buffer, resource: string) => string;
+export type StyleResourcesInjector = (source: string | Buffer, resource: string) => string;
 
 export type StyleResourcesLoaderOptions = Partial<{
-    resources: string | ReadonlyArray<string>;
-    injector: StyleResourcesLoaderInjectorKeys | StyleResourcesLoaderInjector;
+    resources: string | string[];
+    injector: StyleResourceInjectorKeys | StyleResourcesInjector;
 }>;
 
 const loader: loader.Loader = function (source) {
@@ -23,36 +23,46 @@ const loader: loader.Loader = function (source) {
         return this.callback(new Error('style-resources-loader: Asynchronous loader is not supported.'));
     }
 
-    const { resources, injector = 'prepend' }: StyleResourcesLoaderOptions = getOptions(this);
-    if (!resources) {
+    const isString = (arg: any): arg is string => typeof arg === 'string';
+
+    const { resources, injector = 'prepend' }: StyleResourcesLoaderOptions = getOptions(this) || {};
+
+    if (!isString(resources) && !(Array.isArray(resources) && resources.every(isString))) {
         return callback(new Error(
             'style-resources-loader: Expected options.resources to be a string or an array of string.'
-            + ` Instead received: ${typeof resources}.`,
+            + ` Instead received ${resources}: ${typeof resources}.`,
         ));
     }
 
-    const context = this.options.context || process.cwd();
+    if (isString(injector) ? !['prepend', 'append'].includes(injector) : typeof injector !== 'function') {
+        return callback(new Error(
+            'style-resources-loader: Expected options.resources to be `prepend`, `append` or a function.'
+            + ` Instead received ${injector}: ${typeof injector}.`,
+        ));
+    }
 
-    const files = (typeof resources === 'string'
-        ? sync(resources)
-        : ([] as string[]).concat(...resources.map(resource => sync(resource))))
-        .map(resource => resolve(context, resource));
+    const { context = process.cwd() } = this.options;
+
+    const files = (isString(resources)
+        ? glob.sync(resources)
+        : ([] as string[]).concat(...resources.map(resource => glob.sync(resource))))
+        .map(resource => path.resolve(context, resource));
 
     files.forEach(this.addDependency.bind(this));
 
     Promise.all(files.map(async (file) => {
-        const content = await promisify(readFile)(file, 'utf8');
+        const content = await util.promisify(fs.readFile)(file, 'utf8');
         if (!/\.(?:s[ac]|le)ss$/i.test(file)) {
             return content;
         }
         return content.replace(/@import\s+(?:'([^'])+'|"([^"])"|([^\s"';]))/g, (match, single, double, unquote) => {
-            const absolutePath = resolve(dirname(file), single || double || unquote);
-            const relativePath = relative(this.context, absolutePath);
+            const absolutePath = path.resolve(path.dirname(file), single || double || unquote);
+            const relativePath = path.relative(this.context, absolutePath);
             const quote = (match.match(/['"]$/) || [''])[0];
             return `@import ${quote}${relativePath}${quote}`;
         });
     })).then((contents) => {
-        const resource = contents.join('\n') + '\n';
+        const resource = contents.join('\n');
         if (typeof injector === 'function') {
             try {
                 return callback(null, injector(source, resource));
