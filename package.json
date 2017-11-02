@@ -1,6 +1,6 @@
 {
   "name": "style-resources-loader",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "CSS preprocessor resources loader for webpack",
   "main": "lib/index.js",
   "files": [
