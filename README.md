@@ -102,13 +102,17 @@ For example, `path.resolve(__dirname, './styles/*/*.less')` would include all `l
 An optional function which controls the resources injection precisely.
 
 It receives two parameters:
-  - source
+
+- **source**
+
     A string containing the content of the source file.
-  - resources
-    An array of resource, each contains `file` and `content` properties.
-    - file
-      A string represents the absolute path to the resource.
-    - content
-      A string containing the content of the resource file.
+
+- **resources**
+
+    An array of resource, each contains `file` and `content` property:
+
+    - **file**: A string represents the absolute path to the resource.
+
+    - **content**: A string containing the content of the resource file.
 
 It defaults to `(source, resources) => resources.map(({ content }) => content).join('\n') + source`, which means the loader prepends all resources to source file.
