@@ -1,6 +1,6 @@
 {
   "name": "style-resources-loader",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "CSS preprocessor resources loader for webpack",
   "main": "lib/index.js",
   "files": [
@@ -50,16 +50,16 @@
   },
   "devDependencies": {
     "@types/glob": "^5.0.33",
-    "@types/jest": "^21.1.2",
+    "@types/jest": "^21.1.6",
     "@types/loader-utils": "^1.1.0",
-    "@types/node": "^8.0.32",
-    "@types/webpack": "^3.0.14",
+    "@types/node": "^8.0.53",
+    "@types/webpack": "^3.8.1",
     "coveralls": "^3.0.0",
     "cross-env": "^5.0.5",
     "jest": "^21.2.1",
-    "ts-jest": "^21.1.0",
+    "ts-jest": "^21.2.3",
     "tslint": "^5.7.0",
-    "tslint-config-airbnb": "^5.3.0",
+    "tslint-config-airbnb": "^5.4.2",
     "typescript": "^2.5.3"
   },
   "browserify": {
