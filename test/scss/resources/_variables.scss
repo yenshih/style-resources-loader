@@ -1,0 +1,8 @@
+// TODO: rewrite `resolveImportUrl` to support the following `@import` situations
+
+// "../variables/color.scss", '../variables/font' only screen
+//     and (min-width: 320px)
+//     and (max-width: 568px)
+//     and (orientation: portrait);
+// $version: 'v4-dev';
+// url("https://github.com/twbs/bootstrap/blob/#{$version}/scss/_variables.scss");

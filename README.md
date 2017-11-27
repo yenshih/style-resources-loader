@@ -39,7 +39,7 @@ Append `variables` to all `less` files and override original `less variables`.
         loader: 'style-resources-loader',
         options: {
             patterns: 'path/to/less/variables/*.less',
-            injector: (source, resources) => source + resources.map(({ content }) => content).join('\n')
+            injector: (source, resources) => source + resources.map(({ content }) => content).join('')
         }
     }]
 }
@@ -61,7 +61,7 @@ Append `mixins` and prepend `variables` to all `scss` files with customized reso
                 const combineAll = (type) => resources
                     .filter(({ file }) => file.includes(type))
                     .map(({ content }) => content)
-                    .join('\n');
+                    .join('');
                 return combineAll('mixins') + source + combineAll('variables');
             }
         }
@@ -115,4 +115,4 @@ It receives two parameters:
 
     - **content**: A string containing the content of the resource file.
 
-It defaults to `(source, resources) => resources.map(({ content }) => content).join('\n') + source`, which means the loader prepends all resources to source file.
+It defaults to `(source, resources) => resources.map(({ content }) => content).join('') + source`, which means the loader prepends all resources to source file.
