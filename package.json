@@ -1,6 +1,6 @@
 {
   "name": "style-resources-loader",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "CSS preprocessor resources loader for webpack",
   "main": "lib/index.js",
   "files": [
@@ -16,7 +16,7 @@
     "posttest": "rimraf test/**/outputs",
     "start": "npm test -- --watch",
     "build": "tsc --outDir lib -d",
-    "prepare": "npm run clean && npm run lint && npm run test && npm run build"
+    "prepare": "npm run clean && npm run lint && npm run build && npm run test"
   },
   "repository": {
     "type": "git",
