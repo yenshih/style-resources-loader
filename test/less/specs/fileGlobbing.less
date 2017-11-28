@@ -1,0 +1,15 @@
+@body-background: #fff;
+@html-font-size: 100px;
+.size(@width, @height: @width) {
+    width: @width;
+    height: @height;
+}
+html {
+    font-size: @html-font-size;
+}
+body {
+    background: @body-background;
+}
+#root {
+    .size(100%);
+}

@@ -3,6 +3,6 @@ import * as path from 'path';
 import { StyleResourcesFileExt } from '../../src';
 
 export default (ext: StyleResourcesFileExt) => ({
-    patterns: path.resolve(__dirname, `../${ext}/variables/_color.${ext}`),
+    patterns: path.resolve(__dirname, `../${ext}/variables/color.${ext}`),
     resolveUrl: () => false,
 });

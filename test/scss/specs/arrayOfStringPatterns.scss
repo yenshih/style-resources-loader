@@ -1,3 +1,7 @@
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
 $body-background: #fff;
 $html-font-size: 100px;
 html {

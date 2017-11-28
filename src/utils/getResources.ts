@@ -33,7 +33,10 @@ export async function getResources(
             const partialResources: StyleResources = await Promise.all(partialFiles.map(async (file) => {
                 const content = await util.promisify(fs.readFile)(file, 'utf8');
                 const resource: StyleResource = { file, content };
-                return resolveUrl ? resolveImportUrl.call(this, resource) : resource;
+                return resolveUrl ? {
+                    file,
+                    content: resolveImportUrl.call(this, resource),
+                } : resource;
             }));
 
             return partialResources;

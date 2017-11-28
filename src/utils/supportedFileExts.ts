@@ -1,6 +1,5 @@
 import { StyleResourcesFileExt } from '../';
 
-// TODO: support stylus
-export const supportedFileExts: ReadonlyArray<StyleResourcesFileExt> = ['sass', 'scss', 'less'];
+export const supportedFileExts: ReadonlyArray<StyleResourcesFileExt> = ['sass', 'scss', 'less', 'styl'];
 
 export const supportedFileExtsWithDot = supportedFileExts.map(ext => `.${ext}`);

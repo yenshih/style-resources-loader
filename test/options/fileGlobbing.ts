@@ -5,6 +5,6 @@ import { StyleResourcesFileExt, StyleResourcesLoaderOriginalOptions } from '../.
 export default (ext: StyleResourcesFileExt): StyleResourcesLoaderOriginalOptions => ({
     patterns: [
         path.resolve(__dirname, `../${ext}/variables/*.${ext}`),
-        path.resolve(__dirname, `../${ext}/mixins/_size.${ext}`),
+        path.resolve(__dirname, `../${ext}/mixins/*.${ext}`),
     ],
 });

@@ -1,4 +1,5 @@
-$body-background: #fff;
+@import "resources/mixins";
+@import "resources/variables";
 html {
     font-size: $html-font-size;
 }

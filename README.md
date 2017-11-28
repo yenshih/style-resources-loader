@@ -5,7 +5,7 @@
 [![npm version](https://img.shields.io/npm/v/style-resources-loader.svg?style=flat-square)](https://www.npmjs.com/package/style-resources-loader)
 [![npm downloads](https://img.shields.io/npm/dm/style-resources-loader.svg?style=flat-square)](https://www.npmjs.com/package/style-resources-loader)
 
-This loader is a CSS preprocessor resources loader for webpack, which injects your style resources (e.g. `variables / mixins`) into multiple `sass / scss / less` files.
+This loader is a CSS preprocessor resources loader for webpack, which injects your style resources (e.g. `variables / mixins`) into multiple `sass / scss / less / stylus` files.
 
 It's mainly used to
  - share your `variables / mixins / functions` across all style files, so you don't need to `@import` them manually.
@@ -45,17 +45,17 @@ Append `variables` to all `less` files and override original `less variables`.
 }
 ```
 
-Append `mixins` and prepend `variables` to all `scss` files with customized resources injector.
+Append `mixins` and prepend `variables` to all `stylus` files with customized resources injector.
 
 ``` js
 {
     test: /\.scss$/,
-    use: ['style-loader', 'css-loader', 'sass-loader', {
+    use: ['style-loader', 'css-loader', 'stylus-loader', {
         loader: 'style-resources-loader',
         options: {
             patterns: [
-                'path/to/scss/variables/*.scss',
-                'path/to/scss/mixins/*.scss'
+                'path/to/stylus/variables/*.styl',
+                'path/to/stylus/mixins/*.styl'
             ],
             injector: (source, resources) => {
                 const combineAll = (type) => resources

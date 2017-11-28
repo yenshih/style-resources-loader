@@ -19,7 +19,7 @@ export async function loadResources(
         if (typeof next !== 'string' && !(next instanceof Buffer)) {
             throw new TypeError(
                 '[style-resources-loader] Expected options.injector(...) returns a string or a Buffer. '
-                + `Instead returns ${typeof next}.`,
+                + `Instead received ${typeof next}.`,
             );
         }
 

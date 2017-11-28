@@ -14,7 +14,7 @@ export const execTestOf = (ext: StyleResourcesFileExt) => {
             if (typeof assertError !== 'function') {
                 throw new Error(
                     `Test \`${testId}\` throws an error. `
-                    + 'It requires an `assertError` function as the second argument in `execTest(...).`',
+                    + 'It requires an `assertError` function as the second argument in `execTest(...)`.',
                 );
             }
             assertError(err);

@@ -4,21 +4,25 @@ import { loader } from 'webpack';
 
 import { StyleResource } from '../';
 
-// TODO: rewrite this function to support complicated `@import` situations
 export function resolveImportUrl(
     this: loader.LoaderContext,
     { file, content }: StyleResource,
-): StyleResource {
-    return {
-        file,
-        content: content.replace(
-            /@import\s+(?:'([^']+)'|"([^"]+)"|([^\s"';]+))/g,
-            (match, single, double, unquote) => {
-                const absolutePath = path.resolve(path.dirname(file), single || double || unquote);
-                const relativePath = path.relative(this.context, absolutePath);
-                const quote = (match.match(/['"]$/) || [''])[0];
-                return `@import ${quote}${relativePath}${quote}`;
-            },
-        ),
-    };
+): string {
+    return content.replace(/(@import|@require)([()a-z,\s]+)(?:'([^']+)'|"([^"]+)"|([^\s"';]+))/g, (
+        match: string,
+        imports: string,
+        options: string,
+        single: string | undefined,
+        double: string | undefined,
+        unquoted: string | undefined,
+    ) => {
+        const pathToResource = single || double || unquoted;
+        if (!pathToResource || /^[~/]/.test(pathToResource)) {
+            return match;
+        }
+        const absolutePathToResource = path.resolve(path.dirname(file), pathToResource);
+        const relativePathFromContextToResource = path.relative(this.context, absolutePathToResource);
+        const quote = (match.match(/['"]$/) || [''])[0];
+        return `${imports}${options}${quote}${relativePathFromContextToResource}${quote}`;
+    });
 }

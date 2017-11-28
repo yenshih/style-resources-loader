@@ -1,0 +1,13 @@
+@import "../mixins/size";
+@import '~bootstrap/mixins';
+@import '../variables/color';
+@import "../variables/font.scss";
+html {
+    font-size: $html-font-size;
+}
+body {
+    background: $body-background;
+}
+#root {
+    @include size(100%);
+}
