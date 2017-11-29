@@ -8,10 +8,10 @@ export function resolveImportUrl(
     this: loader.LoaderContext,
     { file, content }: StyleResource,
 ): string {
-    return content.replace(/(@import|@require)([()a-z,\s]+)(?:'([^']+)'|"([^"]+)"|([^\s"';]+))/g, (
+    return content.replace(/(@import|@require)(\s+(?:\([a-z,\s]+\)\s*)?)(?:'([^']+)'|"([^"]+)"|([^\s"';]+))/g, (
         match: string,
-        imports: string,
-        options: string,
+        importDeclaration: string,
+        spacingOrOptions: string,
         single: string | undefined,
         double: string | undefined,
         unquoted: string | undefined,
@@ -23,6 +23,6 @@ export function resolveImportUrl(
         const absolutePathToResource = path.resolve(path.dirname(file), pathToResource);
         const relativePathFromContextToResource = path.relative(this.context, absolutePathToResource);
         const quote = (match.match(/['"]$/) || [''])[0];
-        return `${imports}${options}${quote}${relativePathFromContextToResource}${quote}`;
+        return `${importDeclaration}${spacingOrOptions}${quote}${relativePathFromContextToResource}${quote}`;
     });
 }
