@@ -14,7 +14,7 @@
     "test": "jest --colors",
     "test:coverage": "npm test -- --coverage",
     "posttest": "rimraf test/**/outputs",
-    "start": "npm test -- --watch",
+    "start": "tsc --outDir lib -w",
     "build": "tsc --outDir lib -d",
     "prepare": "npm run clean && npm run lint && npm run build && npm run test"
   },
@@ -23,12 +23,17 @@
     "url": "https://github.com/yenshih/style-resources-loader.git"
   },
   "keywords": [
+    "webpack",
+    "loader",
+    "style",
     "sass",
     "scss",
     "less",
-    "resources",
-    "webpack",
-    "loader"
+    "stylus",
+    "inject",
+    "resource",
+    "variable",
+    "mixin"
   ],
   "authors": [
     "Shi Yan <yenshih95@gmail.com> (https://github.com/yenshih)"
@@ -52,29 +57,29 @@
     "coveragePathIgnorePatterns": [
       "node_modules",
       "test",
-      "utils"
+      "src"
     ]
   },
   "dependencies": {
     "glob": "^7.1.2",
-    "loader-utils": "^1.1.0",
-    "webpack": "^3.8.1"
+    "loader-utils": "^1.1.0"
   },
   "devDependencies": {
     "@types/glob": "^5.0.33",
-    "@types/jest": "^21.1.6",
+    "@types/jest": "^21.1.8",
     "@types/loader-utils": "^1.1.0",
-    "@types/node": "^8.0.53",
+    "@types/node": "^8.0.54",
     "@types/webpack": "^3.8.1",
     "@types/webpack-merge": "^4.1.1",
     "coveralls": "^3.0.0",
     "cross-env": "^5.0.5",
     "jest": "^21.2.1",
     "raw-loader": "^0.5.1",
-    "ts-jest": "^21.2.3",
+    "ts-jest": "^21.2.4",
     "tslint": "^5.7.0",
     "tslint-config-airbnb": "^5.4.2",
-    "typescript": "^2.5.3",
+    "typescript": "^2.6.2",
+    "webpack": "^3.9.1",
     "webpack-merge": "^4.1.1"
   },
   "peerDependencies": {
