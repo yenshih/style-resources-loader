@@ -112,7 +112,7 @@ module.exports = {
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**[`patterns`](#patterns)**|`{String | String[]}`|`/`|Path to the resources you would like to inject|
+|**[`patterns`](#patterns)**|`{String \| String[]}`|`/`|Path to the resources you would like to inject|
 |**[`injector`](#injector)**|`{Function}`|`(source, resources) => resources.map(({ content }) => content).join('') + source`|Controls the resources injection precisely|
 |**[`resolveUrl`](#resolveUrl)**|`{Boolean}`|`true`|Enable/Disable `@import` url to be resolved|
 
@@ -145,7 +145,7 @@ It receives two parameters:
 |**`source`**|`{String}`|`/`|Content of the source file|
 |**[`resources`](#resources)**|`{Object[]}`|`/`|Resource descriptors|
 
-#### resources
+#### `resources`
 
 An array of resource, each contains `file` and `content` property:
 
@@ -162,7 +162,7 @@ A boolean which defaults to `true`, represents the relative path in `@import` or
 
 If you were to use `@import` or `@require` statements in style resource file, you should make sure that the `@import` url is relative to that resource rather than the source file.
 
-You could disable this feature by setting this options to `false`.
+You could disable this feature by setting `resolveUrl` to `false`.
 
 <h2 align="center">License</h2>
 
