@@ -113,7 +113,7 @@ module.exports = {
 |:--:|:--:|:-----:|:----------|
 |**[`patterns`](#patterns)**|`{String \| String[]}`|`/`|Path to the resources you would like to inject|
 |**[`injector`](#injector)**|`{Function}`|`(source, resources) => resources.map(({ content }) => content).join('') + source`|Controls the resources injection precisely|
-|**[`resolveUrl`](#resolveUrl)**|`{Boolean}`|`true`|Enable/Disable `@import` url to be resolved|
+|**[`resolveUrl`](#resolveurl)**|`{Boolean}`|`true`|Enable/Disable `@import` url to be resolved|
 
 ### `patterns`
 
