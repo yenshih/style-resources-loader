@@ -1,9 +1,30 @@
 # style-resources-loader
 
-[![build status](https://img.shields.io/travis/yenshih/style-resources-loader/master.svg?style=flat-square)](https://travis-ci.org/yenshih/style-resources-loader)
-[![Coverage Status](https://img.shields.io/coveralls/yenshih/style-resources-loader/master.svg?style=flat)](https://coveralls.io/github/yenshih/style-resources-loader?branch=master)
 [![npm version](https://img.shields.io/npm/v/style-resources-loader.svg?style=flat-square)](https://www.npmjs.com/package/style-resources-loader)
 [![npm downloads](https://img.shields.io/npm/dm/style-resources-loader.svg?style=flat-square)](https://www.npmjs.com/package/style-resources-loader)
+[![build status](https://img.shields.io/travis/yenshih/style-resources-loader/master.svg?style=flat-square)](https://travis-ci.org/yenshih/style-resources-loader)
+[![Coverage Status](https://img.shields.io/coveralls/yenshih/style-resources-loader/master.svg?style=flat)](https://coveralls.io/github/yenshih/style-resources-loader?branch=master)
+
+<div align="center">
+  <a href="https://github.com/webpack/webpack">
+    <img
+        width="200"
+        height="200"
+        src="https://webpack.js.org/assets/icon-square-big.svg"
+    >
+  </a>
+  <h1>Style Resources Loader</h1>
+  <p>CSS preprocessor resources loader for webpack.</p>
+</div>
+
+
+<h2 align="center">Install</h2>
+
+```bash
+npm i style-resources-loader -D
+```
+
+<h2 align="center">Usage</h2>
 
 This loader is a CSS preprocessor resources loader for webpack, which injects your style resources (e.g. `variables / mixins`) into multiple `sass / scss / less / stylus` files.
 
@@ -11,75 +32,91 @@ It's mainly used to
  - share your `variables / mixins / functions` across all style files, so you don't need to `@import` them manually.
  - override `variables` in style files provided by other libraries (e.g. [ant-design](https://github.com/ant-design/ant-design)) and customize your own theme.
 
-## Example
+<h2 align="center">Examples</h2>
 
-Prepend `variables` and `mixins` to all `scss` files with default resources injector.
+Prepends `variables` and `mixins` to all `scss` files with default resources injector.
 
+**webpack.config.js**
 ``` js
-{
-    test: /\.scss$/,
-    use: ['style-loader', 'css-loader', 'sass-loader', {
-        loader: 'style-resources-loader',
-        options: {
-            patterns: [
-                'path/to/scss/variables/*.scss',
-                'path/to/scss/mixins/*.scss'
-            ]
-        }
-    }]
+module.exports = {
+    // ...
+    module: {
+        rules: [{
+            test: /\.scss$/,
+            use: ['style-loader', 'css-loader', 'sass-loader', {
+                loader: 'style-resources-loader',
+                options: {
+                    patterns: [
+                        path.resolve(__dirname, 'path/to/scss/variables/*.scss'),
+                        path.resolve(__dirname, 'path/to/scss/mixins/*.scss'),
+                    ]
+                }
+            }]
+        }]
+    }
 }
 ```
 
-Append `variables` to all `less` files and override original `less variables`.
+Appends `variables` to all `less` files and override original `less variables`.
 
+**webpack.config.js**
 ```js
-{
-    test: /\.less$/,
-    use: ['style-loader', 'css-loader', 'less-loader', {
-        loader: 'style-resources-loader',
-        options: {
-            patterns: 'path/to/less/variables/*.less',
-            injector: (source, resources) => source + resources.map(({ content }) => content).join('')
-        }
-    }]
+module.exports = {
+    // ...
+    module: {
+        rules: [{
+            test: /\.less$/,
+            use: ['style-loader', 'css-loader', 'less-loader', {
+                loader: 'style-resources-loader',
+                options: {
+                    patterns: path.resolve(__dirname, 'path/to/less/variables/*.less'),
+                    injector: (source, resources) => source + resources.map(({ content }) => content).join('')
+                }
+            }]
+        }]
+    }
 }
 ```
 
-Append `mixins` and prepend `variables` to all `stylus` files with customized resources injector.
+Appends `mixins` and prepends `variables` to all `stylus` files with customized resources injector.
 
+**webpack.config.js**
 ``` js
-{
-    test: /\.scss$/,
-    use: ['style-loader', 'css-loader', 'stylus-loader', {
-        loader: 'style-resources-loader',
-        options: {
-            patterns: [
-                'path/to/stylus/variables/*.styl',
-                'path/to/stylus/mixins/*.styl'
-            ],
-            injector: (source, resources) => {
-                const combineAll = (type) => resources
-                    .filter(({ file }) => file.includes(type))
-                    .map(({ content }) => content)
-                    .join('');
-                return combineAll('mixins') + source + combineAll('variables');
-            }
-        }
-    }]
+module.exports = {
+    // ...
+    module: {
+        rules: [{
+            test: /\.scss$/,
+            use: ['style-loader', 'css-loader', 'stylus-loader', {
+                loader: 'style-resources-loader',
+                options: {
+                    patterns: [
+                        path.resolve(__dirname, 'path/to/stylus/variables/*.styl'),
+                        path.resolve(__dirname, 'path/to/stylus/mixins/*.styl')
+                    ],
+                    injector: (source, resources) => {
+                        const combineAll = (type) => resources
+                            .filter(({ file }) => file.includes(type))
+                            .map(({ content }) => content)
+                            .join('');
+                        return combineAll('mixins') + source + combineAll('variables');
+                    }
+                }
+            }]
+        }]
+    }
 }
 ```
 
-## Installation
+<h2 align="center">Options</h2>
 
-```
-npm i style-resources-loader -D
-```
+|Name|Type|Default|Description|
+|:--:|:--:|:-----:|:----------|
+|**[`patterns`](#patterns)**|`{String | String[]}`|`/`|Path to the resources you would like to inject|
+|**[`injector`](#injector)**|`{Function}`|`(source, resources) => resources.map(({ content }) => content).join('') + source`|Controls the resources injection precisely|
+|**[`resolveUrl`](#resolveUrl)**|`{Boolean}`|`true`|Enable/Disable `@import` url to be resolved|
 
-## Documentation
-
-### Loader Options
-
-#### patterns
+### `patterns`
 
 A string or an array of string, represents the path to the resources you would like to inject.
 
@@ -97,22 +134,36 @@ For example, `path.resolve(__dirname, './styles/*/*.less')` would include all `l
   |-- reset.less
 ```
 
-#### injector
+### `injector`
 
 An optional function which controls the resources injection precisely.
 
 It receives two parameters:
 
-- **source**
+|Name|Type|Default|Description|
+|:--:|:--:|:-----:|:----------|
+|**`source`**|`{String}`|`/`|Content of the source file|
+|**[`resources`](#resources)**|`{Object[]}`|`/`|Resource descriptors|
 
-    A string containing the content of the source file.
+#### resources
 
-- **resources**
+An array of resource, each contains `file` and `content` property:
 
-    An array of resource, each contains `file` and `content` property:
-
-    - **file**: A string represents the absolute path to the resource.
-
-    - **content**: A string containing the content of the resource file.
+|Name|Type|Default|Description|
+|:--:|:--:|:-----:|:----------|
+|**`file`**|`{String}`|`/`|Absolute path to the resource|
+|**`content`**|`{String}`|`/`|Content of the resource file|
 
 It defaults to `(source, resources) => resources.map(({ content }) => content).join('') + source`, which means the loader prepends all resources to source file.
+
+### `resolveUrl`
+
+A boolean which defaults to `true`, represents the relative path in `@import` or `@require` statements will have been resolved correctly.
+
+If you were to use `@import` or `@require` statements in style resource file, you should make sure that the `@import` url is relative to that resource rather than the source file.
+
+You could disable this feature by setting this options to `false`.
+
+<h2 align="center">License</h2>
+
+[MIT](http://www.opensource.org/licenses/mit-license.php)
