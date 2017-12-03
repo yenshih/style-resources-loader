@@ -1,9 +1,8 @@
-# style-resources-loader
-
-[![npm version](https://img.shields.io/npm/v/style-resources-loader.svg?style=flat-square)](https://www.npmjs.com/package/style-resources-loader)
-[![npm downloads](https://img.shields.io/npm/dm/style-resources-loader.svg?style=flat-square)](https://www.npmjs.com/package/style-resources-loader)
-[![build status](https://img.shields.io/travis/yenshih/style-resources-loader/master.svg?style=flat-square)](https://travis-ci.org/yenshih/style-resources-loader)
-[![Coverage Status](https://img.shields.io/coveralls/yenshih/style-resources-loader/master.svg?style=flat)](https://coveralls.io/github/yenshih/style-resources-loader?branch=master)
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![downloads][downloads]][downloads-url]
+[![build][build]][build-url]
+[![coverage][coverage]][coverage-url]
 
 <div align="center">
   <a href="https://github.com/webpack/webpack">
@@ -167,3 +166,14 @@ You could disable this feature by setting `resolveUrl` to `false`.
 <h2 align="center">License</h2>
 
 [MIT](http://www.opensource.org/licenses/mit-license.php)
+
+[npm]: https://img.shields.io/npm/v/style-resources-loader.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/style-resources-loader
+[node]: https://img.shields.io/node/v/style-resources-loader.svg
+[node-url]: https://nodejs.org
+[downloads]: https://img.shields.io/npm/dm/style-resources-loader.svg?style=flat-square
+[downloads-url]: https://www.npmjs.com/package/style-resources-loader
+[build]: https://img.shields.io/travis/yenshih/style-resources-loader/master.svg?style=flat-square
+[build-url]: https://travis-ci.org/yenshih/style-resources-loader
+[coverage]: https://img.shields.io/coveralls/yenshih/style-resources-loader/master.svg?style=flat
+[coverage-url]: https://coveralls.io/github/yenshih/style-resources-loader?branch=master

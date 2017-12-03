@@ -2,6 +2,9 @@
   "name": "style-resources-loader",
   "version": "0.5.2",
   "description": "CSS preprocessor resources loader for webpack",
+  "engines": {
+    "node": ">=7.6"
+  },
   "main": "lib/index.js",
   "files": [
     "lib",
