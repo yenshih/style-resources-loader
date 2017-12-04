@@ -25,7 +25,7 @@ npm i style-resources-loader -D
 
 <h2 align="center">Usage</h2>
 
-This loader is a CSS preprocessor resources loader for webpack, which injects your style resources (e.g. `variables / mixins`) into multiple `sass / scss / less / stylus` files.
+This loader is a CSS preprocessor resources loader for webpack, which injects your style resources (e.g. `variables / mixins`) into multiple imported `sass / scss / less / stylus` modules.
 
 It's mainly used to
  - share your `variables / mixins / functions` across all style files, so you don't need to `@import` them manually.
@@ -113,13 +113,14 @@ module.exports = {
 |:--:|:--:|:-----:|:----------|
 |**[`patterns`](#patterns)**|`{String \| String[]}`|`/`|Path to the resources you would like to inject|
 |**[`injector`](#injector)**|`{Function}`|`(source, resources) => resources.map(({ content }) => content).join('') + source`|Controls the resources injection precisely|
+|**[`globOptions`](#globoptions)**|`{Object}`|`{}`|An options that can be passed to `glob(...)`|
 |**[`resolveUrl`](#resolveurl)**|`{Boolean}`|`true`|Enable/Disable `@import` url to be resolved|
 
 ### `patterns`
 
 A string or an array of string, represents the path to the resources you would like to inject.
 
-It supports globbing. You could include many files using a file mask.
+It supports [globbing](https://github.com/isaacs/node-glob). You could include many files using a file mask.
 
 For example, `path.resolve(__dirname, './styles/*/*.less')` would include all `less` files from `variables` and `mixins` directories and ignore `reset.less` in such following structure.
 
@@ -155,11 +156,15 @@ An array of resource, each contains `file` and `content` property:
 
 It defaults to `(source, resources) => resources.map(({ content }) => content).join('') + source`, which means the loader prepends all resources to source file.
 
+### `globOptions`
+
+An options that can be passed to `glob(...)`. See [node-glob options](https://github.com/isaacs/node-glob#options) for more details.
+
 ### `resolveUrl`
 
-A boolean which defaults to `true`, represents the relative path in `@import` or `@require` statements will have been resolved correctly.
+A boolean which defaults to `true`. It represents whether the relative path in `@import` or `@require` statements should have been resolved.
 
-If you were to use `@import` or `@require` statements in style resource file, you should make sure that the `@import` url is relative to that resource rather than the source file.
+If you were to use `@import` or `@require` statements in style resource file, you should make sure that the url is relative to that resource rather than the source file.
 
 You could disable this feature by setting `resolveUrl` to `false`.
 
