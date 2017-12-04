@@ -1,15 +1,16 @@
 import { loader } from 'webpack';
 
 import { StyleResources, StyleResourcesLoaderOptions } from '../';
-import { getResources } from './';
+import { getNormalizedOptions, getResources } from './';
 
 export async function loadResources(
     this: loader.LoaderContext,
     source: string | Buffer,
-    options: StyleResourcesLoaderOptions,
     callback: loader.loaderCallback,
 ) {
     try {
+        const options: StyleResourcesLoaderOptions = getNormalizedOptions.call(this);
+
         const resources: StyleResources = await getResources.call(this, options);
 
         const { injector } = options;

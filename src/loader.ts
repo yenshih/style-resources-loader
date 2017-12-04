@@ -1,8 +1,6 @@
 import { loader } from 'webpack';
 
-import { getNormalizedOptions, loadResources } from './utils';
-
-import { StyleResourcesLoaderOptions } from './';
+import { loadResources } from './utils';
 
 const loader: loader.Loader = function (source) {
     this.cacheable && this.cacheable();
@@ -13,12 +11,7 @@ const loader: loader.Loader = function (source) {
         throw new Error('[style-resources-loader] Synchronous compilation is not supported.');
     }
 
-    try {
-        const options: StyleResourcesLoaderOptions = getNormalizedOptions.call(this);
-        loadResources.call(this, source, options, callback);
-    } catch (err) {
-        callback(err);
-    }
+    loadResources.call(this, source, callback);
 };
 
 export default loader;
