@@ -72,6 +72,14 @@ describe('style-resources-loader', () => {
                     }),
                 );
                 it(
+                    'should cause an error when `options.globOptions` isn\'t an object',
+                    execTest('invalidGlobOptions', (err) => {
+                        expect(err).toEqual(expect.stringMatching(/TypeError: \[style-resources-loader\] /));
+                        expect(err).toEqual(expect.stringMatching(/Expected options\.globOptions to be an object\. /));
+                        expect(err).toEqual(expect.stringMatching(/Instead received number\./));
+                    }),
+                );
+                it(
                     'should cause an error when `options.resolveUrl` isn\'t a boolean',
                     execTest('invalidResolveUrl', (err) => {
                         expect(err).toEqual(expect.stringMatching(/TypeError: \[style-resources-loader\] /));
@@ -79,6 +87,9 @@ describe('style-resources-loader', () => {
                         expect(err).toEqual(expect.stringMatching(/Instead received function\./));
                     }),
                 );
+                it('should cause an error when `glob(...)` throws an error', execTest('globThrowsAnError', (err) => {
+                    expect(err).toEqual(expect.stringMatching(/Error: EACCES: permission denied/));
+                }));
                 it(
                     'should cause an error when `options.injector(...)` returns neither a string nor a Buffer',
                     execTest('invalidInjectorReturn', (err) => {

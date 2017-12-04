@@ -8,11 +8,14 @@ export function getNormalizedOptions(this: loader.LoaderContext): StyleResources
     const defaultInjector: StyleResourcesInjector = (source, resources) =>
         resources.map(({ content }) => content).join('') + source;
 
+    const defaultGlobOptions = {};
+
     const defaultResolveUrl = true;
 
     const {
         patterns,
         injector = defaultInjector,
+        globOptions = defaultGlobOptions,
         resolveUrl = defaultResolveUrl,
     }: StyleResourcesLoaderOriginalOptions = getOptions(this) || {};
 
@@ -30,6 +33,13 @@ export function getNormalizedOptions(this: loader.LoaderContext): StyleResources
         );
     }
 
+    if (typeof globOptions !== 'object') {
+        throw new TypeError(
+            '[style-resources-loader] Expected options.globOptions to be an object. '
+            + `Instead received ${typeof globOptions}.`,
+        );
+    }
+
     if (typeof resolveUrl !== 'boolean') {
         throw new TypeError(
             '[style-resources-loader] Expected options.resolveUrl to be a boolean. '
@@ -40,6 +50,7 @@ export function getNormalizedOptions(this: loader.LoaderContext): StyleResources
     return {
         patterns,
         injector,
+        globOptions,
         resolveUrl,
     };
 }

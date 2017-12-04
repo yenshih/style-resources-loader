@@ -1,5 +1,4 @@
 import * as fs from 'fs';
-import * as path from 'path';
 import * as util from 'util';
 
 import * as glob from 'glob';
@@ -13,9 +12,7 @@ export async function getResources(
     this: loader.LoaderContext,
     options: StyleResourcesLoaderOptions,
 ) {
-    const { patterns, resolveUrl } = options;
-
-    const { context = process.cwd() } = this.options;
+    const { patterns, globOptions, resolveUrl } = options;
 
     const resourceFragments = await Promise.all((isString(patterns) ? [patterns] : patterns)
         // We can change `map` to `flatMap` when `Array.prototype.flatMap` is fully supported.
@@ -23,9 +20,7 @@ export async function getResources(
             // Type signature of `util.promisify` is not compatible with `glob`.
             // Not super happy with this approach.
             const partialFiles = await new Promise<ReadonlyArray<string>>((resolve, reject) =>
-                glob(pattern, (err, matches) => err ? reject(err) : resolve(
-                    matches.filter(isStyleFile).map(file => path.resolve(context, file)),
-                )),
+                glob(pattern, globOptions, (err, matches) => err ? reject(err) : resolve(matches.filter(isStyleFile))),
             );
 
             partialFiles.forEach(this.dependency.bind(this));

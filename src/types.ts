@@ -1,3 +1,5 @@
+import * as glob from 'glob';
+
 export type StyleResourcesFileExt = 'sass' | 'scss' | 'less' | 'styl';
 
 export interface StyleResource {
@@ -12,6 +14,7 @@ export type StyleResourcesInjector = (source: string | Buffer, resources: StyleR
 export interface StyleResourcesLoaderOptions {
     patterns: string | string[];
     injector: StyleResourcesInjector;
+    globOptions: glob.IOptions;
     resolveUrl: boolean;
 }
 
