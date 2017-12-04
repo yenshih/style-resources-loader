@@ -164,7 +164,7 @@ An options that can be passed to `glob(...)`. See [node-glob options](https://gi
 
 A boolean which defaults to `true`. It represents whether the relative path in `@import` or `@require` statements should have been resolved.
 
-If you were to use `@import` or `@require` statements in style resource file, you should make sure that the url is relative to that resource rather than the source file.
+If you were to use `@import` or `@require` statements in style resource file, you should make sure that the url is relative to that resource file, rather than the source file.
 
 You could disable this feature by setting `resolveUrl` to `false`.
 
