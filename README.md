@@ -138,6 +138,8 @@ For example, `path.resolve(__dirname, './styles/*/*.less')` would include all `l
 
 An optional function which controls the resources injection precisely.
 
+It defaults to `(source, resources) => resources.map(({ content }) => content).join('') + source`, which means the loader prepends all resources to source file.
+
 It receives two parameters:
 
 |Name|Type|Default|Description|
@@ -154,15 +156,13 @@ An array of resource, each contains `file` and `content` property:
 |**`file`**|`{String}`|`/`|Absolute path to the resource|
 |**`content`**|`{String}`|`/`|Content of the resource file|
 
-It defaults to `(source, resources) => resources.map(({ content }) => content).join('') + source`, which means the loader prepends all resources to source file.
-
 ### `globOptions`
 
 An options that can be passed to `glob(...)`. See [node-glob options](https://github.com/isaacs/node-glob#options) for more details.
 
 ### `resolveUrl`
 
-A boolean which defaults to `true`. It represents whether the relative path in `@import` or `@require` statements should have been resolved.
+A boolean which defaults to `true`. It represents whether the relative path in `@import` or `@require` statements should be resolved.
 
 If you were to use `@import` or `@require` statements in style resource file, you should make sure that the url is relative to that resource file, rather than the source file.
 
