@@ -85,7 +85,7 @@ module.exports = {
     // ...
     module: {
         rules: [{
-            test: /\.scss$/,
+            test: /\.styl$/,
             use: ['style-loader', 'css-loader', 'stylus-loader', {
                 loader: 'style-resources-loader',
                 options: {
