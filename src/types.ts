@@ -13,9 +13,14 @@ export type StyleResourcesInjector = (source: string | Buffer, resources: StyleR
 
 export interface StyleResourcesLoaderOptions {
     patterns: string | string[];
-    injector: StyleResourcesInjector;
+    injector: StyleResourcesInjector | 'APPEND' | 'PREPEND';
     globOptions: glob.IOptions;
     resolveUrl: boolean;
 }
 
 export type StyleResourcesLoaderOriginalOptions = Partial<StyleResourcesLoaderOptions>;
+
+export interface SpecialInjectors {
+    PREPEND: StyleResourcesInjector;
+    APPEND: StyleResourcesInjector;
+}

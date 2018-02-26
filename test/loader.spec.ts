@@ -45,6 +45,8 @@ describe('style-resources-loader', () => {
 
             describe('injector', () => {
                 it('should work with customized function', execTest('customizedInjector'));
+                it('should work with `PREPEND`', execTest('specialPrependInjector'));
+                it('should work with `APPEND`', execTest('specialAppendInjector'));
             });
 
             describe('resolveUrl', () => {
@@ -64,10 +66,14 @@ describe('style-resources-loader', () => {
                     }),
                 );
                 it(
-                    'should cause an error when `options.injector` isn\'t a function',
+                    'should cause an error when `options.injector` isn\'t a function '
+                    + 'or one of the two constants: `PREPEND` and `APPEND`',
                     execTest('invalidInjector', (err) => {
                         expect(err).toEqual(expect.stringMatching(/TypeError: \[style-resources-loader\] /));
-                        expect(err).toEqual(expect.stringMatching(/Expected options\.injector to be a function\. /));
+                        expect(err).toEqual(expect.stringMatching(/Expected options\.injector to be a function or /));
+                        expect(err).toEqual(
+                            expect.stringMatching(/or one of the two constants: `PREPEND` and `APPEND`\. /),
+                        );
                         expect(err).toEqual(expect.stringMatching(/Instead received string\./));
                     }),
                 );
