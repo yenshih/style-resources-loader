@@ -4,27 +4,19 @@ import { getOptions } from 'loader-utils';
 import {
     StyleResourcesLoaderOptions,
     StyleResourcesLoaderOriginalOptions,
-    StyleResourcesSpecialInjectors,
     StyleResourcesInjector,
+    StyleResourcesInternalInjectors,
+    StyleResourcesOriginalInjector,
 } from '../';
 import { isString } from './';
 
-const specialInjectors: StyleResourcesSpecialInjectors = {
-    prepend: (source, resources) => [
-        ...resources.map(({ content }) => content),
-        source,
-    ].join(''),
-    append: (source, resources) => [
-        source,
-        ...resources.map(({ content }) => content),
-    ].join(''),
+const internalInjectors: StyleResourcesInternalInjectors = {
+    prepend: (source, resources) => resources.map(({ content }) => content).join('') + source,
+    append: (source, resources) => source + resources.map(({ content }) => content).join(''),
 };
 
-function getNormalizedInjector(
-    inputInjector: StyleResourcesInjector | keyof StyleResourcesSpecialInjectors,
-): StyleResourcesInjector {
-    return typeof inputInjector === 'function' ? inputInjector : specialInjectors[inputInjector];
-}
+const getNormalizedInjector = (injector: StyleResourcesOriginalInjector): StyleResourcesInjector =>
+    typeof injector === 'function' ? injector : internalInjectors[injector];
 
 export function getNormalizedOptions(this: loader.LoaderContext): StyleResourcesLoaderOptions {
     const defaultInjector = 'prepend';
@@ -47,7 +39,7 @@ export function getNormalizedOptions(this: loader.LoaderContext): StyleResources
         );
     }
 
-    if (typeof injector !== 'function' && !Object.keys(specialInjectors).includes(injector)) {
+    if (typeof injector !== 'function' && !Object.keys(internalInjectors).includes(injector)) {
         throw new TypeError(
             '[style-resources-loader] Expected options.injector to be a function '
             + 'or one of the two constants: `prepend` and `append`. '
