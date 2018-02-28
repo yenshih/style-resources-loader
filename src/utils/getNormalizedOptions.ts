@@ -41,8 +41,7 @@ export function getNormalizedOptions(this: loader.LoaderContext): StyleResources
 
     if (typeof injector !== 'function' && !Object.keys(internalInjectors).includes(injector)) {
         throw new TypeError(
-            '[style-resources-loader] Expected options.injector to be a function '
-            + 'or one of the two constants: `prepend` and `append`. '
+            '[style-resources-loader] Expected options.injector to be a function or `prepend`, `append`. '
             + `Instead received ${typeof injector}.`,
         );
     }

@@ -68,14 +68,12 @@ describe('style-resources-loader', () => {
                     }),
                 );
                 it(
-                    'should cause an error when `options.injector` isn\'t a function '
-                    + 'or one of the two constants: `prepend` and `append`',
+                    'should cause an error when `options.injector` isn\'t a function or `prepend`, `append`',
                     execTest('invalidInjector', (err) => {
                         expect(err).toMatchObject({
                             message: expect.stringContaining(
                                 'TypeError: [style-resources-loader] '
-                                + 'Expected options.injector to be a function '
-                                + 'or one of the two constants: `prepend` and `append`. '
+                                + 'Expected options.injector to be a function or `prepend`, `append`. '
                                 + 'Instead received string.',
                             ),
                         });
@@ -126,7 +124,7 @@ describe('style-resources-loader', () => {
                     'should cause an error when `options.injector(...)` throws an error',
                     execTest('injectorThrowsAnError', (err) => {
                         expect(err).toMatchObject({
-                            message: expect.stringContaining('Error: This error is thrown from injector.')
+                            message: expect.stringContaining('Error: This error is thrown from injector.'),
                         });
                     }),
                 );
