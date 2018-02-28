@@ -1,42 +1,44 @@
 import { loader } from 'webpack';
 import { getOptions } from 'loader-utils';
 
-import { StyleResourcesLoaderOptions, StyleResourcesLoaderOriginalOptions, SpecialInjectors } from '../';
+import {
+    StyleResourcesLoaderOptions,
+    StyleResourcesLoaderOriginalOptions,
+    StyleResourcesSpecialInjectors,
+    StyleResourcesInjector,
+} from '../';
 import { isString } from './';
 
-function fixEndLine(content: string): string {
-    return /\n+\s*$/g.test(content) ? content : (content + '\n');
-}
-
-const SPECIAL_INJECTORS: SpecialInjectors = {
-    PREPEND: (source, resources) => [
-        ...resources.map(({ content }) => fixEndLine(content)),
-        fixEndLine('' + source),
+const specialInjectors: StyleResourcesSpecialInjectors = {
+    prepend: (source, resources) => [
+        ...resources.map(({ content }) => content),
+        source,
     ].join(''),
-    APPEND: (source, resources) => [
-        fixEndLine('' + source),
-        ...resources.map(({ content }) => fixEndLine(content)),
+    append: (source, resources) => [
+        source,
+        ...resources.map(({ content }) => content),
     ].join(''),
 };
 
+function getNormalizedInjector(
+    inputInjector: StyleResourcesInjector | keyof StyleResourcesSpecialInjectors,
+): StyleResourcesInjector {
+    return typeof inputInjector === 'function' ? inputInjector : specialInjectors[inputInjector];
+}
+
 export function getNormalizedOptions(this: loader.LoaderContext): StyleResourcesLoaderOptions {
+    const defaultInjector = 'prepend';
+
     const defaultGlobOptions = {};
 
     const defaultResolveUrl = true;
 
-    const options: StyleResourcesLoaderOriginalOptions = getOptions(this) || {};
-    if (typeof options.injector === 'undefined') {
-        options.injector = SPECIAL_INJECTORS.PREPEND;
-    } else if (typeof options.injector === 'string') {
-        options.injector = SPECIAL_INJECTORS[options.injector] || options.injector;
-    }
-
     const {
         patterns,
-        injector,
+        injector = defaultInjector,
         globOptions = defaultGlobOptions,
         resolveUrl = defaultResolveUrl,
-    }: StyleResourcesLoaderOriginalOptions = options;
+    }: StyleResourcesLoaderOriginalOptions = getOptions(this) || {};
 
     if (!isString(patterns) && !(Array.isArray(patterns) && patterns.every(isString))) {
         throw new TypeError(
@@ -45,7 +47,7 @@ export function getNormalizedOptions(this: loader.LoaderContext): StyleResources
         );
     }
 
-    if (typeof injector !== 'function') {
+    if (typeof injector !== 'function' && !Object.keys(specialInjectors).includes(injector)) {
         throw new TypeError(
             '[style-resources-loader] Expected options.injector to be a function '
             + 'or one of the two constants: `PREPEND` and `APPEND`. '
@@ -69,7 +71,7 @@ export function getNormalizedOptions(this: loader.LoaderContext): StyleResources
 
     return {
         patterns,
-        injector,
+        injector: getNormalizedInjector(injector),
         globOptions,
         resolveUrl,
     };

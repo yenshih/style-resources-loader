@@ -11,16 +11,22 @@ export type StyleResources = ReadonlyArray<StyleResource>;
 
 export type StyleResourcesInjector = (source: string | Buffer, resources: StyleResources) => string;
 
-export interface StyleResourcesLoaderOptions {
+export interface StyleResourcesSpecialInjectors {
+    prepend: StyleResourcesInjector;
+    append: StyleResourcesInjector;
+}
+
+export interface StyleResourcesLoaderCommonOptions<I> {
     patterns: string | string[];
-    injector: StyleResourcesInjector | 'APPEND' | 'PREPEND';
+    injector: I;
     globOptions: glob.IOptions;
     resolveUrl: boolean;
 }
 
-export type StyleResourcesLoaderOriginalOptions = Partial<StyleResourcesLoaderOptions>;
+export type StyleResourcesLoaderOptions = StyleResourcesLoaderCommonOptions<StyleResourcesInjector>;
 
-export interface SpecialInjectors {
-    PREPEND: StyleResourcesInjector;
-    APPEND: StyleResourcesInjector;
-}
+export type StyleResourcesLoaderOriginalOptions = Partial<
+    StyleResourcesLoaderCommonOptions<
+        StyleResourcesInjector | keyof StyleResourcesSpecialInjectors
+    >
+>;

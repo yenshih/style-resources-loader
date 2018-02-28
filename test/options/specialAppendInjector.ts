@@ -4,5 +4,5 @@ import { StyleResourcesFileExt, StyleResourcesLoaderOriginalOptions } from '../.
 
 export default (ext: StyleResourcesFileExt): StyleResourcesLoaderOriginalOptions => ({
     patterns: path.resolve(__dirname, `../${ext}/resources/*.${ext}`),
-    injector: 'APPEND',
+    injector: 'append',
 });
