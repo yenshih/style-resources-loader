@@ -69,7 +69,7 @@ module.exports = {
                 loader: 'style-resources-loader',
                 options: {
                     patterns: path.resolve(__dirname, 'path/to/less/variables/*.less'),
-                    injector: (source, resources) => source + resources.map(({ content }) => content).join('')
+                    injector: 'append'
                 }
             }]
         }]
@@ -112,7 +112,7 @@ module.exports = {
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**[`patterns`](#patterns)**|`{String \| String[]}`|`/`|Path to the resources you would like to inject|
-|**[`injector`](#injector)**|`{Function}`|`(source, resources) => resources.map(({ content }) => content).join('') + source`|Controls the resources injection precisely|
+|**[`injector`](#injector)**|`{Function \| 'prepend' \| 'append'}`|`prepend`|Controls the resources injection precisely|
 |**[`globOptions`](#globoptions)**|`{Object}`|`{}`|An options that can be passed to `glob(...)`|
 |**[`resolveUrl`](#resolveurl)**|`{Boolean}`|`true`|Enable/Disable `@import` url to be resolved|
 
@@ -136,11 +136,11 @@ For example, `path.resolve(__dirname, './styles/*/*.less')` would include all `l
 
 ### `injector`
 
-An optional function which controls the resources injection precisely.
+An optional function which controls the resources injection precisely. It also supports `prepend` and `append` for convenience.
 
-It defaults to `(source, resources) => resources.map(({ content }) => content).join('') + source`, which means the loader prepends all resources to source file.
+It defaults to `prepend` (equivalent to `(source, resources) => resources.map(({ content }) => content).join('') + source` internally), which means the loader prepends all resources to source file.
 
-It receives two parameters:
+An injector function receives two parameters:
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
