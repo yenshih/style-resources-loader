@@ -56,7 +56,6 @@
       "tsx",
       "js"
     ],
-    "mapCoverage": true,
     "coveragePathIgnorePatterns": [
       "node_modules",
       "test",
@@ -68,22 +67,22 @@
     "loader-utils": "^1.1.0"
   },
   "devDependencies": {
-    "@types/glob": "^5.0.33",
-    "@types/jest": "^21.1.8",
-    "@types/loader-utils": "^1.1.0",
-    "@types/node": "^8.0.54",
-    "@types/webpack": "^3.8.1",
-    "@types/webpack-merge": "^4.1.1",
+    "@types/glob": "^5.0.35",
+    "@types/jest": "^22.1.3",
+    "@types/loader-utils": "^1.1.2",
+    "@types/node": "^9.4.6",
+    "@types/webpack": "^3.8.8",
+    "@types/webpack-merge": "^4.1.2",
     "coveralls": "^3.0.0",
-    "cross-env": "^5.0.5",
-    "jest": "^21.2.1",
+    "cross-env": "^5.1.3",
+    "jest": "^22.4.2",
     "raw-loader": "^0.5.1",
-    "ts-jest": "^21.2.4",
-    "tslint": "^5.7.0",
-    "tslint-config-airbnb": "^5.4.2",
-    "typescript": "^2.6.2",
-    "webpack": "^3.10.0",
-    "webpack-merge": "^4.1.1"
+    "ts-jest": "^22.4.0",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.7.0",
+    "typescript": "^2.7.2",
+    "webpack": "^3.11.0",
+    "webpack-merge": "^4.1.2"
   },
   "peerDependencies": {
     "webpack": "^2.0.0 || >= 3.0.0-rc.0 || ^3.0.0"
