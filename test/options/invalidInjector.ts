@@ -7,5 +7,5 @@ export default (ext: StyleResourcesFileExt) => ({
         path.resolve(__dirname, `../${ext}/variables/*.${ext}`),
         path.resolve(__dirname, `../${ext}/mixins/*.${ext}`),
     ],
-    injector: 'append',
+    injector: 'invalid injector config',
 });
