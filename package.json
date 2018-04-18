@@ -15,7 +15,7 @@
     "clean": "rimraf lib coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix && tslint -p . --fix",
     "test": "jest --colors",
-    "test:coverage": "npm test -- --coverage",
+    "coverage": "npm test -- --coverage",
     "posttest": "rimraf test/**/outputs",
     "start": "tsc --outDir lib -w",
     "build": "tsc --outDir lib -d",

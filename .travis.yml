@@ -6,8 +6,8 @@ before_install:
 script:
   - npm run lint
   - npm run build
-  - npm run test:coverage
-after_script: 
+  - npm run coverage
+after_script:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 branches:
   only:
