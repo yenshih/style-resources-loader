@@ -6,6 +6,7 @@ describe('style-resources-loader', () => {
     describe('enviroments', () => {
         describe('errors', () => {
             it('should cause an error in synchronous loader environments', () => {
+                /* eslint-disable-next-line global-require */
                 const styleResourcesLoader = require('../lib').default;
 
                 const loaderContextMock = {
@@ -14,15 +15,16 @@ describe('style-resources-loader', () => {
                     dependency: Function.prototype,
                 };
 
-                Object.defineProperty(loaderContextMock, 'options', {
+                Reflect.defineProperty(loaderContextMock, 'options', {
                     get() {
                         throw new Error('webpack options are not allowed to be accessed anymore.');
                     },
                 });
 
                 try {
-                    styleResourcesLoader.call(Object.create(loaderContextMock));
-                } catch (err) {
+                    Reflect.apply(styleResourcesLoader, Object.create(loaderContextMock), []);
+                }
+                catch (err) {
                     expect(err).toMatchObject({
                         message: expect.stringContaining(
                             '[style-resources-loader] Synchronous compilation is not supported.',
@@ -62,7 +64,7 @@ describe('style-resources-loader', () => {
                             message: expect.stringContaining(
                                 'TypeError: [style-resources-loader] '
                                 + 'Expected options.patterns to be a string or an array of string. '
-                                + 'Instead received undefined.',
+                                + 'Instead received object.',
                             ),
                         });
                     }),

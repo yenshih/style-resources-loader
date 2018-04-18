@@ -4,6 +4,7 @@
         "tslint-config-airbnb"
     ],
     "rules": {
+        "brace-style": [true, "stroustrup"],
         "import-name": [false],
         "interface-name": [true, "never-prefix"],
         "max-line-length": [true, 120],
@@ -13,6 +14,7 @@
         "no-unused-expression": [true, "allow-fast-null-checks"],
         "object-literal-sort-keys": [false],
         "object-shorthand-properties-first": [false],
+        "one-line": [false],
         "ordered-imports": [false],
         "prefer-array-literal": [false],
         "strict-boolean-expressions": [false],

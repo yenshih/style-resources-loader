@@ -9,9 +9,9 @@ export async function loadResources(
     callback: loader.loaderCallback,
 ) {
     try {
-        const options: StyleResourcesLoaderOptions = getNormalizedOptions.call(this);
+        const options: StyleResourcesLoaderOptions = Reflect.apply(getNormalizedOptions, this, []);
 
-        const resources: StyleResources = await getResources.call(this, options);
+        const resources: StyleResources = await Reflect.apply(getResources, this, [options]);
 
         const { injector } = options;
 
@@ -25,7 +25,8 @@ export async function loadResources(
         }
 
         return callback(null, next);
-    } catch (err) {
+    }
+    catch (err) {
         return callback(err);
     }
 }

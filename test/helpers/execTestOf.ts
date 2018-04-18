@@ -14,14 +14,16 @@ export const execTestOf = (ext: StyleResourcesFileExt) => {
     function execTest(testId: string, config: Configuration, assertError: (err: Error) => void): () => Promise<void>;
     function execTest(testId: string, ...args: any[]): () => Promise<void> {
         const [config, assertError]: [Configuration, (err: Error) => void] = (
-            (args: any[]): any => typeof args[0] === 'function' ? [undefined, args[0]] : args
+            (args: any[]): any => typeof args[0] === 'function' ? [{}, args[0]] : args
         )(args);
 
         return async () => {
-            const baseConfig = createBaseConfig(testId, !!assertError);
+            const baseConfig = await createBaseConfig(testId, !!assertError);
+
             try {
                 await runWebpack(merge(baseConfig, config));
-            } catch (err) {
+            }
+            catch (err) {
                 if (typeof assertError !== 'function') {
                     throw new Error(
                         `${err.message}\nTest \`${testId}\` throws an error. `
@@ -29,10 +31,14 @@ export const execTestOf = (ext: StyleResourcesFileExt) => {
                     );
                 }
                 assertError(err);
+
                 return;
             }
+
+            /* eslint-disable-next-line global-require */
             const actualStyle = require(`../${ext}/outputs/${testId}`);
-            const expectedStyle = readStyle(testId);
+            const expectedStyle = await readStyle(testId);
+
             expect(actualStyle).toBe(expectedStyle);
         };
     }

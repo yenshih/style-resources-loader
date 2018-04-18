@@ -1,0 +1,7 @@
+{
+    "linters": {
+        "*.js?(x)": ["eslint --fix", "git add"],
+        "*.ts?(x)": ["eslint --fix", "tslint --fix", "git add"]
+    },
+    "ignore": ["*.d.ts"]
+}

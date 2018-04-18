@@ -12,6 +12,7 @@ export default (ext: StyleResourcesFileExt): StyleResourcesLoaderOriginalOptions
             .filter(({ file }) => file.includes(type))
             .map(({ content }) => content)
             .join('');
+
         return combineAll('mixins') + source + combineAll('variables');
     },
 });

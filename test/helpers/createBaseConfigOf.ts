@@ -12,14 +12,20 @@ export const createBaseConfigOf = (ext: StyleResourcesFileExt) =>
             filename: `${testId}.js`,
             libraryTarget: 'commonjs2',
         },
+        mode: 'production',
         module: {
-            rules: [{
-                test: new RegExp(`\\.${ext}$`),
-                use: [...(isError ? [] : ['raw-loader']), {
-                    loader: path.resolve(__dirname, '../../lib'),
-                    options: require(`../options/${testId}`).default(ext),
-                }],
-            }],
+            rules: [
+                {
+                    test: new RegExp(`\\.${ext}$`),
+                    use: [
+                        ...isError ? [] : ['raw-loader'], {
+                            loader: path.resolve(__dirname, '../../lib'),
+                            /* eslint-disable-next-line global-require */
+                            options: require(`../options/${testId}`).default(ext),
+                        },
+                    ],
+                },
+            ],
         },
     });
 
