@@ -9,7 +9,8 @@ export interface StyleResource {
 
 export type StyleResources = ReadonlyArray<StyleResource>;
 
-export type StyleResourcesInjector = (source: string | Buffer, resources: StyleResources) => string;
+export type StyleResourcesInjector = (source: string | Buffer, resources: StyleResources) =>
+    string | Buffer | Promise<string | Buffer>;
 
 export type StyleResourcesInternalInjectors = Record<'prepend' | 'append', StyleResourcesInjector>;
 

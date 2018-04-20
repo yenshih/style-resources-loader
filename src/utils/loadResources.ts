@@ -1,7 +1,7 @@
 import { loader } from 'webpack';
 
 import { StyleResources, StyleResourcesLoaderOptions } from '../';
-import { getNormalizedOptions, getResources } from './';
+import { getNormalizedOptions, getResources, injectResources } from './';
 
 export async function loadResources(
     this: loader.LoaderContext,
@@ -13,18 +13,9 @@ export async function loadResources(
 
         const resources: StyleResources = await Reflect.apply(getResources, this, [options]);
 
-        const { injector } = options;
+        const content: string | Buffer = await Reflect.apply(injectResources, this, [options, source, resources]);
 
-        const next: any = injector(source, resources);
-
-        if (typeof next !== 'string' && !(next instanceof Buffer)) {
-            throw new TypeError(
-                '[style-resources-loader] Expected options.injector(...) returns a string or a Buffer. '
-                + `Instead received ${typeof next}.`,
-            );
-        }
-
-        return callback(null, next);
+        return callback(null, content);
     }
     catch (err) {
         return callback(err);

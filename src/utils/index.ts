@@ -1,5 +1,6 @@
 export { getNormalizedOptions } from './getNormalizedOptions';
 export { getResources } from './getResources';
+export { injectResources } from './injectResources';
 export { isString } from './isString';
 export { isStyleFile } from './isStyleFile';
 export { loadResources } from './loadResources';
