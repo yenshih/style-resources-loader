@@ -1,14 +1,15 @@
-import * as fs from 'fs';
-import * as util from 'util';
+import fs from 'fs';
+import util from 'util';
 
-import * as glob from 'glob';
+import glob from 'glob';
 
 import { loader } from 'webpack';
 
-import { StyleResource, StyleResources, StyleResourcesLoaderOptions } from '../';
-import { isString, isStyleFile, resolveImportUrl } from './';
+import { StyleResource, StyleResources, StyleResourcesLoaderOptions } from '..';
 
-export async function getResources(
+import { isString, isStyleFile, resolveImportUrl } from '.';
+
+async function getResources(
     this: loader.LoaderContext,
     options: StyleResourcesLoaderOptions,
 ) {
@@ -47,3 +48,5 @@ export async function getResources(
 
     return resources;
 }
+
+export default getResources;

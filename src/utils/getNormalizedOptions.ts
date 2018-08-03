@@ -7,8 +7,9 @@ import {
     StyleResourcesInjector,
     StyleResourcesInternalInjectors,
     StyleResourcesOriginalInjector,
-} from '../';
-import { isString } from './';
+} from '..';
+
+import { isString } from '.';
 
 const internalInjectors: StyleResourcesInternalInjectors = {
     prepend: (source, resources) => resources.map(({ content }) => content).join('') + source,
@@ -18,7 +19,7 @@ const internalInjectors: StyleResourcesInternalInjectors = {
 const getNormalizedInjector = (injector: StyleResourcesOriginalInjector): StyleResourcesInjector =>
     typeof injector === 'function' ? injector : internalInjectors[injector];
 
-export function getNormalizedOptions(this: loader.LoaderContext): StyleResourcesLoaderOptions {
+function getNormalizedOptions(this: loader.LoaderContext): StyleResourcesLoaderOptions {
     const defaultInjector = 'prepend';
 
     const defaultGlobOptions = {};
@@ -67,3 +68,5 @@ export function getNormalizedOptions(this: loader.LoaderContext): StyleResources
         resolveUrl,
     };
 }
+
+export default getNormalizedOptions;

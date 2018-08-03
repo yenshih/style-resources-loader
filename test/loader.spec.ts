@@ -1,6 +1,6 @@
-import { execTestOf } from './helpers';
-
 import { supportedFileExts } from '../src/utils';
+
+import { execTestOf } from './helpers';
 
 describe('style-resources-loader', () => {
     describe('enviroments', () => {

@@ -1,8 +1,8 @@
-export { getNormalizedOptions } from './getNormalizedOptions';
-export { getResources } from './getResources';
-export { injectResources } from './injectResources';
-export { isString } from './isString';
-export { isStyleFile } from './isStyleFile';
-export { loadResources } from './loadResources';
-export { resolveImportUrl } from './resolveImportUrl';
-export { supportedFileExts, supportedFileExtsWithDot } from './supportedFileExts';
+export { default as getNormalizedOptions } from './getNormalizedOptions';
+export { default as getResources } from './getResources';
+export { default as injectResources } from './injectResources';
+export { default as loadResources } from './loadResources';
+export { default as resolveImportUrl } from './resolveImportUrl';
+
+export * from './supportedFileExts';
+export * from './typeGuards';

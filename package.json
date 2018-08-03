@@ -2,6 +2,8 @@
   "name": "style-resources-loader",
   "version": "1.1.0",
   "description": "CSS preprocessor resources loader for webpack",
+  "author": "Shi Yan <yenshih95@gmail.com> (https://github.com/yenshih)",
+  "license": "MIT",
   "engines": {
     "node": ">=7.6"
   },
@@ -19,11 +21,7 @@
     "posttest": "rimraf test/**/outputs",
     "start": "tsc --outDir lib -w",
     "build": "tsc --outDir lib -d",
-    "prepare": "npm run clean && npm run lint && npm run build && npm run test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yenshih/style-resources-loader.git"
+    "prepare": "npm run clean && npm run lint && npm run build && npm run coverage"
   },
   "keywords": [
     "webpack",
@@ -38,46 +36,37 @@
     "variable",
     "mixin"
   ],
-  "authors": [
-    "Shi Yan <yenshih95@gmail.com> (https://github.com/yenshih)"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/yenshih/style-resources-loader/issues"
-  },
-  "npmName": "style-resources-loader",
+  "repository": "https://github.com/yenshih/style-resources-loader.git",
+  "homepage": "https://github.com/yenshih/style-resources-loader",
+  "bugs": "https://github.com/yenshih/style-resources-loader/issues",
   "dependencies": {
     "glob": "^7.1.2",
     "loader-utils": "^1.1.0"
   },
   "devDependencies": {
     "@types/glob": "^5.0.35",
-    "@types/jest": "^23.0.0",
+    "@types/jest": "^23.3.1",
     "@types/loader-utils": "^1.1.3",
-    "@types/node": "^10.3.0",
-    "@types/webpack": "^4.4.0",
+    "@types/node": "^10.5.5",
+    "@types/webpack": "^4.4.9",
     "@types/webpack-merge": "^4.1.3",
-    "coveralls": "^3.0.1",
-    "cross-env": "^5.1.6",
-    "eslint": "^4.19.1",
+    "coveralls": "^3.0.2",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.2.0",
+    "eslint-plugin-import": "^2.13.0",
     "husky": "^0.14.3",
-    "jest": "^23.1.0",
-    "lint-staged": "^7.1.3",
+    "jest": "^23.4.2",
+    "lint-staged": "^7.2.0",
     "raw-loader": "^0.5.1",
-    "ts-jest": "^22.4.6",
-    "tslint": "^5.10.0",
+    "ts-jest": "^23.1.2",
+    "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.9.2",
-    "typescript": "^2.9.1",
-    "typescript-eslint-parser": "^16.0.0",
-    "webpack": "^4.10.2",
-    "webpack-merge": "^4.1.2"
+    "typescript": "^3.0.1",
+    "typescript-eslint-parser": "^17.0.1",
+    "webpack": "^4.16.4",
+    "webpack-merge": "^4.1.4"
   },
   "peerDependencies": {
-    "webpack": "^2.0.0 || >= 3.0.0-rc.0 || ^3.0.0"
-  },
-  "browserify": {
-    "transform": [
-      "loose-envify"
-    ]
+    "webpack": "^3.0.0 || ^4.0.0"
   }
 }

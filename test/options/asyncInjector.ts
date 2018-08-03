@@ -1,6 +1,6 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import * as util from 'util';
+import fs from 'fs';
+import path from 'path';
+import util from 'util';
 
 import { StyleResourcesFileExt, StyleResourcesLoaderOriginalOptions } from '../../src';
 

@@ -10,7 +10,7 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "removeComments": true,
-        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "sourceMap": true,
@@ -23,6 +23,6 @@
         "src/**/*"
     ],
     "exclude": [
-        "/node_modules"
+        "node_modules"
     ]
 }

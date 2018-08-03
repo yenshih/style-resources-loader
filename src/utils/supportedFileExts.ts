@@ -1,4 +1,4 @@
-import { StyleResourcesFileExt } from '../';
+import { StyleResourcesFileExt } from '..';
 
 export const supportedFileExts: ReadonlyArray<StyleResourcesFileExt> = ['sass', 'scss', 'less', 'styl'];
 

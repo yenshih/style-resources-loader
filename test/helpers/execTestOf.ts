@@ -1,11 +1,11 @@
 import { Configuration } from 'webpack';
-
-import { StyleResourcesFileExt } from '../../src';
 import merge from 'webpack-merge';
 
-import { createBaseConfigOf, readStyleOf, runWebpack } from './';
+import { StyleResourcesFileExt } from '../../src';
 
-export const execTestOf = (ext: StyleResourcesFileExt) => {
+import { createBaseConfigOf, readStyleOf, runWebpack } from '.';
+
+const execTestOf = (ext: StyleResourcesFileExt) => {
     const createBaseConfig = createBaseConfigOf(ext);
     const readStyle = readStyleOf(ext);
 
@@ -35,7 +35,7 @@ export const execTestOf = (ext: StyleResourcesFileExt) => {
                 return;
             }
 
-            /* eslint-disable-next-line global-require */
+            /* eslint-disable-next-line global-require, import/no-dynamic-require */
             const actualStyle = require(`../${ext}/outputs/${testId}`);
             const expectedStyle = await readStyle(testId);
 
@@ -45,3 +45,5 @@ export const execTestOf = (ext: StyleResourcesFileExt) => {
 
     return execTest;
 };
+
+export default execTestOf;

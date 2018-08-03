@@ -1,4 +1,4 @@
-import * as glob from 'glob';
+import glob from 'glob';
 
 export type StyleResourcesFileExt = 'sass' | 'scss' | 'less' | 'styl';
 

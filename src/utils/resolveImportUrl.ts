@@ -1,10 +1,10 @@
-import * as path from 'path';
+import path from 'path';
 
 import { loader } from 'webpack';
 
-import { StyleResource } from '../';
+import { StyleResource } from '..';
 
-export function resolveImportUrl(
+function resolveImportUrl(
     this: loader.LoaderContext,
     { file, content }: StyleResource,
 ): string {
@@ -30,3 +30,5 @@ export function resolveImportUrl(
         return `${importDeclaration}${spacingOrOptions}${quote}${relativePathFromContextToResource}${quote}`;
     });
 }
+
+export default resolveImportUrl;

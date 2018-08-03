@@ -1,9 +1,9 @@
 import { loader } from 'webpack';
 
-import { StyleResourcesLoaderOptions, StyleResources } from '../';
+import { StyleResourcesLoaderOptions, StyleResources } from '..';
 
 /* eslint-disable-next-line max-params */
-export async function injectResources(
+async function injectResources(
     this: loader.LoaderContext,
     options: StyleResourcesLoaderOptions,
     source: string | Buffer,
@@ -24,3 +24,5 @@ export async function injectResources(
 
     return content;
 }
+
+export default injectResources;

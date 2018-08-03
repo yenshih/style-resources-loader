@@ -1,9 +1,10 @@
 import { loader } from 'webpack';
 
-import { StyleResources, StyleResourcesLoaderOptions } from '../';
-import { getNormalizedOptions, getResources, injectResources } from './';
+import { StyleResources, StyleResourcesLoaderOptions } from '..';
 
-export async function loadResources(
+import { getNormalizedOptions, getResources, injectResources } from '.';
+
+async function loadResources(
     this: loader.LoaderContext,
     source: string | Buffer,
     callback: loader.loaderCallback,
@@ -21,3 +22,5 @@ export async function loadResources(
         return callback(err);
     }
 }
+
+export default loadResources;

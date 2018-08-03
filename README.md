@@ -52,7 +52,8 @@ module.exports = {
                 }
             }]
         }]
-    }
+    },
+    // ...
 }
 ```
 
@@ -73,11 +74,12 @@ module.exports = {
                 }
             }]
         }]
-    }
+    },
+    // ...
 }
 ```
 
-Appends `mixins` and prepends `variables` to all `stylus` files with customized resources injector.
+Prepends `variables` and `mixins` to all `stylus` files with customized resources injector.
 
 **webpack.config.js**
 ``` js
@@ -98,12 +100,14 @@ module.exports = {
                             .filter(({ file }) => file.includes(type))
                             .map(({ content }) => content)
                             .join('');
-                        return combineAll('mixins') + source + combineAll('variables');
+
+                        return combineAll('variables') + combineAll('mixins') + source;
                     }
                 }
             }]
         }]
-    }
+    },
+    // ...
 }
 ```
 
