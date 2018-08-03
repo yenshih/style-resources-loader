@@ -57,7 +57,7 @@ module.exports = {
 }
 ```
 
-Appends `variables` to all `less` files and override original `less variables`.
+Appends `variables` to all `less` files and overrides original `less variables`.
 
 **webpack.config.js**
 ```js
@@ -96,7 +96,7 @@ module.exports = {
                         path.resolve(__dirname, 'path/to/stylus/mixins/*.styl')
                     ],
                     injector: (source, resources) => {
-                        const combineAll = (type) => resources
+                        const combineAll = type => resources
                             .filter(({ file }) => file.includes(type))
                             .map(({ content }) => content)
                             .join('');
