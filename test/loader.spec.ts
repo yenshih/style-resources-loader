@@ -5,9 +5,8 @@ import { execTestOf } from './helpers';
 describe('style-resources-loader', () => {
     describe('enviroments', () => {
         describe('errors', () => {
-            it('should cause an error in synchronous loader environments', () => {
-                /* eslint-disable-next-line global-require */
-                const styleResourcesLoader = require('../lib').default;
+            it('should cause an error in synchronous loader environments', async () => {
+                const styleResourcesLoader = (await import('../src')).default;
 
                 const loaderContextMock = {
                     async: Function.prototype,

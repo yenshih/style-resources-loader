@@ -5,7 +5,7 @@ import { Configuration } from 'webpack';
 import { StyleResourcesFileExt } from '../../src';
 
 const createBaseConfigOf = (ext: StyleResourcesFileExt) =>
-    (testId: string, isError: boolean = false): Configuration => ({
+    async (testId: string, isError: boolean = false): Promise<Configuration> => ({
         entry: path.resolve(__dirname, `../${ext}/source.${ext}`),
         output: {
             path: path.resolve(__dirname, `../${ext}/outputs`),
@@ -19,9 +19,8 @@ const createBaseConfigOf = (ext: StyleResourcesFileExt) =>
                     test: new RegExp(`\\.${ext}$`),
                     use: [
                         ...isError ? [] : ['raw-loader'], {
-                            loader: path.resolve(__dirname, '../../lib'),
-                            /* eslint-disable-next-line global-require, import/no-dynamic-require */
-                            options: require(`../options/${testId}`).default(ext),
+                            loader: path.resolve(__dirname, '../../src/index.ts'),
+                            options: (await import(`../options/${testId}`)).default(ext),
                         },
                     ],
                 },

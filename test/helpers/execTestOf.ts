@@ -35,8 +35,7 @@ const execTestOf = (ext: StyleResourcesFileExt) => {
                 return;
             }
 
-            /* eslint-disable-next-line global-require, import/no-dynamic-require */
-            const actualStyle = require(`../${ext}/outputs/${testId}`);
+            const actualStyle = (await import(`../${ext}/outputs/${testId}`)).default;
             const expectedStyle = await readStyle(testId);
 
             expect(actualStyle).toBe(expectedStyle);
