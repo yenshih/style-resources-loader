@@ -1,8 +1,8 @@
 import path from 'path';
 
-import { StyleResourcesFileExt, StyleResourcesLoaderOptions } from '../../src';
+import { StyleResourcesLoaderOptions } from '../../src';
 
-export default (ext: StyleResourcesFileExt): StyleResourcesLoaderOptions => ({
+export default (): StyleResourcesLoaderOptions => ({
     patterns: path.resolve('/**'),
     globOptions: {
         silent: true,
