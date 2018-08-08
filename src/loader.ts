@@ -1,6 +1,6 @@
 import { loader } from 'webpack';
 
-import { loadResources } from './utils';
+import { loadResources, isFunction } from './utils';
 
 /* eslint-disable-next-line func-style, no-redeclare */
 const loader: loader.Loader = function (source) {
@@ -8,7 +8,7 @@ const loader: loader.Loader = function (source) {
 
     const callback = this.async();
 
-    if (typeof callback !== 'function') {
+    if (!isFunction<loader.loaderCallback>(callback)) {
         throw new Error('[style-resources-loader] Synchronous compilation is not supported.');
     }
 

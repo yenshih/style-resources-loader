@@ -2,6 +2,7 @@ import { Configuration } from 'webpack';
 import merge from 'webpack-merge';
 
 import { StyleResourcesFileExt } from '../../src';
+import { isFunction } from '../../src/utils';
 
 import { createBaseConfigOf, readStyleOf, runWebpack } from '.';
 
@@ -14,7 +15,7 @@ const execTestOf = (ext: StyleResourcesFileExt) => {
     function execTest(testId: string, config: Configuration, assertError: (err: Error) => void): () => Promise<void>;
     function execTest(testId: string, ...args: any[]): () => Promise<void> {
         const [config, assertError]: [Configuration, (err: Error) => void] = (
-            (args: any[]): any => typeof args[0] === 'function' ? [{}, args[0]] : args
+            (args: any[]): any => isFunction(args[0]) ? [{}, args[0]] : args
         )(args);
 
         return async () => {
@@ -24,7 +25,7 @@ const execTestOf = (ext: StyleResourcesFileExt) => {
                 await runWebpack(merge(baseConfig, config));
             }
             catch (err) {
-                if (typeof assertError !== 'function') {
+                if (!isFunction(assertError)) {
                     throw new Error(
                         `${err.message}\nTest \`${testId}\` throws an error. `
                         + 'It requires an `assertError` function as the second argument in `execTest(...)`.',

@@ -2,6 +2,8 @@ import { loader } from 'webpack';
 
 import { StyleResourcesLoaderNormalizedOptions, StyleResources } from '..';
 
+import { isString, isPromise } from '.';
+
 /* eslint-disable-next-line max-params */
 async function injectResources(
     this: loader.LoaderContext,
@@ -13,9 +15,9 @@ async function injectResources(
 
     const dist: any = injector(source, resources);
 
-    const content = dist && typeof dist.then === 'function' ? await dist : dist;
+    const content = isPromise(dist) ? await dist : dist;
 
-    if (typeof content !== 'string' && !(content instanceof Buffer)) {
+    if (!isString(content) && !(content instanceof Buffer)) {
         throw new TypeError(
             '[style-resources-loader] Expected options.injector(...) returns a string or a Buffer. '
             + `Instead received ${typeof content}.`,

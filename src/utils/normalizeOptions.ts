@@ -7,13 +7,13 @@ import {
     StyleResourcesLoaderNormalizedOptions,
 } from '..';
 
-import { validateOptions } from '.';
+import { validateOptions, isUndefined } from '.';
 
 const normalizePatterns = (patterns: StyleResourcesLoaderOptions['patterns']) =>
     Array.isArray(patterns) ? patterns : [patterns];
 
 const normalizeInjector = (injector: StyleResourcesLoaderOptions['injector']): StyleResourcesNormalizedInjector => {
-    if (typeof injector === 'undefined' || injector === 'prepend') {
+    if (isUndefined(injector) || injector === 'prepend') {
         return (source, resources) => resources.map(({ content }) => content).join('') + source;
     }
 

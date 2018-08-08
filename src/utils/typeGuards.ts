@@ -2,6 +2,7 @@ import path from 'path';
 
 import isPlainObject from 'is-plain-object';
 import isCallable from 'is-callable';
+import isPromise from 'is-promise';
 
 import { supportedFileExtsWithDot } from '.';
 
@@ -16,3 +17,5 @@ export const isObject = <T extends {}>(arg: any): arg is T => isPlainObject(arg)
 export const isFunction = <T extends (...args: any[]) => any>(arg: any): arg is T => isCallable(arg);
 
 export const isStyleFile = (file: string) => supportedFileExtsWithDot.includes(path.extname(file));
+
+export { isPromise };

@@ -1,4 +1,7 @@
-import { StyleResourcesLoaderOptions } from '..';
+import {
+    StyleResourcesFunctionalInjector,
+    StyleResourcesLoaderOptions,
+} from '..';
 
 import { isUndefined, isString, isBoolean, isObject, isFunction } from '.';
 
@@ -8,7 +11,9 @@ const validatePatterns = (patterns: any): patterns is StyleResourcesLoaderOption
     isString(patterns) || Array.isArray(patterns) && patterns.every(isString);
 
 const validateInjector = (injector: any): injector is StyleResourcesLoaderOptions['injector'] =>
-    isUndefined(injector) || isFunction(injector) || internalInjectorKeys.includes(injector);
+    isUndefined(injector)
+    || isFunction<StyleResourcesFunctionalInjector>(injector)
+    || internalInjectorKeys.includes(injector);
 
 const validateGlobOptions = (globOptions: any): globOptions is StyleResourcesLoaderOptions['globOptions'] =>
     isUndefined(globOptions) || isObject<NonNullable<StyleResourcesLoaderOptions['globOptions']>>(globOptions);
