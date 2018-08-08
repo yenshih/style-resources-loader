@@ -1,6 +1,6 @@
 import { StyleResourcesLoaderOptions } from '..';
 
-import { isUndefined, isString, isBoolean, isObject, isFunction } from './typeGuards';
+import { isUndefined, isString, isBoolean, isObject, isFunction } from '.';
 
 const internalInjectorKeys = ['prepend', 'append'];
 
