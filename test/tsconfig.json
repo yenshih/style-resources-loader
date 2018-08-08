@@ -1,6 +1,7 @@
 {
-    "extends": "./tsconfig",
+    "extends": "../tsconfig",
     "compilerOptions": {
+        "rootDir": ".",
         "removeComments": false
     }
  }
