@@ -1,8 +1,8 @@
 import { loader } from 'webpack';
 
-import { StyleResources, StyleResourcesLoaderOptions } from '..';
+import { StyleResources, StyleResourcesLoaderNormalizedOptions } from '..';
 
-import { getNormalizedOptions, getResources, injectResources } from '.';
+import { normalizeOptions, getResources, injectResources } from '.';
 
 async function loadResources(
     this: loader.LoaderContext,
@@ -10,7 +10,7 @@ async function loadResources(
     callback: loader.loaderCallback,
 ) {
     try {
-        const options: StyleResourcesLoaderOptions = Reflect.apply(getNormalizedOptions, this, []);
+        const options: StyleResourcesLoaderNormalizedOptions = Reflect.apply(normalizeOptions, this, []);
 
         const resources: StyleResources = await Reflect.apply(getResources, this, [options]);
 

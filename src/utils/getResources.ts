@@ -5,17 +5,17 @@ import glob from 'glob';
 
 import { loader } from 'webpack';
 
-import { StyleResource, StyleResources, StyleResourcesLoaderOptions } from '..';
+import { StyleResource, StyleResources, StyleResourcesLoaderNormalizedOptions } from '..';
 
-import { isString, isStyleFile, resolveImportUrl } from '.';
+import { isStyleFile, resolveImportUrl } from '.';
 
 async function getResources(
     this: loader.LoaderContext,
-    options: StyleResourcesLoaderOptions,
+    options: StyleResourcesLoaderNormalizedOptions,
 ) {
     const { patterns, globOptions, resolveUrl } = options;
 
-    const resourceFragments = await Promise.all((isString(patterns) ? [patterns] : patterns)
+    const resourceFragments = await Promise.all(patterns
         // We can change `map` to `flatMap` when `Array.prototype.flatMap` is fully supported.
         .map(async (pattern) => {
 

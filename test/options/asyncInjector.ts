@@ -2,9 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import util from 'util';
 
-import { StyleResourcesFileExt, StyleResourcesLoaderOriginalOptions } from '../../src';
+import { StyleResourcesFileExt, StyleResourcesLoaderOptions } from '../../src';
 
-export default (ext: StyleResourcesFileExt): StyleResourcesLoaderOriginalOptions => ({
+export default (ext: StyleResourcesFileExt): StyleResourcesLoaderOptions => ({
     patterns: [
         path.resolve(__dirname, `../${ext}/variables/*.${ext}`),
         path.resolve(__dirname, `../${ext}/mixins/*.${ext}`),

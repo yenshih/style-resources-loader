@@ -9,23 +9,23 @@ export interface StyleResource {
 
 export type StyleResources = ReadonlyArray<StyleResource>;
 
-export type StyleResourcesInjector = (source: string | Buffer, resources: StyleResources) =>
+export type StyleResourcesFunctionalInjector = (source: string | Buffer, resources: StyleResources) =>
     string | Buffer | Promise<string | Buffer>;
 
-export type StyleResourcesInternalInjectors = Record<'prepend' | 'append', StyleResourcesInjector>;
+export type StyleResourcesInjector = 'prepend' | 'append' | StyleResourcesFunctionalInjector;
 
-export type StyleResourcesOriginalInjector = StyleResourcesInjector | keyof StyleResourcesInternalInjectors;
+export type StyleResourcesNormalizedInjector = StyleResourcesFunctionalInjector;
 
 export interface StyleResourcesLoaderOptions {
     patterns: string | string[];
-    injector: StyleResourcesInjector;
+    injector?: StyleResourcesInjector;
+    globOptions?: glob.IOptions;
+    resolveUrl?: boolean;
+}
+
+export interface StyleResourcesLoaderNormalizedOptions {
+    patterns: string[];
+    injector: StyleResourcesNormalizedInjector;
     globOptions: glob.IOptions;
     resolveUrl: boolean;
 }
-
-export type StyleResourcesLoaderOriginalOptions = Partial<{
-    patterns: string | string[];
-    injector: StyleResourcesOriginalInjector;
-    globOptions: glob.IOptions;
-    resolveUrl: boolean;
-}>;

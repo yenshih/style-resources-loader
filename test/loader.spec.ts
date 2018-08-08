@@ -47,8 +47,8 @@ describe('style-resources-loader', () => {
             describe('injector', () => {
                 it('should work with customized function', execTest('customizedInjector'));
                 it('should work with asynchronous function', execTest('asyncInjector'));
-                it('should work with `prepend`', execTest('specialPrependInjector'));
-                it('should work with `append`', execTest('specialAppendInjector'));
+                it('should work with `prepend`', execTest('prependInjector'));
+                it('should work with `append`', execTest('appendInjector'));
             });
 
             describe('resolveUrl', () => {
