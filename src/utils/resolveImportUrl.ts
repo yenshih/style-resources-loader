@@ -1,13 +1,11 @@
 import path from 'path';
 
-import { loader } from 'webpack';
-
-import { StyleResource } from '..';
+import { LoaderContext, StyleResource } from '..';
 
 function resolveImportUrl(
-    this: loader.LoaderContext,
+    this: LoaderContext,
     { file, content }: StyleResource,
-): string {
+) {
     /* eslint-disable-next-line max-params */
     return content.replace(/(@import|@require)(\s+(?:\([a-z,\s]+\)\s*)?)(?:'([^']+)'|"([^"]+)"|([^\s"';]+))/g, (
         match: string,

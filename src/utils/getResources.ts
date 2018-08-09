@@ -3,14 +3,12 @@ import util from 'util';
 
 import glob from 'glob';
 
-import { loader } from 'webpack';
-
-import { StyleResource, StyleResources, StyleResourcesLoaderNormalizedOptions } from '..';
+import { LoaderContext, StyleResource, StyleResources, StyleResourcesLoaderNormalizedOptions } from '..';
 
 import { isStyleFile, resolveImportUrl } from '.';
 
 async function getResources(
-    this: loader.LoaderContext,
+    this: LoaderContext,
     options: StyleResourcesLoaderNormalizedOptions,
 ) {
     const { patterns, globOptions, resolveUrl } = options;

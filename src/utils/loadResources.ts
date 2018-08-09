@@ -1,13 +1,11 @@
-import { loader } from 'webpack';
-
-import { StyleResources, StyleResourcesLoaderNormalizedOptions } from '..';
+import { LoaderContext, LoaderCallback, StyleResources, StyleResourcesLoaderNormalizedOptions } from '..';
 
 import { normalizeOptions, getResources, injectResources } from '.';
 
 async function loadResources(
-    this: loader.LoaderContext,
+    this: LoaderContext,
     source: string | Buffer,
-    callback: loader.loaderCallback,
+    callback: LoaderCallback,
 ) {
     try {
         const options: StyleResourcesLoaderNormalizedOptions = Reflect.apply(normalizeOptions, this, []);

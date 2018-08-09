@@ -1,12 +1,10 @@
-import { loader } from 'webpack';
-
-import { StyleResourcesLoaderNormalizedOptions, StyleResources } from '..';
+import { LoaderContext, StyleResources, StyleResourcesLoaderNormalizedOptions } from '..';
 
 import { isString, isPromise } from '.';
 
 /* eslint-disable-next-line max-params */
 async function injectResources(
-    this: loader.LoaderContext,
+    this: LoaderContext,
     options: StyleResourcesLoaderNormalizedOptions,
     source: string | Buffer,
     resources: StyleResources,

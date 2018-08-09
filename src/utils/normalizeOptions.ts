@@ -1,7 +1,7 @@
-import { loader } from 'webpack';
 import { getOptions } from 'loader-utils';
 
 import {
+    LoaderContext,
     StyleResourcesNormalizedInjector,
     StyleResourcesLoaderOptions,
     StyleResourcesLoaderNormalizedOptions,
@@ -24,7 +24,7 @@ const normalizeInjector = (injector: StyleResourcesLoaderOptions['injector']): S
     return injector;
 };
 
-function normalizeOptions(this: loader.LoaderContext): StyleResourcesLoaderNormalizedOptions {
+function normalizeOptions(this: LoaderContext): StyleResourcesLoaderNormalizedOptions {
     const options = getOptions(this) || {};
 
     /* istanbul ignore if: not possible to test */

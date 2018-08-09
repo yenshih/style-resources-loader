@@ -1,4 +1,11 @@
+import { loader } from 'webpack';
 import glob from 'glob';
+
+export type Loader = loader.Loader;
+
+export type LoaderContext = loader.LoaderContext;
+
+export type LoaderCallback = loader.loaderCallback;
 
 export type StyleResourcesFileExt = 'sass' | 'scss' | 'less' | 'styl';
 
