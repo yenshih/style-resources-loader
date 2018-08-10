@@ -16,13 +16,7 @@ async function getResources(
     const resourceFragments = await Promise.all(patterns
         // We can change `map` to `flatMap` when `Array.prototype.flatMap` is fully supported.
         .map(async (pattern) => {
-
-            /*
-             * Type signature of `util.promisify` is not compatible with `glob`.
-             * Not super happy with this approach.
-             */
-            const partialFiles = await new Promise<ReadonlyArray<string>>((resolve, reject) =>
-                glob(pattern, globOptions, (err, matches) => err ? reject(err) : resolve(matches.filter(isStyleFile))));
+            const partialFiles = (await util.promisify(glob)(pattern, globOptions)).filter(isStyleFile);
 
             partialFiles.forEach(this.dependency.bind(this));
 
