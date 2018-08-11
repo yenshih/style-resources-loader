@@ -13,7 +13,7 @@
     >
   </a>
   <h1>Style Resources Loader</h1>
-  <p>CSS preprocessor resources loader for webpack.</p>
+  <p>CSS processor resources loader for webpack.</p>
 </div>
 
 
@@ -25,7 +25,7 @@ npm i style-resources-loader -D
 
 <h2 align="center">Usage</h2>
 
-This loader is a CSS preprocessor resources loader for webpack, which injects your style resources (e.g. `variables / mixins`) into multiple imported `sass / scss / less / stylus` modules.
+This loader is a CSS processor resources loader for webpack, which injects your style resources (e.g. `variables / mixins`) into multiple imported `css / sass / scss / less / stylus` modules.
 
 It's mainly used to
  - share your `variables / mixins / functions` across all style files, so you don't need to `@import` them manually.
@@ -138,11 +138,15 @@ For example, `path.resolve(__dirname, './styles/*/*.less')` would include all `l
   |-- reset.less
 ```
 
+Only supports `.css` `.sass` `.scss` `.less` `.styl` as resources file extensions.
+
 ### `injector`
 
 An optional function which controls the resources injection precisely. It also supports `prepend` and `append` for convenience.
 
 It defaults to `prepend` (equivalent to `(source, resources) => resources.map(({ content }) => content).join('') + source` internally), which means the loader prepends all resources to source file.
+
+It could be asynchronous. You could use `async / await` syntax in your own injector function.
 
 An injector function receives two parameters:
 
