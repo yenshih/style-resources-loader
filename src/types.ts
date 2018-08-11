@@ -7,7 +7,7 @@ export type LoaderContext = loader.LoaderContext;
 
 export type LoaderCallback = loader.loaderCallback;
 
-export type StyleResourcesFileExt = 'sass' | 'scss' | 'less' | 'styl';
+export type StyleResourcesFileExt = 'css' | 'sass' | 'scss' | 'less' | 'styl';
 
 export interface StyleResource {
     file: string;
