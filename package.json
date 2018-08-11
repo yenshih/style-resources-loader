@@ -1,7 +1,7 @@
 {
   "name": "style-resources-loader",
   "version": "1.1.0",
-  "description": "CSS preprocessor resources loader for webpack",
+  "description": "CSS processor resources loader for webpack",
   "author": "Shi Yan <yenshih95@gmail.com> (https://github.com/yenshih)",
   "license": "MIT",
   "engines": {
@@ -27,6 +27,7 @@
     "webpack",
     "loader",
     "style",
+    "css",
     "sass",
     "scss",
     "less",
@@ -73,5 +74,6 @@
   },
   "peerDependencies": {
     "webpack": "^3.0.0 || ^4.0.0"
-  }
+  },
+  "sideEffects": false
 }
