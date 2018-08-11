@@ -1,6 +1,6 @@
 ## 1.2.0 (August 11, 2018)
 
-* Support for `css` resources. https://github.com/yenshih/style-resources-loader/issues/7
+* Support for `css` resources. [#7](https://github.com/yenshih/style-resources-loader/issues/7)
 * Support for asynchronous injector.
 * Improve type checking for loader options.
 
