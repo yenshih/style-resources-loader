@@ -22,7 +22,9 @@ function resolveImportUrl(
         }
 
         const absolutePathToResource = path.resolve(path.dirname(file), pathToResource);
-        const relativePathFromContextToResource = path.relative(this.context, absolutePathToResource);
+        const relativePathFromContextToResource = path.relative(this.context, absolutePathToResource)
+            .split(path.sep)
+            .join('/');
         const quote = (match.match(/['"]$/) || [''])[0];
 
         return `${importDeclaration}${spacingOrOptions}${quote}${relativePathFromContextToResource}${quote}`;
