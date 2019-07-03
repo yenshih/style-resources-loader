@@ -1,28 +1,25 @@
-import { LoaderContext, StyleResources, StyleResourcesLoaderNormalizedOptions } from '..';
+import {StyleResources, StyleResourcesLoaderNormalizedOptions} from '..';
 
-import { isString, isPromise } from '.';
+import {isString, isPromise} from '.';
+import {throwValidationError} from './errors';
 
 /* eslint-disable-next-line max-params */
-async function injectResources(
-    this: LoaderContext,
+const injectResources = async function(
     options: StyleResourcesLoaderNormalizedOptions,
-    source: string | Buffer,
+    source: string,
     resources: StyleResources,
 ) {
-    const { injector } = options;
+    const {injector} = options;
 
     const dist: any = injector(source, resources);
 
     const content = isPromise(dist) ? await dist : dist;
 
-    if (!isString(content) && !(content instanceof Buffer)) {
-        throw new TypeError(
-            '[style-resources-loader] Expected options.injector(...) returns a string or a Buffer. '
-            + `Instead received ${typeof content}.`,
-        );
+    if (!isString(content)) {
+        throwValidationError('options.injector(...) returns a string', typeof content);
     }
 
     return content;
-}
+};
 
 export default injectResources;

@@ -1,4 +1,4 @@
-import { loader } from 'webpack';
+import {loader} from 'webpack';
 import glob from 'glob';
 
 export type Loader = loader.Loader;
@@ -14,10 +14,9 @@ export interface StyleResource {
     content: string;
 }
 
-export type StyleResources = ReadonlyArray<StyleResource>;
+export type StyleResources = StyleResource[];
 
-export type StyleResourcesFunctionalInjector = (source: string | Buffer, resources: StyleResources) =>
-    string | Buffer | Promise<string | Buffer>;
+export type StyleResourcesFunctionalInjector = (source: string, resources: StyleResources) => string | Promise<string>;
 
 export type StyleResourcesInjector = 'prepend' | 'append' | StyleResourcesFunctionalInjector;
 

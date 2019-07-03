@@ -1,19 +1,16 @@
-import {
-    StyleResourcesFunctionalInjector,
-    StyleResourcesLoaderOptions,
-} from '..';
+import {StyleResourcesFunctionalInjector, StyleResourcesLoaderOptions} from '..';
 
-import { isUndefined, isString, isBoolean, isObject, isFunction } from '.';
+import {isUndefined, isString, isBoolean, isObject, isFunction, throwValidationError} from '.';
 
 const internalInjectorKeys = ['prepend', 'append'];
 
 const validatePatterns = (patterns: any): patterns is StyleResourcesLoaderOptions['patterns'] =>
-    isString(patterns) || Array.isArray(patterns) && patterns.every(isString);
+    isString(patterns) || (Array.isArray(patterns) && patterns.every(isString));
 
 const validateInjector = (injector: any): injector is StyleResourcesLoaderOptions['injector'] =>
-    isUndefined(injector)
-    || isFunction<StyleResourcesFunctionalInjector>(injector)
-    || internalInjectorKeys.includes(injector);
+    isUndefined(injector) ||
+    isFunction<StyleResourcesFunctionalInjector>(injector) ||
+    internalInjectorKeys.includes(injector);
 
 const validateGlobOptions = (globOptions: any): globOptions is StyleResourcesLoaderOptions['globOptions'] =>
     isUndefined(globOptions) || isObject<NonNullable<StyleResourcesLoaderOptions['globOptions']>>(globOptions);
@@ -22,34 +19,22 @@ const validateResolveUrl = (resolveUrl: any): resolveUrl is StyleResourcesLoader
     isUndefined(resolveUrl) || isBoolean(resolveUrl);
 
 const valiateOptions = (options: any): options is StyleResourcesLoaderOptions => {
-    const { patterns, injector, globOptions, resolveUrl } = options;
+    const {patterns, injector, globOptions, resolveUrl} = options;
 
     if (!validatePatterns(patterns)) {
-        throw new TypeError(
-            '[style-resources-loader] Expected options.patterns to be a string or an array of string. '
-            + `Instead received ${typeof patterns}.`,
-        );
+        throwValidationError('options.patterns to be a string or an array of string', typeof patterns);
     }
 
     if (!validateInjector(injector)) {
-        throw new TypeError(
-            '[style-resources-loader] Expected options.injector to be a function or `prepend`, `append`. '
-            + `Instead received ${typeof injector}.`,
-        );
+        throwValidationError('options.injector to be a function or `prepend`, `append`', typeof injector);
     }
 
     if (!validateGlobOptions(globOptions)) {
-        throw new TypeError(
-            '[style-resources-loader] Expected options.globOptions to be an object. '
-            + `Instead received ${typeof globOptions}.`,
-        );
+        throwValidationError('options.globOptions to be an object', typeof globOptions);
     }
 
     if (!validateResolveUrl(resolveUrl)) {
-        throw new TypeError(
-            '[style-resources-loader] Expected options.resolveUrl to be a boolean. '
-            + `Instead received ${typeof resolveUrl}.`,
-        );
+        throwValidationError('options.resolveUrl to be a boolean', typeof resolveUrl);
     }
 
     return true;

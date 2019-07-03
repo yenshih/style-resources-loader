@@ -1,6 +1,6 @@
-import { supportedFileExts } from '../src/utils';
+import {supportedFileExts} from '../src/utils';
 
-import { execTestOf } from './helpers';
+import {execTestOf} from './helpers';
 
 describe('style-resources-loader', () => {
     describe('enviroments', () => {
@@ -22,8 +22,7 @@ describe('style-resources-loader', () => {
 
                 try {
                     Reflect.apply(styleResourcesLoader, Object.create(loaderContextMock), []);
-                }
-                catch (err) {
+                } catch (err) {
                     expect(err).toMatchObject({
                         message: expect.stringContaining(
                             '[style-resources-loader] Synchronous compilation is not supported.',
@@ -34,7 +33,7 @@ describe('style-resources-loader', () => {
         });
     });
 
-    supportedFileExts.forEach((ext) => {
+    supportedFileExts.forEach(ext => {
         describe(ext, () => {
             const execTest = execTestOf(ext);
 
@@ -59,72 +58,75 @@ describe('style-resources-loader', () => {
             describe('errors', () => {
                 it(
                     'should cause an error when `options.patterns` is neither a string nor an array of string',
-                    execTest('invalidPatterns', (err) => {
+                    execTest('invalidPatterns', {}, err => {
                         expect(err).toMatchObject({
                             message: expect.stringContaining(
-                                'TypeError: [style-resources-loader] '
-                                + 'Expected options.patterns to be a string or an array of string. '
-                                + 'Instead received undefined.',
+                                'Error: [style-resources-loader] ' +
+                                    'Expected options.patterns to be a string or an array of string. ' +
+                                    'Instead received undefined.',
                             ),
                         });
                     }),
                 );
                 it(
-                    'should cause an error when `options.injector` isn\'t a function or `prepend`, `append`',
-                    execTest('invalidInjector', (err) => {
+                    "should cause an error when `options.injector` isn't a function or `prepend`, `append`",
+                    execTest('invalidInjector', {}, err => {
                         expect(err).toMatchObject({
                             message: expect.stringContaining(
-                                'TypeError: [style-resources-loader] '
-                                + 'Expected options.injector to be a function or `prepend`, `append`. '
-                                + 'Instead received string.',
+                                'Error: [style-resources-loader] ' +
+                                    'Expected options.injector to be a function or `prepend`, `append`. ' +
+                                    'Instead received string.',
                             ),
                         });
                     }),
                 );
                 it(
-                    'should cause an error when `options.globOptions` isn\'t an object',
-                    execTest('invalidGlobOptions', (err) => {
+                    "should cause an error when `options.globOptions` isn't an object",
+                    execTest('invalidGlobOptions', {}, err => {
                         expect(err).toMatchObject({
                             message: expect.stringContaining(
-                                'TypeError: [style-resources-loader] '
-                                + 'Expected options.globOptions to be an object. '
-                                + 'Instead received number.',
+                                'Error: [style-resources-loader] ' +
+                                    'Expected options.globOptions to be an object. ' +
+                                    'Instead received number.',
                             ),
                         });
                     }),
                 );
                 it(
-                    'should cause an error when `options.resolveUrl` isn\'t a boolean',
-                    execTest('invalidResolveUrl', (err) => {
+                    "should cause an error when `options.resolveUrl` isn't a boolean",
+                    execTest('invalidResolveUrl', {}, err => {
                         expect(err).toMatchObject({
                             message: expect.stringContaining(
-                                'TypeError: [style-resources-loader] '
-                                + 'Expected options.resolveUrl to be a boolean. '
-                                + 'Instead received function.',
+                                'Error: [style-resources-loader] ' +
+                                    'Expected options.resolveUrl to be a boolean. ' +
+                                    'Instead received function.',
                             ),
                         });
                     }),
                 );
-                it('should cause an error when `glob(...)` throws an error', execTest('globThrowsAnError', (err) => {
-                    expect(err).toMatchObject({
-                        message: expect.stringContaining('Error: EACCES: permission denied'),
-                    });
-                }));
+                it(
+                    'should cause an error when `glob(...)` throws an error',
+                    execTest('globThrowsAnError', {}, err => {
+                        expect(err).toMatchObject({
+                            message: expect.stringContaining('Error: EACCES: permission denied'),
+                        });
+                    }),
+                );
                 it(
                     'should cause an error when `options.injector(...)` returns neither a string nor a Buffer',
-                    execTest('invalidInjectorReturn', (err) => {
+                    execTest('invalidInjectorReturn', {}, err => {
                         expect(err).toMatchObject({
                             message: expect.stringContaining(
-                                'TypeError: [style-resources-loader] '
-                                + 'Expected options.injector(...) returns a string or a Buffer. '
-                                + 'Instead received number.',
+                                'Error: [style-resources-loader] ' +
+                                    'Expected options.injector(...) returns a string. ' +
+                                    'Instead received number.',
                             ),
                         });
                     }),
                 );
                 it(
                     'should cause an error when `options.injector(...)` throws an error',
-                    execTest('injectorThrowsAnError', (err) => {
+                    execTest('injectorThrowsAnError', {}, err => {
                         expect(err).toMatchObject({
                             message: expect.stringContaining('Error: This error is thrown from injector.'),
                         });

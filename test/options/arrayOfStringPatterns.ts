@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { StyleResourcesFileExt, StyleResourcesLoaderOptions } from '../../src';
+import {StyleResourcesFileExt, StyleResourcesLoaderOptions} from '../../src';
 
 export default (ext: StyleResourcesFileExt): StyleResourcesLoaderOptions => ({
     patterns: [

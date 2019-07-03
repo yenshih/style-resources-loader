@@ -25,11 +25,15 @@ npm i style-resources-loader -D
 
 <h2 align="center">Usage</h2>
 
-This loader is a CSS processor resources loader for webpack, which injects your style resources (e.g. `variables / mixins`) into multiple imported `css / sass / scss / less / stylus` modules.
+This loader is a CSS processor resources loader for webpack, which injects your style resources (e.g. `variables, mixins`) into multiple imported `css, sass, scss, less, stylus` modules.
 
 It's mainly used to
- - share your `variables / mixins / functions` across all style files, so you don't need to `@import` them manually.
+ - share your `variables, mixins, functions` across all style files, so you don't need to `@import` them manually.
  - override `variables` in style files provided by other libraries (e.g. [ant-design](https://github.com/ant-design/ant-design)) and customize your own theme.
+
+### Usage with Vue CLI
+
+See [automatic imports](https://cli.vuejs.org/guide/css.html#automatic-imports) for more details.
 
 <h2 align="center">Examples</h2>
 
@@ -115,14 +119,16 @@ module.exports = {
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**[`patterns`](#patterns)**|`{String \| String[]}`|`/`|Path to the resources you would like to inject|
-|**[`injector`](#injector)**|`{Function \| 'prepend' \| 'append'}`|`prepend`|Controls the resources injection precisely|
+|**[`patterns`](#patterns)**|`{string \| string[]}`|`/`|Path to the resources you would like to inject|
+|**[`injector`](#injector)**|`{Function \| 'prepend' \| 'append'}`|`'prepend'`|Controls the resources injection precisely|
 |**[`globOptions`](#globoptions)**|`{Object}`|`{}`|An options that can be passed to `glob(...)`|
-|**[`resolveUrl`](#resolveurl)**|`{Boolean}`|`true`|Enable/Disable `@import` url to be resolved|
+|**[`resolveUrl`](#resolveurl)**|`{boolean}`|`true`|Enable/Disable `@import` url to be resolved|
+
+See [the type definition file](https://github.com/yenshih/style-resources-loader/blob/master/src/types.ts) for more details.
 
 ### `patterns`
 
-A string or an array of string, represents the path to the resources you would like to inject.
+A string or an array of string, which represents the absolute path to the resources you would like to inject.
 
 It supports [globbing](https://github.com/isaacs/node-glob). You could include many files using a file mask.
 
@@ -142,37 +148,47 @@ Only supports `.css` `.sass` `.scss` `.less` `.styl` as resources file extension
 
 ### `injector`
 
-An optional function which controls the resources injection precisely. It also supports `prepend` and `append` for convenience.
+An optional function which controls the resources injection precisely. It also supports `'prepend'` and `'append'` for convenience, which means the loader will prepend or append all resources to source files, respectively.
 
-It defaults to `prepend` (equivalent to `(source, resources) => resources.map(({ content }) => content).join('') + source` internally), which means the loader prepends all resources to source file.
+It defaults to `'prepend'`, which implements as an injector function internally:
 
-It could be asynchronous. You could use `async / await` syntax in your own injector function.
+```js
+(source, resources) => resources.map(({content}) => content).join('') + source
+```
 
-An injector function receives two parameters:
+Furthermore, an injector function should match type signature:
+
+```ts
+(source: string, resources: StyleResource[]) => string | Promise<string>
+```
+
+It receives two parameters:
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`source`**|`{String}`|`/`|Content of the source file|
-|**[`resources`](#resources)**|`{Object[]}`|`/`|Resource descriptors|
+|**`source`**|`{string}`|`/`|Content of the source file|
+|**[`resources`](#resources)**|`{StyleResource[]}`|`/`|Resource descriptors|
 
 #### `resources`
 
-An array of resource, each contains `file` and `content` property:
+An array of resource descriptor, each contains `file` and `content` properties:
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`file`**|`{String}`|`/`|Absolute path to the resource|
-|**`content`**|`{String}`|`/`|Content of the resource file|
+|**`file`**|`{string}`|`/`|Absolute path to the resource|
+|**`content`**|`{string}`|`/`|Content of the resource file|
+
+It can be asynchronous. You could use `async / await` syntax in your own injector function or just return a promise.
 
 ### `globOptions`
 
-An options that can be passed to `glob(...)`. See [node-glob options](https://github.com/isaacs/node-glob#options) for more details.
+Options that can be passed to `glob(...)`. See [node-glob options](https://github.com/isaacs/node-glob#options) for more details.
 
 ### `resolveUrl`
 
 A boolean which defaults to `true`. It represents whether the relative path in `@import` or `@require` statements should be resolved.
 
-If you were to use `@import` or `@require` statements in style resource file, you should make sure that the url is relative to that resource file, rather than the source file.
+If you were to use `@import` or `@require` statements in style resource files, you should make sure that the URL is relative to that resource file, rather than the source file.
 
 You could disable this feature by setting `resolveUrl` to `false`.
 

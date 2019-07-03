@@ -1,9 +1,9 @@
-import { loadResources, isFunction } from './utils';
+import {loadResources, isFunction, throwImpossibleError} from './utils';
 
-import { Loader, LoaderCallback } from '.';
+import {Loader, LoaderCallback} from '.';
 
-/* eslint-disable-next-line func-style */
-const loader: Loader = function (source) {
+/* eslint-disable no-invalid-this */
+const loader: Loader = function(source) {
     this.cacheable && this.cacheable();
 
     const callback = this.async();
@@ -12,7 +12,16 @@ const loader: Loader = function (source) {
         throw new Error('[style-resources-loader] Synchronous compilation is not supported.');
     }
 
-    Reflect.apply(loadResources, this, [source, callback]);
+    /* istanbul ignore if: not possible to test */
+    if (typeof source !== 'string') {
+        throwImpossibleError();
+
+        return;
+    }
+
+    /* eslint-disable-next-line @typescript-eslint/no-floating-promises */
+    loadResources(this, source, callback);
 };
+/* eslint-enable no-invalid-this */
 
 export default loader;
