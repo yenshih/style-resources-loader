@@ -1,7 +1,10 @@
+import {EOL} from 'os';
+
 import {getOptions} from 'loader-utils';
 
 import {
     LoaderContext,
+    StyleResource,
     StyleResourcesNormalizedInjector,
     StyleResourcesLoaderOptions,
     StyleResourcesLoaderNormalizedOptions,
@@ -12,13 +15,15 @@ import {validateOptions, isUndefined, throwImpossibleError} from '.';
 const normalizePatterns = (patterns: StyleResourcesLoaderOptions['patterns']) =>
     Array.isArray(patterns) ? patterns : [patterns];
 
+const getResourceContent = ({content}: StyleResource) => (content.endsWith(EOL) ? content : `${content}${EOL}`);
+
 const normalizeInjector = (injector: StyleResourcesLoaderOptions['injector']): StyleResourcesNormalizedInjector => {
     if (isUndefined(injector) || injector === 'prepend') {
-        return (source, resources) => resources.map(({content}) => content).join('') + source;
+        return (source, resources) => resources.map(getResourceContent).join('') + source;
     }
 
     if (injector === 'append') {
-        return (source, resources) => source + resources.map(({content}) => content).join('');
+        return (source, resources) => source + resources.map(getResourceContent).join('');
     }
 
     return injector;

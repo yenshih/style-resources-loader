@@ -1,4 +1,5 @@
 import fs from 'fs';
+import {EOL} from 'os';
 import path from 'path';
 import util from 'util';
 
@@ -14,7 +15,9 @@ export default (ext: StyleResourcesFileExt): StyleResourcesLoaderOptions => ({
         const combineAll = async (type: string) =>
             (await Promise.all(
                 resources.filter(({file}) => file.includes(type)).map(({file}) => readFile(file, 'utf8')),
-            )).join('');
+            ))
+                .map(content => (content.endsWith(EOL) ? content : `${content}${EOL}`))
+                .join('');
         const [mixins, variables] = await Promise.all([combineAll('mixins'), combineAll('variables')]);
 
         return mixins + source + variables;
