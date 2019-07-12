@@ -3,6 +3,7 @@
 [![downloads][downloads]][downloads-url]
 [![build][build]][build-url]
 [![coverage][coverage]][coverage-url]
+[![996.icu][996.icu]][996.icu-url]
 
 <div align="center">
   <a href="https://github.com/webpack/webpack">
@@ -50,8 +51,8 @@ module.exports = {
                 loader: 'style-resources-loader',
                 options: {
                     patterns: [
-                        path.resolve(__dirname, 'path/to/scss/variables/*.scss'),
-                        path.resolve(__dirname, 'path/to/scss/mixins/*.scss'),
+                        'path/from/context/to/scss/variables/*.scss',
+                        'path/from/context/to/scss/mixins/*.scss',
                     ]
                 }
             }]
@@ -128,7 +129,7 @@ See [the type definition file](https://github.com/yenshih/style-resources-loader
 
 ### `patterns`
 
-A string or an array of string, which represents the absolute path to the resources you would like to inject.
+A string or an array of string, which represents the path to the resources you would like to inject. If the path is relative, it would relative to [webpack context](https://webpack.js.org/configuration/entry-context/).
 
 It supports [globbing](https://github.com/isaacs/node-glob). You could include many files using a file mask.
 
@@ -150,13 +151,9 @@ Only supports `.css` `.sass` `.scss` `.less` `.styl` as resources file extension
 
 An optional function which controls the resources injection precisely. It also supports `'prepend'` and `'append'` for convenience, which means the loader will prepend or append all resources to source files, respectively.
 
-It defaults to `'prepend'`, which implements as an injector function internally:
+It defaults to `'prepend'`, which implements as an injector function internally.
 
-```js
-(source, resources) => resources.map(({content}) => content).join('') + source
-```
-
-Furthermore, an injector function should match type signature:
+Furthermore, an injector function should match the following type signature:
 
 ```ts
 (source: string, resources: StyleResource[]) => string | Promise<string>
@@ -206,3 +203,5 @@ You could disable this feature by setting `resolveUrl` to `false`.
 [build-url]: https://travis-ci.org/yenshih/style-resources-loader
 [coverage]: https://img.shields.io/coveralls/yenshih/style-resources-loader/master.svg?style=flat
 [coverage-url]: https://coveralls.io/github/yenshih/style-resources-loader?branch=master
+[996.icu]: https://img.shields.io/badge/link-996.icu-%23FF4D5B.svg?style=flat-square
+[996.icu-url]: https://996.icu/#/en_US

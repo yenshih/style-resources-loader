@@ -1,4 +1,4 @@
-import {loadResources, isFunction, throwImpossibleError} from './utils';
+import {loadResources, isFunction, throwError, throwImpossibleError} from './utils';
 
 import {Loader, LoaderCallback} from '.';
 
@@ -9,7 +9,9 @@ const loader: Loader = function(source) {
     const callback = this.async();
 
     if (!isFunction<LoaderCallback>(callback)) {
-        throw new Error('[style-resources-loader] Synchronous compilation is not supported.');
+        throwError('Synchronous compilation is not supported.');
+
+        return;
     }
 
     /* istanbul ignore if: not possible to test */

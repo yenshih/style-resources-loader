@@ -8,7 +8,8 @@ const createBaseConfigOf = (ext: StyleResourcesFileExt) => async (
     testId: string,
     isError: boolean = false,
 ): Promise<Configuration> => ({
-    entry: path.resolve(__dirname, `../${ext}/source.${ext}`),
+    context: path.resolve(__dirname, '..'),
+    entry: `./${ext}/source.${ext}`,
     output: {
         path: path.resolve(__dirname, `../${ext}/outputs`),
         filename: `${testId}.js`,
@@ -22,7 +23,7 @@ const createBaseConfigOf = (ext: StyleResourcesFileExt) => async (
                 use: [
                     ...(isError ? [] : ['raw-loader']),
                     {
-                        loader: path.resolve(__dirname, '../../src/index.ts'),
+                        loader: '../src/index.ts',
                         options: (await import(`../options/${testId}`)).default(ext),
                     },
                 ],

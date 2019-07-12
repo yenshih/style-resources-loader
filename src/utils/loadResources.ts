@@ -2,7 +2,7 @@ import {LoaderContext, LoaderCallback, StyleResources, StyleResourcesLoaderNorma
 
 import {normalizeOptions, getResources, injectResources} from '.';
 
-const loadResources = async function(ctx: LoaderContext, source: string, callback: LoaderCallback) {
+const loadResources = async (ctx: LoaderContext, source: string, callback: LoaderCallback) => {
     try {
         const options: StyleResourcesLoaderNormalizedOptions = normalizeOptions(ctx);
 

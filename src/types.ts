@@ -29,9 +29,7 @@ export interface StyleResourcesLoaderOptions {
     resolveUrl?: boolean;
 }
 
-export interface StyleResourcesLoaderNormalizedOptions {
+export interface StyleResourcesLoaderNormalizedOptions extends NonNullable<StyleResourcesLoaderOptions> {
     patterns: string[];
     injector: StyleResourcesNormalizedInjector;
-    globOptions: glob.IOptions;
-    resolveUrl: boolean;
 }

@@ -22,19 +22,19 @@ const valiateOptions = (options: any): options is StyleResourcesLoaderOptions =>
     const {patterns, injector, globOptions, resolveUrl} = options;
 
     if (!validatePatterns(patterns)) {
-        throwValidationError('options.patterns to be a string or an array of string', typeof patterns);
+        return throwValidationError('options.patterns to be a string or an array of string', typeof patterns);
     }
 
     if (!validateInjector(injector)) {
-        throwValidationError('options.injector to be a function or `prepend`, `append`', typeof injector);
+        return throwValidationError('options.injector to be a function or `prepend`, `append`', typeof injector);
     }
 
     if (!validateGlobOptions(globOptions)) {
-        throwValidationError('options.globOptions to be an object', typeof globOptions);
+        return throwValidationError('options.globOptions to be an object', typeof globOptions);
     }
 
     if (!validateResolveUrl(resolveUrl)) {
-        throwValidationError('options.resolveUrl to be a boolean', typeof resolveUrl);
+        return throwValidationError('options.resolveUrl to be a boolean', typeof resolveUrl);
     }
 
     return true;

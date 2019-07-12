@@ -1,6 +1,3 @@
 {
-    "linters": {
-        "*.{js,jsx,ts,tsx}": ["prettier --write", "eslint --fix", "git add"]
-    },
-    "ignore": ["*.d.ts"]
+    "*.{js,jsx,ts,tsx}": ["prettier --write", "eslint --fix", "git add"]
 }

@@ -4,11 +4,11 @@ import {isString, isPromise} from '.';
 import {throwValidationError} from './errors';
 
 /* eslint-disable-next-line max-params */
-const injectResources = async function(
+const injectResources = async (
     options: StyleResourcesLoaderNormalizedOptions,
     source: string,
     resources: StyleResources,
-) {
+) => {
     const {injector} = options;
 
     const dist: any = injector(source, resources);
@@ -16,7 +16,7 @@ const injectResources = async function(
     const content = isPromise(dist) ? await dist : dist;
 
     if (!isString(content)) {
-        throwValidationError('options.injector(...) returns a string', typeof content);
+        return throwValidationError('options.injector(...) returns a string', typeof content);
     }
 
     return content;
