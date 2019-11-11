@@ -51,8 +51,8 @@ module.exports = {
                 loader: 'style-resources-loader',
                 options: {
                     patterns: [
-                        'path/from/context/to/scss/variables/*.scss',
-                        'path/from/context/to/scss/mixins/*.scss',
+                        './path/from/context/to/scss/variables/*.scss',
+                        './path/from/context/to/scss/mixins/*.scss',
                     ]
                 }
             }]
@@ -133,16 +133,17 @@ A string or an array of string, which represents the path to the resources you w
 
 It supports [globbing](https://github.com/isaacs/node-glob). You could include many files using a file mask.
 
-For example, `path.resolve(__dirname, './styles/*/*.less')` would include all `less` files from `variables` and `mixins` directories and ignore `reset.less` in such following structure.
+For example, `'./styles/*/*.less'` would include all `less` files from `variables` and `mixins` directories and ignore `reset.less` in such following structure.
 
 ```
-./styles
-  /variables
-    |-- fonts.less
-    |-- colors.less
-  /mixins
-    |-- size.less
-  |-- reset.less
+./src  <-- context
+    /styles
+        /variables
+            |-- fonts.less
+            |-- colors.less
+        /mixins
+            |-- size.less
+        |-- reset.less
 ```
 
 Only supports `.css` `.sass` `.scss` `.less` `.styl` as resources file extensions.
