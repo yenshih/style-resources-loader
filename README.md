@@ -136,14 +136,14 @@ It supports [globbing](https://github.com/isaacs/node-glob). You could include m
 For example, `'./styles/*/*.less'` would include all `less` files from `variables` and `mixins` directories and ignore `reset.less` in such following structure.
 
 ```
-./src  <-- context
-    /styles
-        /variables
-            |-- fonts.less
-            |-- colors.less
-        /mixins
-            |-- size.less
-        |-- reset.less
+./src  <-- webpack context
+  /styles
+    /variables
+      |-- fonts.less
+      |-- colors.less
+    /mixins
+      |-- size.less
+    |-- reset.less
 ```
 
 Only supports `.css` `.sass` `.scss` `.less` `.styl` as resources file extensions.
