@@ -20,8 +20,8 @@
     "test": "jest --detectOpenHandles",
     "coverage": "npm test -- --coverage",
     "posttest": "rimraf test/**/outputs",
-    "start": "tsc --outDir lib -w",
-    "build": "tsc --outDir lib -d",
+    "start": "tsc -w",
+    "build": "tsc -d",
     "prepare": "npm run clean && npm run lint && npm run build && npm run coverage"
   },
   "keywords": [
