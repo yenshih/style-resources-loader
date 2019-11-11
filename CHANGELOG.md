@@ -1,3 +1,9 @@
+## 1.3.0 (November 11, 2019)
+
+* Support for relative path in patterns.
+* Ensure each resource ends with a newline.
+* More detailed validation messages.
+
 ## 1.2.1 (August 12, 2018)
 
 * Fix invalid path seperator on Windows. [#8](https://github.com/yenshih/style-resources-loader/issues/8)
