@@ -9,6 +9,9 @@ export const getResources = async (ctx: LoaderContext, options: StyleResourcesLo
     const {resolveUrl} = options;
 
     const files = await matchFiles(ctx, options);
+
+    files.forEach(file => ctx.dependency(file));
+
     const resources = await Promise.all(
         files.map(async file => {
             const content = await util.promisify(fs.readFile)(file, 'utf8');
