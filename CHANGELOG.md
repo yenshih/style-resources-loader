@@ -1,12 +1,12 @@
-## 1.3.1 (November 11, 2019)
-
-* Fix the regular expression compatibility error. [#20](https://github.com/yenshih/style-resources-loader/issues/20)
-
-## 1.3.0 (November 11, 2019)
+## 1.3.0 ~ 1.3.2 (November 11, 2019)
 
 * Support for relative path in patterns.
 * Ensure each resource ends with a newline.
 * More detailed validation messages.
+
+* Fix the regular expression compatibility error. [#20](https://github.com/yenshih/style-resources-loader/issues/20)
+
+* Fix dependency issue of resource files.
 
 ## 1.2.1 (August 12, 2018)
 
