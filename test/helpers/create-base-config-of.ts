@@ -2,16 +2,16 @@ import path from 'path';
 
 import {Configuration} from 'webpack';
 
-import {StyleResourcesFileExt} from '../../src';
+import {StyleResourcesFileFormat} from '../../src';
 
-const createBaseConfigOf = (ext: StyleResourcesFileExt) => async (
+const createBaseConfigOf = (format: StyleResourcesFileFormat) => async (
     testId: string,
-    isError: boolean = false,
+    isError = false,
 ): Promise<Configuration> => ({
     context: path.resolve(__dirname, '..'),
-    entry: `./${ext}/source.${ext}`,
+    entry: `./${format}/source.${format}`,
     output: {
-        path: path.resolve(__dirname, `../${ext}/outputs`),
+        path: path.resolve(__dirname, `../${format}/outputs`),
         filename: `${testId}.js`,
         libraryTarget: 'commonjs2',
     },
@@ -19,12 +19,12 @@ const createBaseConfigOf = (ext: StyleResourcesFileExt) => async (
     module: {
         rules: [
             {
-                test: new RegExp(`\\.${ext}$`, 'u'),
+                test: new RegExp(`\\.${format}$`, 'u'),
                 use: [
                     ...(isError ? [] : ['raw-loader']),
                     {
                         loader: '../src/index.ts',
-                        options: (await import(`../options/${testId}`)).default(ext),
+                        options: (await import(`../options/${testId}`)).default(format),
                     },
                 ],
             },

@@ -1,10 +1,8 @@
 import {StyleResources, StyleResourcesLoaderNormalizedOptions} from '..';
 
-import {isString, isPromise} from '.';
-import {throwValidationError} from './errors';
+import {isPromise, errorMessage} from '.';
 
-/* eslint-disable-next-line max-params */
-const injectResources = async (
+export const injectResources = async (
     options: StyleResourcesLoaderNormalizedOptions,
     source: string,
     resources: StyleResources,
@@ -15,11 +13,9 @@ const injectResources = async (
 
     const content = isPromise(dist) ? await dist : dist;
 
-    if (!isString(content)) {
-        return throwValidationError('options.injector(...) returns a string', typeof content);
+    if (typeof content !== 'string') {
+        throw new Error(errorMessage.invalidInjectorReturn);
     }
 
     return content;
 };
-
-export default injectResources;

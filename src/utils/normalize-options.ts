@@ -10,15 +10,16 @@ import {
     StyleResourcesLoaderNormalizedOptions,
 } from '..';
 
-import {validateOptions, isUndefined, throwImpossibleError} from '.';
+import {validateOptions} from '.';
 
 const normalizePatterns = (patterns: StyleResourcesLoaderOptions['patterns']) =>
     Array.isArray(patterns) ? patterns : [patterns];
 
-const getResourceContent = ({content}: StyleResource) => (content.endsWith(EOL) ? content : `${content}${EOL}`);
+const coerceContentEOL = (content: string) => (content.endsWith(EOL) ? content : `${content}${EOL}`);
+const getResourceContent = ({content}: StyleResource) => coerceContentEOL(content);
 
 const normalizeInjector = (injector: StyleResourcesLoaderOptions['injector']): StyleResourcesNormalizedInjector => {
-    if (isUndefined(injector) || injector === 'prepend') {
+    if (typeof injector === 'undefined' || injector === 'prepend') {
         return (source, resources) => resources.map(getResourceContent).join('') + source;
     }
 
@@ -29,13 +30,10 @@ const normalizeInjector = (injector: StyleResourcesLoaderOptions['injector']): S
     return injector;
 };
 
-const normalizeOptions = (ctx: LoaderContext): StyleResourcesLoaderNormalizedOptions => {
+export const normalizeOptions = (ctx: LoaderContext): StyleResourcesLoaderNormalizedOptions => {
     const options = getOptions(ctx) || {};
 
-    /* istanbul ignore if: not possible to test */
-    if (!validateOptions(options)) {
-        return throwImpossibleError();
-    }
+    validateOptions<StyleResourcesLoaderOptions>(options);
 
     const {patterns, injector, globOptions = {}, resolveUrl = true} = options;
 
@@ -46,5 +44,3 @@ const normalizeOptions = (ctx: LoaderContext): StyleResourcesLoaderNormalizedOpt
         resolveUrl,
     };
 };
-
-export default normalizeOptions;

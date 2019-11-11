@@ -1,4 +1,4 @@
-export {default as createBaseConfigOf} from './createBaseConfigOf';
-export {default as execTestOf} from './execTestOf';
-export {default as readStyleOf} from './readStyleOf';
-export {default as runWebpack} from './runWebpack';
+export {default as createBaseConfigOf} from './create-base-config-of';
+export {default as execTestOf} from './exec-test-of';
+export {default as readStyleOf} from './read-style-of';
+export {default as runWebpack} from './run-webpack';

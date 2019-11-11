@@ -1,12 +1,12 @@
 import {EOL} from 'os';
 import path from 'path';
 
-import {StyleResourcesFileExt, StyleResourcesLoaderOptions} from '../../src';
+import {StyleResourcesFileFormat, StyleResourcesLoaderOptions} from '../../src';
 
-export default (ext: StyleResourcesFileExt): StyleResourcesLoaderOptions => ({
+export default (format: StyleResourcesFileFormat): StyleResourcesLoaderOptions => ({
     patterns: [
-        path.resolve(__dirname, `../${ext}/variables/*.${ext}`),
-        path.resolve(__dirname, `../${ext}/mixins/*.${ext}`),
+        path.resolve(__dirname, `../${format}/variables/*.${format}`),
+        path.resolve(__dirname, `../${format}/mixins/*.${format}`),
     ],
     injector: (source, resources) => {
         const combineAll = (type: string) =>

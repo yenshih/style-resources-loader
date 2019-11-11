@@ -6,6 +6,6 @@
         "noEmit": true
     },
     "include": [
-        "."
+        "./**/*"
     ]
 }

@@ -5,7 +5,10 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "project": "tsconfig.json"
+        "project": [
+            "tsconfig.json",
+            "./test/tsconfig.json"
+        ]
     },
     "extends": [
         "eslint:all",
@@ -49,6 +52,7 @@
             "allowTaggedTemplates": true
         }],
         "new-cap": "off",
+        "no-shadow": "off",
         "one-var": ["error", "never"],
         "padded-blocks": ["error", "never"],
         "padding-line-between-statements": [
@@ -84,13 +88,15 @@
         "@typescript-eslint/explicit-member-accessibility": ["error", {
             "accessibility": "no-public"
         }],
+        "@typescript-eslint/generic-type-naming": "off",
         "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/no-magic-numbers": ["error", {
-            "ignoreArrayIndexes": true
-        }],
+        "@typescript-eslint/no-magic-numbers": "off",
+        "@typescript-eslint/no-parameter-properties": "off",
         "@typescript-eslint/no-type-alias": "off",
+        "@typescript-eslint/no-unnecessary-condition": "off",
         "@typescript-eslint/promise-function-async": "off",
         "@typescript-eslint/strict-boolean-expressions": "off",
+        "@typescript-eslint/typedef": "off",
 
         "prettier/prettier": "error"
     }

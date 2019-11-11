@@ -1,4 +1,4 @@
-import {loadResources, isFunction, throwError, throwImpossibleError} from './utils';
+import {errorMessage, isFunction, loadResources} from './utils';
 
 import {Loader, LoaderCallback} from '.';
 
@@ -9,16 +9,12 @@ const loader: Loader = function(source) {
     const callback = this.async();
 
     if (!isFunction<LoaderCallback>(callback)) {
-        throwError('Synchronous compilation is not supported.');
-
-        return;
+        throw new Error(errorMessage.syncCompilation);
     }
 
     /* istanbul ignore if: not possible to test */
     if (typeof source !== 'string') {
-        throwImpossibleError();
-
-        return;
+        throw new Error(errorMessage.impossible);
     }
 
     /* eslint-disable-next-line @typescript-eslint/no-floating-promises */
