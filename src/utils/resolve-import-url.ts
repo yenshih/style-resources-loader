@@ -2,7 +2,8 @@ import path from 'path';
 
 import {LoaderContext, StyleResource} from '..';
 
-const regex = /@(?:import|require)\s+(?:\([a-z,\s]+\)\s*)?['"]?(?<pathToResource>[^'"\s;]+)['"]?;?/gu;
+/* eslint-disable-next-line prefer-named-capture-group */
+const regex = /@(?:import|require)\s+(?:\([a-z,\s]+\)\s*)?['"]?([^'"\s;]+)['"]?;?/gu;
 
 export const resolveImportUrl = (ctx: LoaderContext, {file, content}: StyleResource): StyleResource => ({
     file,
