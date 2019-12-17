@@ -121,7 +121,7 @@ module.exports = {
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**[`test`](#test)**|`{string \| RegExp \| Function}`|`''`|Match resource file|
+|**[`test`](#test)**|`{string \| RegExp \| Function}`|`''`|Match and Filter resource file|
 |**[`patterns`](#patterns)**|`{string \| string[]}`|`/`|Path to the resources you would like to inject|
 |**[`injector`](#injector)**|`{Function \| 'prepend' \| 'append'}`|`'prepend'`|Controls the resources injection precisely|
 |**[`globOptions`](#globoptions)**|`{Object}`|`{}`|An options that can be passed to `glob(...)`|
