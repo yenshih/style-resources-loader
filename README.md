@@ -127,7 +127,7 @@ module.exports = {
 |**[`globOptions`](#globoptions)**|`{Object}`|`{}`|An options that can be passed to `glob(...)`|
 |**[`resolveUrl`](#resolveurl)**|`{boolean}`|`true`|Enable/Disable `@import` url to be resolved|
 
-See [the type definition file](https://github.com/yenshih/style-resources-loader/blob/master/src/types.ts) for more details.
+See [the type definition file](https://github.com/jhuix/style-resources-loader/blob/master/src/types.ts) for more details.
 
 ### `test`
 
