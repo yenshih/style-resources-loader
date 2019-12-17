@@ -37,5 +37,4 @@ export interface StyleResourcesLoaderOptions {
 export interface StyleResourcesLoaderNormalizedOptions extends NonNullable<StyleResourcesLoaderOptions> {
     patterns: string[];
     injector: StyleResourcesNormalizedInjector;
-    filename?: string;
 }

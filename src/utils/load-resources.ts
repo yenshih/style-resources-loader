@@ -6,14 +6,15 @@ import {normalizeOptions, getResources, injectResources} from '.';
 export const loadResources = async (ctx: LoaderContext, source: string, callback: LoaderCallback) => {
     try {
         const options = normalizeOptions(ctx);
-        const {test = '', filename = ctx.resourcePath} = options;
 
-        if (test && filename) {
+        if (options.test && ctx.resourcePath) {
+            const {test} = options;
+
             /* eslint-disable-next-line @typescript-eslint/prefer-regexp-exec */
-            if ((test instanceof RegExp || typeof test === 'string') && !filename.match(test)) {
+            if ((test instanceof RegExp || typeof test === 'string') && !ctx.resourcePath.match(test)) {
                 return callback(null, source);
             }
-            if (typeof test === 'function' && !test(filename)) {
+            if (typeof test === 'function' && !test(ctx.resourcePath)) {
                 return callback(null, source);
             }
         }

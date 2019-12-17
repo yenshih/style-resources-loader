@@ -32,11 +32,10 @@ const normalizeInjector = (injector: StyleResourcesLoaderOptions['injector']): S
 
 export const normalizeOptions = (ctx: LoaderContext): StyleResourcesLoaderNormalizedOptions => {
     const options = getOptions(ctx) || {};
-    const filename = options.filename || ctx.resourcePath;
 
     validateOptions<StyleResourcesLoaderOptions>(options);
 
-    const {test, patterns, injector, globOptions = {}, resolveUrl = true} = options;
+    const {test = '', patterns, injector, globOptions = {}, resolveUrl = true} = options;
 
     return {
         test,
@@ -44,6 +43,5 @@ export const normalizeOptions = (ctx: LoaderContext): StyleResourcesLoaderNormal
         injector: normalizeInjector(injector),
         globOptions,
         resolveUrl,
-        filename,
     };
 };
