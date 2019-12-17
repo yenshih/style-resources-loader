@@ -1,3 +1,7 @@
+## 1.3.3 (December 17, 2019)
+
+* Add `test` option;
+
 ## 1.3.0 ~ 1.3.2 (November 11, 2019)
 
 * Support for relative path in patterns.
