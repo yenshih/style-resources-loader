@@ -39,6 +39,12 @@ describe('style-resources-loader', () => {
         describe(format, () => {
             const execTest = execTestOf(format);
 
+            describe('test', () => {
+                it('should work with a string', execTest('string-test'));
+                it('should work with an RegExp object', execTest('regexp-test'));
+                it('should work with customized function', execTest('customized-test'));
+            });
+
             describe('patterns', () => {
                 it('should work with a string', execTest('string-pattern'));
                 it('should work with an array of string', execTest('array-of-string-patterns'));
@@ -63,6 +69,20 @@ describe('style-resources-loader', () => {
                     `${LOADER_NAME} has been initialised using an ${VALIDATION_BASE_DATA_PATH} object ` +
                     'that does not match the API schema.';
 
+                it(
+                    "should cause an error when `options.test` isn't a string or RegExp or function",
+                    execTest('invalid-test', {}, err =>
+                        expect(err).toMatchObject({
+                            message: expect.stringContaining(
+                                [
+                                    VALIDATION_ERROR_MESSAGE,
+                                    " - options misses the property 'test'. Should be:",
+                                    '   string | RegExp | Function',
+                                ].join('\n'),
+                            ),
+                        }),
+                    ),
+                );
                 it(
                     'should cause an error when `options.patterns` is neither a string nor an array of string',
                     execTest('invalid-patterns', {}, err =>
