@@ -13,10 +13,11 @@
         src="https://webpack.js.org/assets/icon-square-big.svg"
     >
   </a>
-  <h1>Style Resources Loader</h1>
+  <h1>@jhuix/style-resources-loader</h1>
   <p>CSS processor resources loader for webpack.</p>
 </div>
 
+This [@jhuix/style-resources-loader](https://github.com/jhuix/style-resources-loader) is based on [style-resources-loader](https://github.com/yenshih/style-resources-loader), which extends [`test`](#test) option. 
 
 <h2 align="center">Install</h2>
 
@@ -48,7 +49,7 @@ module.exports = {
         rules: [{
             test: /\.scss$/,
             use: ['style-loader', 'css-loader', 'sass-loader', {
-                loader: 'style-resources-loader',
+                loader: '@jhuix/style-resources-loader',
                 options: {
                     patterns: [
                         './path/from/context/to/scss/variables/*.scss',
@@ -72,7 +73,7 @@ module.exports = {
         rules: [{
             test: /\.less$/,
             use: ['style-loader', 'css-loader', 'less-loader', {
-                loader: 'style-resources-loader',
+                loader: '@jhuix/style-resources-loader',
                 options: {
                     patterns: path.resolve(__dirname, 'path/to/less/variables/*.less'),
                     injector: 'append'
@@ -94,7 +95,7 @@ module.exports = {
         rules: [{
             test: /\.styl$/,
             use: ['style-loader', 'css-loader', 'stylus-loader', {
-                loader: 'style-resources-loader',
+                loader: '@jhuix/style-resources-loader',
                 options: {
                     test:/main/
                     patterns: [
