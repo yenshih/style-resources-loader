@@ -2,7 +2,7 @@
   "name": "@jhuix/style-resources-loader",
   "version": "1.3.3",
   "private": false,
-  "description": "CSS processor resources loader for webpack",
+  "description": "CSS processor resources loader for webpack, which extends test option.",
   "author": "Jhuix <jhuix0117@gmail.com>",
   "license": "MIT",
   "engines": {
