@@ -1,4 +1,3 @@
-import {EOL} from 'os';
 import path from 'path';
 
 import {StyleResourcesFileFormat, StyleResourcesLoaderOptions} from '../../src';
@@ -12,7 +11,7 @@ export default (format: StyleResourcesFileFormat): StyleResourcesLoaderOptions =
         const combineAll = (type: string) =>
             resources
                 .filter(({file}) => file.includes(type))
-                .map(({content}) => (content.endsWith(EOL) ? content : `${content}${EOL}`))
+                .map(({content}) => (content.endsWith('\n') ? content : `${content}\n`))
                 .join('');
 
         return combineAll('mixins') + source + combineAll('variables');
