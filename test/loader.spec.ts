@@ -73,11 +73,15 @@ describe('style-resources-loader', () => {
                     "should cause an error when `options.test` isn't a string or RegExp or function",
                     execTest('invalid-test', {}, err =>
                         expect(err).toMatchObject({
-                            message: expect.stringContaining(
+                            message: expect.stringMatching(
                                 [
                                     VALIDATION_ERROR_MESSAGE,
-                                    " - options misses the property 'test'. Should be:",
-                                    '   string | RegExp | Function',
+                                    ' - options.test should be one of these:',
+                                    '   string | function | RegExp',
+                                    '   Details:',
+                                    '    * options.test should be a string.',
+                                    '    * options.test should be an instance of function.',
+                                    '    * options.test should be an instance of RegExp.',
                                 ].join('\n'),
                             ),
                         }),
@@ -143,7 +147,12 @@ describe('style-resources-loader', () => {
                     'should cause an error when `glob(...)` throws an error',
                     execTest('glob-throws-an-error', {}, err =>
                         expect(err).toMatchObject({
-                            message: expect.stringContaining('Error: EACCES: permission denied'),
+                            message:
+                                process.platform === 'win32'
+                                    ? expect.stringMatching(
+                                          'You may need an additional loader to handle the result of these loaders.',
+                                      )
+                                    : expect.stringContaining('Error: EACCES: permission denied'),
                         }),
                     ),
                 );

@@ -4,10 +4,7 @@ import {StyleResourcesFileFormat, StyleResourcesLoaderOptions} from '../../src';
 
 export default (format: StyleResourcesFileFormat): StyleResourcesLoaderOptions => ({
     test: filename => {
-        return typeof filename !== 'string';
+        return typeof filename === 'string' && filename.includes('.css');
     },
-    patterns: [
-        path.resolve(__dirname, `../${format}/variables/*.${format}`),
-        path.resolve(__dirname, `../${format}/mixins/*.${format}`),
-    ],
+    patterns: path.resolve(__dirname, `../${format}/resources/*.${format}`),
 });
