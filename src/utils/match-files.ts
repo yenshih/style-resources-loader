@@ -36,6 +36,14 @@ export const matchFiles = async (ctx: LoaderContext, options: StyleResourcesLoad
             return partialFiles.filter(isStyleFile);
         }),
     );
+    /*
+     * Glob always return unix style file path which would have problems on Windows.
+     * For more details, see: https://github.com/yenshih/style-resources-loader/issues/17
+     *
+     * Use path.resolve() method to convert the unix style file path to system compatible
+     * file path.
+     */
+    const systemCompatibleFiles = flatten(files).map(file => path.resolve(file));
 
-    return [...new Set(flatten(files))];
+    return [...new Set(systemCompatibleFiles)];
 };
