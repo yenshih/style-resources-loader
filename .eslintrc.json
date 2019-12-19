@@ -41,16 +41,13 @@
         "implicit-arrow-linebreak": "off",
         "max-len": ["error", 120],
         "max-lines-per-function": "off",
+        "max-statements": "off",
         "multiline-ternary": ["error", "always-multiline"],
         "no-confusing-arrow": "off",
         "no-implicit-coercion": "off",
         "no-mixed-operators": "off",
         "no-ternary": "off",
-        "no-unused-expressions": ["error", {
-            "allowShortCircuit": true,
-            "allowTernary": true,
-            "allowTaggedTemplates": true
-        }],
+        "no-unused-expressions": "off",
         "new-cap": "off",
         "no-shadow": "off",
         "one-var": ["error", "never"],
@@ -94,6 +91,11 @@
         "@typescript-eslint/no-parameter-properties": "off",
         "@typescript-eslint/no-type-alias": "off",
         "@typescript-eslint/no-unnecessary-condition": "off",
+        "@typescript-eslint/no-unused-expressions": ["error", {
+            "allowShortCircuit": true,
+            "allowTernary": true,
+            "allowTaggedTemplates": true
+        }],
         "@typescript-eslint/promise-function-async": "off",
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/typedef": "off",

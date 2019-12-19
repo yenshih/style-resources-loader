@@ -20,9 +20,11 @@ const execTestOf = (format: StyleResourcesFileFormat) => {
         try {
             await runWebpack(merge(baseConfig, config));
         } catch (err) {
+            const {message}: Error = err;
+
             if (!isFunction(assertError)) {
                 throw new Error(
-                    `${err.message}\nTest \`${testId}\` throws an error. ` +
+                    `${message}\nTest \`${testId}\` throws an error. ` +
                         'It requires an `assertError` function as the second argument in `execTest(...)`.',
                 );
             }
