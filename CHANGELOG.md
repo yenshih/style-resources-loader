@@ -1,3 +1,7 @@
+## 1.3.3 (December 19, 2019)
+
+* Fix resource files cache invalidation problems on Windows. [#17](https://github.com/yenshih/style-resources-loader/issues/17)
+
 ## 1.3.0 ~ 1.3.2 (November 11, 2019)
 
 * Support for relative path in patterns.
