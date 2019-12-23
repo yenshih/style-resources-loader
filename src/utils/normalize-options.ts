@@ -1,5 +1,3 @@
-import {EOL} from 'os';
-
 import {getOptions} from 'loader-utils';
 
 import {
@@ -15,7 +13,7 @@ import {validateOptions} from '.';
 const normalizePatterns = (patterns: StyleResourcesLoaderOptions['patterns']) =>
     Array.isArray(patterns) ? patterns : [patterns];
 
-const coerceContentEOL = (content: string) => (content.endsWith(EOL) ? content : `${content}${EOL}`);
+const coerceContentEOL = (content: string) => (content.endsWith('\n') ? content : `${content}\n`);
 const getResourceContent = ({content}: StyleResource) => coerceContentEOL(content);
 
 const normalizeInjector = (injector: StyleResourcesLoaderOptions['injector']): StyleResourcesNormalizedInjector => {
@@ -35,9 +33,10 @@ export const normalizeOptions = (ctx: LoaderContext): StyleResourcesLoaderNormal
 
     validateOptions<StyleResourcesLoaderOptions>(options);
 
-    const {patterns, injector, globOptions = {}, resolveUrl = true} = options;
+    const {test = '', patterns, injector, globOptions = {}, resolveUrl = true} = options;
 
     return {
+        test,
         patterns: normalizePatterns(patterns),
         injector: normalizeInjector(injector),
         globOptions,

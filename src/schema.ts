@@ -5,6 +5,17 @@ type Schema = Parameters<typeof validate>[0];
 export const schema: Schema = {
     type: 'object',
     properties: {
+        test: {
+            anyOf: [
+                {type: 'string'},
+                {
+                    instanceof: 'Function',
+                },
+                {
+                    instanceof: 'RegExp',
+                },
+            ],
+        },
         patterns: {
             anyOf: [
                 {type: 'string'},

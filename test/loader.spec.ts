@@ -39,6 +39,12 @@ describe('style-resources-loader', () => {
         describe(format, () => {
             const execTest = execTestOf(format);
 
+            describe('test', () => {
+                it('should work with a string', execTest('string-test'));
+                it('should work with an RegExp object', execTest('regexp-test'));
+                it('should work with customized function', execTest('customized-test'));
+            });
+
             describe('patterns', () => {
                 it('should work with a string', execTest('string-pattern'));
                 it('should work with an array of string', execTest('array-of-string-patterns'));
@@ -63,6 +69,24 @@ describe('style-resources-loader', () => {
                     `${LOADER_NAME} has been initialised using an ${VALIDATION_BASE_DATA_PATH} object ` +
                     'that does not match the API schema.';
 
+                it(
+                    "should cause an error when `options.test` isn't a string or RegExp or function",
+                    execTest('invalid-test', {}, err =>
+                        expect(err).toMatchObject({
+                            message: expect.stringMatching(
+                                [
+                                    VALIDATION_ERROR_MESSAGE,
+                                    ' - options.test should be one of these:',
+                                    '   string | function | RegExp',
+                                    '   Details:',
+                                    '    * options.test should be a string.',
+                                    '    * options.test should be an instance of function.',
+                                    '    * options.test should be an instance of RegExp.',
+                                ].join('\n'),
+                            ),
+                        }),
+                    ),
+                );
                 it(
                     'should cause an error when `options.patterns` is neither a string nor an array of string',
                     execTest('invalid-patterns', {}, err =>
@@ -123,7 +147,12 @@ describe('style-resources-loader', () => {
                     'should cause an error when `glob(...)` throws an error',
                     execTest('glob-throws-an-error', {}, err =>
                         expect(err).toMatchObject({
-                            message: expect.stringContaining('Error: EACCES: permission denied'),
+                            message:
+                                process.platform === 'win32'
+                                    ? expect.stringMatching(
+                                          'You may need an additional loader to handle the result of these loaders.',
+                                      )
+                                    : expect.stringContaining('Error: EACCES: permission denied'),
                         }),
                     ),
                 );
