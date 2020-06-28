@@ -31,7 +31,7 @@ const normalizeInjector = (injector: StyleResourcesLoaderOptions['injector']): S
 };
 
 export const normalizeOptions = (ctx: LoaderContext): StyleResourcesLoaderNormalizedOptions => {
-    const options = getOptions(ctx) || {};
+    const options = getOptions(ctx);
 
     validateOptions<StyleResourcesLoaderOptions>(options);
 

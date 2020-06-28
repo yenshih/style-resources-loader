@@ -1,7 +1,7 @@
 import webpack, {Configuration} from 'webpack';
 
 const runWebpack = (config: Configuration) =>
-    new Promise((resolve, reject) =>
+    new Promise((resolve, reject) => {
         webpack(config, (webpackErr, stats) => {
             const err =
                 webpackErr ||
@@ -9,7 +9,7 @@ const runWebpack = (config: Configuration) =>
                 (stats.hasWarnings() && stats.compilation.warnings[0]);
 
             err ? reject(err) : resolve();
-        }),
-    );
+        });
+    });
 
 export default runWebpack;

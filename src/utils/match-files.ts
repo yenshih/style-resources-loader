@@ -7,6 +7,7 @@ import {LoaderContext, StyleResourcesLoaderNormalizedOptions} from '..';
 
 import {isStyleFile} from '.';
 
+/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */
 const isLegacyWebpack = (ctx: any): ctx is {options: {context: string}} => !!ctx.options;
 
 const getRootContext = (ctx: LoaderContext) => {

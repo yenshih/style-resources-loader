@@ -3,8 +3,8 @@ import {errorMessage, isFunction, loadResources} from './utils';
 import {Loader, LoaderCallback} from '.';
 
 /* eslint-disable no-invalid-this */
-const loader: Loader = function(source) {
-    this.cacheable && this.cacheable();
+const loader: Loader = function (source) {
+    this.cacheable();
 
     const callback = this.async();
 

@@ -34,7 +34,7 @@ const execTestOf = (format: StyleResourcesFileFormat) => {
             return;
         }
 
-        const actualStyle = (await import(`../${format}/outputs/${testId}`)).default;
+        const actualStyle = ((await import(`../${format}/outputs/${testId}`)) as {default: string}).default;
         const expectedStyle = await readStyle(testId);
 
         expect(actualStyle).toBe(expectedStyle);

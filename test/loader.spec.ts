@@ -1,5 +1,3 @@
-import {ValidationError} from 'schema-utils';
-
 import {SUPPORTED_FILE_FORMATS, LOADER_NAME, VALIDATION_BASE_DATA_PATH} from '../src/utils';
 
 import {execTestOf} from './helpers';
@@ -59,21 +57,23 @@ describe('style-resources-loader', () => {
 
             describe('errors', () => {
                 const VALIDATION_ERROR_MESSAGE =
-                    `${ValidationError.name}: Invalid ${VALIDATION_BASE_DATA_PATH} object. ` +
-                    `${LOADER_NAME} has been initialised using an ${VALIDATION_BASE_DATA_PATH} object ` +
+                    `Invalid ${VALIDATION_BASE_DATA_PATH} object. ` +
+                    `${LOADER_NAME} has been initialized using an ${VALIDATION_BASE_DATA_PATH} object ` +
                     'that does not match the API schema.';
 
                 it(
                     'should cause an error when `options.patterns` is neither a string nor an array of string',
                     execTest('invalid-patterns', {}, err =>
                         expect(err).toMatchObject({
-                            message: expect.stringContaining(
-                                [
-                                    VALIDATION_ERROR_MESSAGE,
-                                    " - options misses the property 'patterns'. Should be:",
-                                    '   string | [string, ...] (should not have duplicate items)',
-                                ].join('\n'),
-                            ),
+                            error: {
+                                message: expect.stringContaining(
+                                    [
+                                        VALIDATION_ERROR_MESSAGE,
+                                        " - options misses the property 'patterns'. Should be:",
+                                        '   string | [string, ...] (should not have duplicate items)',
+                                    ].join('\n'),
+                                ),
+                            },
                         }),
                     ),
                 );
@@ -81,17 +81,19 @@ describe('style-resources-loader', () => {
                     "should cause an error when `options.injector` isn't a function or `prepend`, `append`",
                     execTest('invalid-injector', {}, err =>
                         expect(err).toMatchObject({
-                            message: expect.stringContaining(
-                                [
-                                    VALIDATION_ERROR_MESSAGE,
-                                    ' - options.injector should be one of these:',
-                                    '   "prepend" | "append" | function',
-                                    '   Details:',
-                                    '    * options.injector should be one of these:',
-                                    '      "prepend" | "append"',
-                                    '    * options.injector should be an instance of function.',
-                                ].join('\n'),
-                            ),
+                            error: {
+                                message: expect.stringContaining(
+                                    [
+                                        VALIDATION_ERROR_MESSAGE,
+                                        ' - options.injector should be one of these:',
+                                        '   "prepend" | "append" | function',
+                                        '   Details:',
+                                        '    * options.injector should be one of these:',
+                                        '      "prepend" | "append"',
+                                        '    * options.injector should be an instance of function.',
+                                    ].join('\n'),
+                                ),
+                            },
                         }),
                     ),
                 );
@@ -99,13 +101,15 @@ describe('style-resources-loader', () => {
                     "should cause an error when `options.globOptions` isn't an object",
                     execTest('invalid-glob-options', {}, err =>
                         expect(err).toMatchObject({
-                            message: expect.stringContaining(
-                                [
-                                    VALIDATION_ERROR_MESSAGE,
-                                    ' - options.globOptions should be an object:',
-                                    '   object { … }',
-                                ].join('\n'),
-                            ),
+                            error: {
+                                message: expect.stringContaining(
+                                    [
+                                        VALIDATION_ERROR_MESSAGE,
+                                        ' - options.globOptions should be an object:',
+                                        '   object { … }',
+                                    ].join('\n'),
+                                ),
+                            },
                         }),
                     ),
                 );
@@ -113,9 +117,11 @@ describe('style-resources-loader', () => {
                     "should cause an error when `options.resolveUrl` isn't a boolean",
                     execTest('invalid-resolve-url', {}, err =>
                         expect(err).toMatchObject({
-                            message: expect.stringContaining(
-                                [VALIDATION_ERROR_MESSAGE, ' - options.resolveUrl should be a boolean.'].join('\n'),
-                            ),
+                            error: {
+                                message: expect.stringContaining(
+                                    [VALIDATION_ERROR_MESSAGE, ' - options.resolveUrl should be a boolean.'].join('\n'),
+                                ),
+                            },
                         }),
                     ),
                 );

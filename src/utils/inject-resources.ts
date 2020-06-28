@@ -1,6 +1,6 @@
 import {StyleResources, StyleResourcesLoaderNormalizedOptions} from '..';
 
-import {isPromise, errorMessage} from '.';
+import {errorMessage} from '.';
 
 export const injectResources = async (
     options: StyleResourcesLoaderNormalizedOptions,
@@ -9,9 +9,9 @@ export const injectResources = async (
 ) => {
     const {injector} = options;
 
-    const dist: any = injector(source, resources);
+    const dist: unknown = injector(source, resources);
 
-    const content = isPromise(dist) ? await dist : dist;
+    const content = await dist;
 
     if (typeof content !== 'string') {
         throw new Error(errorMessage.invalidInjectorReturn);

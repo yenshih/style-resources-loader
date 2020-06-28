@@ -4,6 +4,10 @@ import {Configuration} from 'webpack';
 
 import {StyleResourcesFileFormat} from '../../src';
 
+interface OptionsFactoryModule {
+    default: (format: StyleResourcesFileFormat) => any;
+}
+
 const createBaseConfigOf = (format: StyleResourcesFileFormat) => async (
     testId: string,
     isError = false,
@@ -24,7 +28,7 @@ const createBaseConfigOf = (format: StyleResourcesFileFormat) => async (
                     ...(isError ? [] : ['raw-loader']),
                     {
                         loader: '../src/index.ts',
-                        options: (await import(`../options/${testId}`)).default(format),
+                        options: ((await import(`../options/${testId}`)) as OptionsFactoryModule).default(format),
                     },
                 ],
             },

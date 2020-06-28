@@ -7,7 +7,7 @@
         },
         "project": [
             "tsconfig.json",
-            "./test/tsconfig.json"
+            "test/tsconfig.json"
         ]
     },
     "extends": [
@@ -33,73 +33,198 @@
         "features": true
     },
     "rules": {
-        "array-element-newline": ["error", "consistent"],
-        "arrow-parens": ["error", "as-needed"],
-        "comma-dangle": ["error", "always-multiline"],
-        "dot-location": ["error", "property"],
-        "func-names": ["error", "as-needed"],
+        "array-element-newline": [
+            "error",
+            "consistent"
+        ],
+        "arrow-parens": [
+            "error",
+            "as-needed"
+        ],
+        "class-methods-use-this": "off",
+        "comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
+        "dot-location": [
+            "error",
+            "property"
+        ],
+        "func-names": [
+            "error",
+            "as-needed"
+        ],
+        "id-length": "off",
         "implicit-arrow-linebreak": "off",
-        "max-len": ["error", 120],
+        "init-declarations": "off",
+        "max-len": [
+            "error",
+            120
+        ],
+        "max-lines": "off",
         "max-lines-per-function": "off",
+        "max-params": "off",
         "max-statements": "off",
-        "multiline-ternary": ["error", "always-multiline"],
+        "multiline-ternary": [
+            "error",
+            "always-multiline"
+        ],
+        "no-await-in-loop": "off",
+        "no-bitwise": "off",
         "no-confusing-arrow": "off",
+        "no-constant-condition": [
+            "error",
+            {
+                "checkLoops": false
+            }
+        ],
+        "no-continue": "off",
+        "no-empty": "off",
         "no-implicit-coercion": "off",
+        "no-invalid-this": "off",
         "no-mixed-operators": "off",
+        "no-process-env": "off",
+        "no-shadow": "off",
         "no-ternary": "off",
         "no-unused-expressions": "off",
         "new-cap": "off",
-        "no-shadow": "off",
-        "one-var": ["error", "never"],
-        "padded-blocks": ["error", "never"],
+        "one-var": [
+            "error",
+            "never"
+        ],
+        "padded-blocks": [
+            "error",
+            "never"
+        ],
         "padding-line-between-statements": [
             "error",
             {
                 "blankLine": "always",
-                "prev": ["const", "let", "var"],
+                "prev": [
+                    "const",
+                    "let",
+                    "var"
+                ],
                 "next": "*"
             },
             {
                 "blankLine": "always",
                 "prev": "*",
-                "next": ["const", "let", "var"]
+                "next": [
+                    "const",
+                    "let",
+                    "var"
+                ]
             },
             {
                 "blankLine": "any",
-                "prev": ["const", "let", "var"],
-                "next": ["const", "let", "var"]
+                "prev": [
+                    "const",
+                    "let",
+                    "var"
+                ],
+                "next": [
+                    "const",
+                    "let",
+                    "var"
+                ]
             },
             {
                 "blankLine": "always",
                 "prev": "*",
                 "next": "return"
+            },
+            {
+                "blankLine": "always",
+                "prev": "block-like",
+                "next": "*"
+            },
+            {
+                "blankLine": "always",
+                "prev": "*",
+                "next": "block-like"
             }
         ],
-        "quote-props": ["error", "as-needed"],
-        "quotes": ["error", "single", {"avoidEscape": true}],
+        "prefer-destructuring": [
+            "error",
+            {
+                "object": true,
+                "array": false
+            }
+        ],
+        "quote-props": [
+            "error",
+            "as-needed"
+        ],
+        "quotes": [
+            "error",
+            "single",
+            {
+                "avoidEscape": true
+            }
+        ],
         "sort-imports": "off",
         "sort-keys": "off",
         "wrap-regex": "off",
 
+        "import/default": "off",
+
         "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/explicit-member-accessibility": ["error", {
-            "accessibility": "no-public"
-        }],
+        "@typescript-eslint/explicit-member-accessibility": [
+            "error",
+            {
+                "accessibility": "no-public"
+            }
+        ],
+        "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/generic-type-naming": "off",
+        "@typescript-eslint/naming-convention": "off",
+        "@typescript-eslint/no-dynamic-delete": "off",
+        "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-invalid-this": "off",
+        "@typescript-eslint/no-invalid-void-type": "off",
         "@typescript-eslint/no-magic-numbers": "off",
+        "@typescript-eslint/no-misused-promises": "off",
         "@typescript-eslint/no-parameter-properties": "off",
+        "@typescript-eslint/no-throw-literal": "off",
         "@typescript-eslint/no-type-alias": "off",
         "@typescript-eslint/no-unnecessary-condition": "off",
-        "@typescript-eslint/no-unused-expressions": ["error", {
-            "allowShortCircuit": true,
-            "allowTernary": true,
-            "allowTaggedTemplates": true
-        }],
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unused-expressions": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "ignoreRestSiblings": true
+            }
+        ],
+        "@typescript-eslint/prefer-readonly-parameter-types": "off",
         "@typescript-eslint/promise-function-async": "off",
+        "@typescript-eslint/restrict-template-expressions": [
+            "error",
+            {
+                "allowNumber": true
+            }
+        ],
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/typedef": "off",
 
         "prettier/prettier": "error"
+    },
+    "overrides": [
+        {
+            "files": ["*.spec.ts"],
+            "rules": {
+                "@typescript-eslint/init-declarations": "off"
+            }
+        }
+    ],
+    "settings": {
+        "import/parsers": {
+            "@typescript-eslint/parser": [
+                ".ts",
+                ".tsx"
+            ]
+        }
     }
 }
