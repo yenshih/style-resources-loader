@@ -1,6 +1,6 @@
-import {StyleResources, StyleResourcesLoaderNormalizedOptions} from '..';
+import type {StyleResources, StyleResourcesLoaderNormalizedOptions} from '..';
 
-import {errorMessage} from '.';
+import {errorMessage} from './error-message';
 
 export const injectResources = async (
     options: StyleResourcesLoaderNormalizedOptions,

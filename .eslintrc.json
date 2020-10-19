@@ -12,7 +12,6 @@
     },
     "extends": [
         "eslint:all",
-        "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/all",
         "plugin:import/errors",
         "plugin:import/typescript",
@@ -42,10 +41,7 @@
             "as-needed"
         ],
         "class-methods-use-this": "off",
-        "comma-dangle": [
-            "error",
-            "always-multiline"
-        ],
+        "comma-dangle": "off",
         "dot-location": [
             "error",
             "property"
@@ -79,11 +75,13 @@
             }
         ],
         "no-continue": "off",
+        "no-duplicate-imports": "off",
         "no-empty": "off",
         "no-implicit-coercion": "off",
         "no-invalid-this": "off",
         "no-mixed-operators": "off",
         "no-process-env": "off",
+        "no-promise-executor-return": "off",
         "no-shadow": "off",
         "no-ternary": "off",
         "no-unused-expressions": "off",
@@ -168,7 +166,31 @@
         "wrap-regex": "off",
 
         "import/default": "off",
+        "import/exports-last": "error",
+        "import/first": "error",
+        "import/newline-after-import": "error",
+        "import/no-absolute-path": "error",
+        "import/no-amd": "error",
+        "import/no-anonymous-default-export": "off",
+        "import/no-commonjs": "error",
+        "import/no-cycle": "error",
+        "import/no-duplicates": "error",
+        "import/no-dynamic-require": "error",
+        "import/no-extraneous-dependencies": "error",
+        "import/no-mutable-exports": "error",
+        "import/no-named-default": "error",
+        "import/no-nodejs-modules": "off",
+        "import/no-self-import": "error",
+        "import/no-unassigned-import": "error",
+        "import/no-unused-modules": "error",
+        "import/no-useless-path-segments": "error",
+        "import/no-webpack-loader-syntax": "error",
+        "import/unambiguous": "error",
 
+        "@typescript-eslint/comma-dangle": [
+            "error",
+            "always-multiline"
+        ],
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-member-accessibility": [
             "error",
@@ -182,11 +204,13 @@
         "@typescript-eslint/no-dynamic-delete": "off",
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-implicit-any-catch": "off",
         "@typescript-eslint/no-invalid-this": "off",
         "@typescript-eslint/no-invalid-void-type": "off",
         "@typescript-eslint/no-magic-numbers": "off",
         "@typescript-eslint/no-misused-promises": "off",
         "@typescript-eslint/no-parameter-properties": "off",
+        "@typescript-eslint/no-shadow": "off",
         "@typescript-eslint/no-throw-literal": "off",
         "@typescript-eslint/no-type-alias": "off",
         "@typescript-eslint/no-unnecessary-condition": "off",

@@ -1,6 +1,7 @@
-import webpack, {Configuration} from 'webpack';
+import webpack from 'webpack';
+import type {Configuration} from 'webpack';
 
-const runWebpack = (config: Configuration) =>
+export const runWebpack = (config: Configuration) =>
     new Promise((resolve, reject) => {
         webpack(config, (webpackErr, stats) => {
             const err =
@@ -11,5 +12,3 @@ const runWebpack = (config: Configuration) =>
             err ? reject(err) : resolve();
         });
     });
-
-export default runWebpack;

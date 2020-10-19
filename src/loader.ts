@@ -1,6 +1,6 @@
 import {errorMessage, isFunction, loadResources} from './utils';
 
-import {Loader, LoaderCallback} from '.';
+import type {Loader, LoaderCallback} from '.';
 
 /* eslint-disable no-invalid-this */
 const loader: Loader = function (source) {

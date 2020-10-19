@@ -2,7 +2,7 @@ import {EOL} from 'os';
 
 import {getOptions} from 'loader-utils';
 
-import {
+import type {
     LoaderContext,
     StyleResource,
     StyleResourcesNormalizedInjector,
@@ -10,7 +10,7 @@ import {
     StyleResourcesLoaderNormalizedOptions,
 } from '..';
 
-import {validateOptions} from '.';
+import {validateOptions} from './validate-options';
 
 const normalizePatterns = (patterns: StyleResourcesLoaderOptions['patterns']) =>
     Array.isArray(patterns) ? patterns : [patterns];

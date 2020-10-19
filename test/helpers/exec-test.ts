@@ -1,12 +1,14 @@
-import {Configuration} from 'webpack';
+import type {Configuration} from 'webpack';
 import merge from 'webpack-merge';
 
-import {StyleResourcesFileFormat} from '../../src';
+import type {StyleResourcesFileFormat} from '../../src';
 import {isFunction} from '../../src/utils';
 
-import {createBaseConfigOf, readStyleOf, runWebpack} from '.';
+import {createBaseConfigOf} from './create-base-config';
+import {readStyleOf} from './read-style';
+import {runWebpack} from './run-webpack';
 
-const execTestOf = (format: StyleResourcesFileFormat) => {
+export const execTestOf = (format: StyleResourcesFileFormat) => {
     const createBaseConfig = createBaseConfigOf(format);
     const readStyle = readStyleOf(format);
 
@@ -42,5 +44,3 @@ const execTestOf = (format: StyleResourcesFileFormat) => {
 
     return execTest;
 };
-
-export default execTestOf;

@@ -3,7 +3,7 @@ import {EOL} from 'os';
 import path from 'path';
 import util from 'util';
 
-import {StyleResourcesFileFormat, StyleResourcesLoaderOptions} from '../../src';
+import type {StyleResourcesFileFormat, StyleResourcesLoaderOptions} from '../../src';
 
 export default (format: StyleResourcesFileFormat): StyleResourcesLoaderOptions => ({
     patterns: [

@@ -1,4 +1,4 @@
-import {PACKAGE_NAME, ISSUES_URL} from '.';
+import {PACKAGE_NAME, ISSUES_URL} from './constants';
 
 const formatErrorMessage = (message: string) => `[${PACKAGE_NAME}] ${message}`;
 

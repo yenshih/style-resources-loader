@@ -1,6 +1,8 @@
-import {LoaderContext, LoaderCallback} from '..';
+import type {LoaderContext, LoaderCallback} from '..';
 
-import {normalizeOptions, getResources, injectResources} from '.';
+import {getResources} from './get-resources';
+import {injectResources} from './inject-resources';
+import {normalizeOptions} from './normalize-options';
 
 export const loadResources = async (ctx: LoaderContext, source: string, callback: LoaderCallback) => {
     try {

@@ -1,6 +1,6 @@
 import path from 'path';
 
-import {StyleResourcesFileFormat} from '../../src';
+import type {StyleResourcesFileFormat} from '../../src';
 
 export default (format: StyleResourcesFileFormat) => ({
     patterns: [

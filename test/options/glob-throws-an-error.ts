@@ -1,6 +1,6 @@
 import path from 'path';
 
-import {StyleResourcesLoaderOptions} from '../../src';
+import type {StyleResourcesLoaderOptions} from '../../src';
 
 export default (): StyleResourcesLoaderOptions => ({
     patterns: path.resolve('/**'),

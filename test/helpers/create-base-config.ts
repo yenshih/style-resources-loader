@@ -1,14 +1,14 @@
 import path from 'path';
 
-import {Configuration} from 'webpack';
+import type {Configuration} from 'webpack';
 
-import {StyleResourcesFileFormat} from '../../src';
+import type {StyleResourcesFileFormat} from '../../src';
 
 interface OptionsFactoryModule {
     default: (format: StyleResourcesFileFormat) => any;
 }
 
-const createBaseConfigOf = (format: StyleResourcesFileFormat) => async (
+export const createBaseConfigOf = (format: StyleResourcesFileFormat) => async (
     testId: string,
     isError = false,
 ): Promise<Configuration> => ({
@@ -35,5 +35,3 @@ const createBaseConfigOf = (format: StyleResourcesFileFormat) => async (
         ],
     },
 });
-
-export default createBaseConfigOf;

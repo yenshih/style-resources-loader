@@ -1,6 +1,6 @@
 import path from 'path';
 
-import {StyleResourcesFileFormat} from '../../src';
+import type {StyleResourcesFileFormat} from '../../src';
 
 const ARBITRARY_NUMBER = 0;
 

@@ -1,9 +1,10 @@
 import fs from 'fs';
 import util from 'util';
 
-import {LoaderContext, StyleResource, StyleResourcesLoaderNormalizedOptions} from '..';
+import type {LoaderContext, StyleResource, StyleResourcesLoaderNormalizedOptions} from '..';
 
-import {matchFiles, resolveImportUrl} from '.';
+import {matchFiles} from './match-files';
+import {resolveImportUrl} from './resolve-import-url';
 
 export const getResources = async (ctx: LoaderContext, options: StyleResourcesLoaderNormalizedOptions) => {
     const {resolveUrl} = options;

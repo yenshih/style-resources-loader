@@ -1,5 +1,5 @@
-import {loader} from 'webpack';
-import glob from 'glob';
+import type {loader} from 'webpack';
+import type glob from 'glob';
 
 export type Loader = loader.Loader;
 

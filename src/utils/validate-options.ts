@@ -1,8 +1,8 @@
-import validate from 'schema-utils';
+import {validate} from 'schema-utils';
 
-import {schema} from '..';
+import {schema} from '../schema';
 
-import {LOADER_NAME, VALIDATION_BASE_DATA_PATH} from '.';
+import {LOADER_NAME, VALIDATION_BASE_DATA_PATH} from './constants';
 
 export const validateOptions: <T extends unknown>(options: any) => asserts options is T = options =>
     validate(schema, options, {

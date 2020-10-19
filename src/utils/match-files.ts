@@ -3,9 +3,9 @@ import util from 'util';
 
 import glob from 'glob';
 
-import {LoaderContext, StyleResourcesLoaderNormalizedOptions} from '..';
+import type {LoaderContext, StyleResourcesLoaderNormalizedOptions} from '..';
 
-import {isStyleFile} from '.';
+import {isStyleFile} from './type-guards';
 
 /* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */
 const isLegacyWebpack = (ctx: any): ctx is {options: {context: string}} => !!ctx.options;
