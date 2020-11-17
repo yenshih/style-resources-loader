@@ -1,6 +1,6 @@
 {
   "name": "style-resources-loader",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "CSS processor resources loader for webpack",
   "author": "Yan Shi <yenshih95@gmail.com> (https://github.com/yenshih)",
   "license": "MIT",
