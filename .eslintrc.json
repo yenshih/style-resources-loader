@@ -41,7 +41,6 @@
             "as-needed"
         ],
         "class-methods-use-this": "off",
-        "comma-dangle": "off",
         "dot-location": [
             "error",
             "property"
@@ -52,7 +51,6 @@
         ],
         "id-length": "off",
         "implicit-arrow-linebreak": "off",
-        "init-declarations": "off",
         "max-len": [
             "error",
             120
@@ -76,15 +74,18 @@
         ],
         "no-continue": "off",
         "no-duplicate-imports": "off",
-        "no-empty": "off",
+        "no-empty": [
+            "error",
+            {
+                "allowEmptyCatch": true
+            }
+        ],
         "no-implicit-coercion": "off",
         "no-invalid-this": "off",
         "no-mixed-operators": "off",
         "no-process-env": "off",
         "no-promise-executor-return": "off",
-        "no-shadow": "off",
         "no-ternary": "off",
-        "no-unused-expressions": "off",
         "new-cap": "off",
         "one-var": [
             "error",
@@ -201,6 +202,12 @@
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/generic-type-naming": "off",
         "@typescript-eslint/naming-convention": "off",
+        "@typescript-eslint/no-confusing-void-expression": [
+            "error",
+            {
+                "ignoreArrowShorthand": true
+            }
+        ],
         "@typescript-eslint/no-dynamic-delete": "off",
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/no-explicit-any": "off",
@@ -208,14 +215,20 @@
         "@typescript-eslint/no-invalid-this": "off",
         "@typescript-eslint/no-invalid-void-type": "off",
         "@typescript-eslint/no-magic-numbers": "off",
-        "@typescript-eslint/no-misused-promises": "off",
         "@typescript-eslint/no-parameter-properties": "off",
         "@typescript-eslint/no-shadow": "off",
         "@typescript-eslint/no-throw-literal": "off",
         "@typescript-eslint/no-type-alias": "off",
         "@typescript-eslint/no-unnecessary-condition": "off",
         "@typescript-eslint/no-unsafe-assignment": "off",
-        "@typescript-eslint/no-unused-expressions": "off",
+        "@typescript-eslint/no-unused-expressions": [
+            "error",
+            {
+                "allowShortCircuit": true,
+                "allowTernary": true,
+                "allowTaggedTemplates": true
+            }
+        ],
         "@typescript-eslint/no-unused-vars": [
             "error",
             {

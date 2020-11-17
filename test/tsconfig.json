@@ -2,9 +2,12 @@
     "extends": "../tsconfig",
     "compilerOptions": {
         "removeComments": false,
-        "noEmit": true
+        "noEmit": true,
+        "types": [
+            "jest"
+        ]
     },
     "include": [
         "./**/*"
-    ]
+    ],
 }

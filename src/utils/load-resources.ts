@@ -12,8 +12,8 @@ export const loadResources = async (ctx: LoaderContext, source: string, callback
 
         const content = await injectResources(options, source, resources);
 
-        return callback(null, content);
+        callback(null, content);
     } catch (err) {
-        return callback(err);
+        callback(err);
     }
 };

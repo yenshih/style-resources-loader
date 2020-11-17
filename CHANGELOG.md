@@ -1,3 +1,7 @@
+## 1.4.0 (November 17, 2020)
+
+* Support webpack 5. [#29](https://github.com/yenshih/style-resources-loader/issues/29)
+
 ## 1.3.3 (December 19, 2019)
 
 * Fix resource files cache invalidation problems on Windows. [#17](https://github.com/yenshih/style-resources-loader/issues/17)

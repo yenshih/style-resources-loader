@@ -3,10 +3,11 @@
         "rootDir": ".",
         "outDir": "lib",
         "module": "commonjs",
-        "target": "esnext",
+        "target": "es2019",
         "moduleResolution": "node",
         "jsx": "react",
         "strict": true,
+        "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
@@ -15,9 +16,17 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "sourceMap": true,
+        "baseUrl": ".",
+        "paths": {
+            "tapable": ["node_modules/@types/tapable"],
+            "webpack": ["node_modules/@types/webpack"]
+        },
         "lib": [
             "dom",
-            "esnext"
+            "es2019"
+        ],
+        "types": [
+            "node"
         ]
     },
     "include": [

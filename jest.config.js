@@ -1,7 +1,7 @@
 module.exports = {
     globals: {
         'ts-jest': {
-            tsConfig: 'test/tsconfig.json',
+            tsconfig: 'test/tsconfig.json',
         },
     },
     testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
