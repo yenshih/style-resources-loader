@@ -16,7 +16,7 @@ export interface StyleResource {
 
 export type StyleResources = StyleResource[];
 
-export type StyleResourcesFunctionalInjector = (source: string, resources: StyleResources) => string | Promise<string>;
+export type StyleResourcesFunctionalInjector = (source: string, resources: StyleResources, ctx: LoaderContext) => string | Promise<string>;
 
 export type StyleResourcesInjector = 'prepend' | 'append' | StyleResourcesFunctionalInjector;
 
