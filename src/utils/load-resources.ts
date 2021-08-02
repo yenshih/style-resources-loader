@@ -10,7 +10,7 @@ export const loadResources = async (ctx: LoaderContext, source: string, callback
 
         const resources = await getResources(ctx, options);
 
-        const content = await injectResources(options, source, resources);
+        const content = await injectResources(options, source, resources, ctx);
 
         callback(null, content);
     } catch (err) {
