@@ -100,7 +100,7 @@ module.exports = {
                         path.resolve(__dirname, 'path/to/stylus/variables/*.styl'),
                         path.resolve(__dirname, 'path/to/stylus/mixins/*.styl')
                     ],
-                    injector: (source, resources) => {
+                    injector: (source, resources, ctx) => {
                         const combineAll = type => resources
                             .filter(({ file }) => file.includes(type))
                             .map(({ content }) => content)
@@ -157,15 +157,16 @@ It defaults to `'prepend'`, which implements as an injector function internally.
 Furthermore, an injector function should match the following type signature:
 
 ```ts
-(source: string, resources: StyleResource[]) => string | Promise<string>
+(source: string, resources: StyleResource[], ctx: LoaderContext) => string | Promise<string>
 ```
 
-It receives two parameters:
+It receives three parameters:
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**`source`**|`{string}`|`/`|Content of the source file|
 |**[`resources`](#resources)**|`{StyleResource[]}`|`/`|Resource descriptors|
+|**`ctx`**|`{LoaderContext}`|`/`|loader context|
 
 #### `resources`
 

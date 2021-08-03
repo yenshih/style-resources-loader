@@ -26,9 +26,6 @@ export const schema: Schema = {
                 {
                     instanceof: 'Function',
                 },
-                {
-                    type: 'object',
-                },
             ],
         },
         globOptions: {
