@@ -1,7 +1,7 @@
 import fs from 'fs';
 import util from 'util';
 
-import type {LoaderContext, StyleResource, StyleResourcesLoaderNormalizedOptions} from '..';
+import type {LoaderContext, StyleResource, StyleResourcesLoaderNormalizedOptions} from '../types';
 
 import {matchFiles} from './match-files';
 import {resolveImportUrl} from './resolve-import-url';

@@ -3,7 +3,7 @@ import util from 'util';
 
 import glob from 'glob';
 
-import type {LoaderContext, StyleResourcesLoaderNormalizedOptions} from '..';
+import type {LoaderContext, StyleResourcesLoaderNormalizedOptions} from '../types';
 
 import {isStyleFile} from './type-guards';
 

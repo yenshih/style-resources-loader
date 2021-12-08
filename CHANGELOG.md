@@ -1,3 +1,7 @@
+## 1.5.0 (December 8, 2021)
+
+* Injector function is called with `this` context pointing to the loader context.
+
 ## 1.4.0 ~ 1.4.1 (November 17, 2020)
 
 * Support webpack 5. [#29](https://github.com/yenshih/style-resources-loader/issues/29)

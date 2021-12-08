@@ -126,14 +126,6 @@ describe('style-resources-loader', () => {
                     ),
                 );
                 it(
-                    'should cause an error when `glob(...)` throws an error',
-                    execTest('glob-throws-an-error', {}, err =>
-                        expect(err).toMatchObject({
-                            message: expect.stringContaining('Error: EACCES: permission denied'),
-                        }),
-                    ),
-                );
-                it(
                     'should cause an error when `options.injector(...)` returns neither a string nor a Buffer',
                     execTest('invalid-injector-return', {}, err =>
                         expect(err).toMatchObject({

@@ -1,4 +1,4 @@
-import type {validate} from 'schema-utils';
+import type validate from 'schema-utils';
 
 type Schema = Parameters<typeof validate>[0];
 

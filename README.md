@@ -100,7 +100,7 @@ module.exports = {
                         path.resolve(__dirname, 'path/to/stylus/variables/*.styl'),
                         path.resolve(__dirname, 'path/to/stylus/mixins/*.styl')
                     ],
-                    injector: (source, resources, ctx) => {
+                    injector: (source, resources) => {
                         const combineAll = type => resources
                             .filter(({ file }) => file.includes(type))
                             .map(({ content }) => content)
@@ -121,8 +121,8 @@ module.exports = {
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**[`patterns`](#patterns)**|`{string \| string[]}`|`/`|Path to the resources you would like to inject|
-|**[`injector`](#injector)**|`{Function \| 'prepend' \| 'append'}`|`'prepend'`|Controls the resources injection precisely|
-|**[`globOptions`](#globoptions)**|`{Object}`|`{}`|An options that can be passed to `glob(...)`|
+|**[`injector`](#injector)**|`{Injector \| 'prepend' \| 'append'}`|`'prepend'`|Controls the resources injection precisely|
+|**[`globOptions`](#globoptions)**|`{GlobOptions}`|`{}`|An options that can be passed to `glob(...)`|
 |**[`resolveUrl`](#resolveurl)**|`{boolean}`|`true`|Enable/Disable `@import` url to be resolved|
 
 See [the type definition file](https://github.com/yenshih/style-resources-loader/blob/master/src/types.ts) for more details.
@@ -157,25 +157,25 @@ It defaults to `'prepend'`, which implements as an injector function internally.
 Furthermore, an injector function should match the following type signature:
 
 ```ts
-(source: string, resources: StyleResource[], ctx: LoaderContext) => string | Promise<string>
+type Injector = (this: LoaderContext, source: string, resources: StyleResource[]) => string | Promise<string>
 ```
 
-It receives three parameters:
+It receives parameters:
 
-|Name|Type|Default|Description|
+|Name|Type|Description|
 |:--:|:--:|:-----:|:----------|
-|**`source`**|`{string}`|`/`|Content of the source file|
-|**[`resources`](#resources)**|`{StyleResource[]}`|`/`|Resource descriptors|
-|**`ctx`**|`{LoaderContext}`|`/`|loader context|
+|**`this`**|`{LoaderContext}`|Loader context|
+|**`source`**|`{string}`|Content of the source file|
+|**[`resources`](#resources)**|`{StyleResource[]}`|Resource descriptors|
 
 #### `resources`
 
 An array of resource descriptor, each contains `file` and `content` properties:
 
-|Name|Type|Default|Description|
+|Name|Type|Description|
 |:--:|:--:|:-----:|:----------|
-|**`file`**|`{string}`|`/`|Absolute path to the resource|
-|**`content`**|`{string}`|`/`|Content of the resource file|
+|**`file`**|`{string}`|Absolute path to the resource|
+|**`content`**|`{string}`|Content of the resource file|
 
 It can be asynchronous. You could use `async / await` syntax in your own injector function or just return a promise.
 

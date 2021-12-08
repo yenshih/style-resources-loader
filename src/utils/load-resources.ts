@@ -1,4 +1,4 @@
-import type {LoaderContext, LoaderCallback} from '..';
+import type {LoaderContext, LoaderCallback} from '../types';
 
 import {getResources} from './get-resources';
 import {injectResources} from './inject-resources';
@@ -10,10 +10,10 @@ export const loadResources = async (ctx: LoaderContext, source: string, callback
 
         const resources = await getResources(ctx, options);
 
-        const content = await injectResources(options, source, resources, ctx);
+        const content = await injectResources(ctx, options, source, resources);
 
         callback(null, content);
-    } catch (err) {
-        callback(err);
+    } catch (err: unknown) {
+        callback(err as Error);
     }
 };

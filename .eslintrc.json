@@ -15,8 +15,7 @@
         "plugin:@typescript-eslint/all",
         "plugin:import/errors",
         "plugin:import/typescript",
-        "prettier",
-        "prettier/@typescript-eslint"
+        "prettier"
     ],
     "plugins": [
         "@typescript-eslint",
@@ -86,6 +85,12 @@
         "no-process-env": "off",
         "no-promise-executor-return": "off",
         "no-ternary": "off",
+        "no-void": [
+            "error",
+            {
+                "allowAsStatement": true
+            }
+        ],
         "new-cap": "off",
         "one-var": [
             "error",
@@ -200,24 +205,46 @@
             }
         ],
         "@typescript-eslint/explicit-module-boundary-types": "off",
-        "@typescript-eslint/generic-type-naming": "off",
-        "@typescript-eslint/naming-convention": "off",
+        "@typescript-eslint/indent": "off",
+        "@typescript-eslint/naming-convention": [
+            "error",
+            {
+                "selector": "typeLike",
+                "format": ["PascalCase"]
+            }
+        ],
         "@typescript-eslint/no-confusing-void-expression": [
             "error",
             {
                 "ignoreArrowShorthand": true
             }
         ],
-        "@typescript-eslint/no-dynamic-delete": "off",
         "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-empty-interface": [
+            "error",
+            {
+                "allowSingleExtends": true
+            }
+        ],
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-extraneous-class": [
+            "error",
+            {
+                "allowWithDecorator": true
+            }
+        ],
         "@typescript-eslint/no-implicit-any-catch": "off",
         "@typescript-eslint/no-invalid-this": "off",
         "@typescript-eslint/no-invalid-void-type": "off",
         "@typescript-eslint/no-magic-numbers": "off",
+        "@typescript-eslint/no-misused-promises": [
+            "error",
+            {
+                "checksVoidReturn": false
+            }
+        ],
         "@typescript-eslint/no-parameter-properties": "off",
         "@typescript-eslint/no-shadow": "off",
-        "@typescript-eslint/no-throw-literal": "off",
         "@typescript-eslint/no-type-alias": "off",
         "@typescript-eslint/no-unnecessary-condition": "off",
         "@typescript-eslint/no-unsafe-assignment": "off",
@@ -232,15 +259,37 @@
         "@typescript-eslint/no-unused-vars": [
             "error",
             {
+                "args": "after-used",
                 "ignoreRestSiblings": true
             }
         ],
+        "@typescript-eslint/object-curly-spacing": [
+            "error",
+            "never"
+        ],
         "@typescript-eslint/prefer-readonly-parameter-types": "off",
+        "@typescript-eslint/prefer-ts-expect-error": "off",
         "@typescript-eslint/promise-function-async": "off",
+        "@typescript-eslint/quotes": [
+            "error",
+            "single",
+            {
+                "avoidEscape": true
+            }
+        ],
         "@typescript-eslint/restrict-template-expressions": [
             "error",
             {
                 "allowNumber": true
+            }
+        ],
+        "@typescript-eslint/sort-type-union-intersection-members": "off",
+        "@typescript-eslint/space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "always",
+                "named": "never",
+                "asyncArrow": "always"
             }
         ],
         "@typescript-eslint/strict-boolean-expressions": "off",

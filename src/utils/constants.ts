@@ -1,4 +1,4 @@
-import type {StyleResourcesFileFormat} from '..';
+import type {StyleResourcesFileFormat} from '../types';
 
 export const PACKAGE_NAME = 'style-resources-loader';
 

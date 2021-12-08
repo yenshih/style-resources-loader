@@ -2,7 +2,6 @@ import {errorMessage, isFunction, loadResources} from './utils';
 
 import type {Loader, LoaderCallback} from '.';
 
-/* eslint-disable no-invalid-this */
 const loader: Loader = function (source) {
     this.cacheable();
 
@@ -17,9 +16,7 @@ const loader: Loader = function (source) {
         throw new Error(errorMessage.impossible);
     }
 
-    /* eslint-disable-next-line @typescript-eslint/no-floating-promises */
-    loadResources(this, source, callback);
+    void loadResources(this, source, callback);
 };
-/* eslint-enable no-invalid-this */
 
 export default loader;

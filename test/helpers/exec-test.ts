@@ -12,35 +12,37 @@ export const execTestOf = (format: StyleResourcesFileFormat) => {
     const createBaseConfig = createBaseConfigOf(format);
     const readStyle = readStyleOf(format);
 
-    const execTest = (
-        testId: string,
-        config: Configuration = {},
-        assertError: ((err: Error) => void) | null = null,
-    ) => async () => {
-        const baseConfig = await createBaseConfig(testId, !!assertError);
+    const execTest =
+        (testId: string, config: Configuration = {}, assertError: ((err: Error) => void) | null = null) =>
+        async () => {
+            const baseConfig = await createBaseConfig(testId, !!assertError);
 
-        try {
-            await runWebpack(merge(baseConfig, config));
-        } catch (err) {
-            const {message}: Error = err;
+            try {
+                await runWebpack(merge(baseConfig, config));
+            } catch (err) {
+                if (!(err instanceof Error)) {
+                    return;
+                }
 
-            if (!isFunction(assertError)) {
-                throw new Error(
-                    `${message}\nTest \`${testId}\` throws an error. ` +
-                        'It requires an `assertError` function as the second argument in `execTest(...)`.',
-                );
+                const {message}: Error = err;
+
+                if (!isFunction(assertError)) {
+                    throw new Error(
+                        `${message}\nTest \`${testId}\` throws an error. ` +
+                            'It requires an `assertError` function as the second argument in `execTest(...)`.',
+                    );
+                }
+
+                assertError(err);
+
+                return;
             }
 
-            assertError(err);
+            const actualStyle = ((await import(`../${format}/outputs/${testId}`)) as {default: string}).default;
+            const expectedStyle = await readStyle(testId);
 
-            return;
-        }
-
-        const actualStyle = ((await import(`../${format}/outputs/${testId}`)) as {default: string}).default;
-        const expectedStyle = await readStyle(testId);
-
-        expect(actualStyle).toBe(expectedStyle);
-    };
+            expect(actualStyle).toBe(expectedStyle);
+        };
 
     return execTest;
 };

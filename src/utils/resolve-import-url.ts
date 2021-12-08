@@ -1,6 +1,6 @@
 import path from 'path';
 
-import type {LoaderContext, StyleResource} from '..';
+import type {LoaderContext, StyleResource} from '../types';
 
 /* eslint-disable-next-line prefer-named-capture-group */
 const regex = /@(?:import|require)\s+(?:\([a-z,\s]+\)\s*)?['"]?([^'"\s;]+)['"]?;?/gu;

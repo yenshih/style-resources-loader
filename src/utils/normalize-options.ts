@@ -8,7 +8,7 @@ import type {
     StyleResourcesNormalizedInjector,
     StyleResourcesLoaderOptions,
     StyleResourcesLoaderNormalizedOptions,
-} from '..';
+} from '../types';
 
 import {validateOptions} from './validate-options';
 
