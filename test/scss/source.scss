@@ -4,6 +4,9 @@ html {
 body {
     background: $body-background;
 }
+div {
+    background: $panel-background;
+}
 #root {
     @include size(100%);
 }
