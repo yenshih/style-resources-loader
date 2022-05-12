@@ -23,7 +23,7 @@ export const resolveImportUrl = (ctx: LoaderContext, {file, content}: StyleResou
             return match.replace(pathToResource, relativePathFromContextToResource);
         })
         .replace(regexUrl, (content: string, pathToResource?: string) => {
-            if (!pathToResource || /^(?:data:|~|\/)/u.test(pathToResource)) {
+            if (!pathToResource || /^(?:http|data:|~|\/)/u.test(pathToResource)) {
                 return content;
             }
 
