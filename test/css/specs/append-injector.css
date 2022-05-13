@@ -4,6 +4,9 @@ html {
 body {
     background: var(--body-background);
 }
+div {
+    background: var(--panel-background);
+}
 #root {
     @mixin size 100%;
 }
@@ -12,3 +15,4 @@ body {
 @import "~@angular/material/theming";
 @import 'variables/color';
 @import "variables/font.css";
+@import 'variables/urls.css';

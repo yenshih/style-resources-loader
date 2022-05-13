@@ -6,34 +6,71 @@ import type {LoaderContext, StyleResource} from '../types';
 const regexImport = /@(?:import|require)\s+(?:\([a-z,\s]+\)\s*)?['"]?([^'"\s;]+)['"]?;?/gu;
 const regexUrl = /url\(['"]?([^'"\s;]+)['"]?\)/gu;
 
-export const resolveImportUrl = (ctx: LoaderContext, {file, content}: StyleResource): StyleResource => ({
-    file,
-    content: content
-        .replace(regexImport, (match: string, pathToResource?: string) => {
-            if (!pathToResource || /^[~/]/u.test(pathToResource)) {
-                return match;
-            }
+const promisify = (ctx: LoaderContext) => (context: string, request: string) =>
+    new Promise<[Error, string]>(resolve => {
+        ctx.resolve(context, request, (err, result) => {
+            resolve([err, result]);
+        });
+    });
 
-            const absolutePathToResource = path.resolve(path.dirname(file), pathToResource);
-            const relativePathFromContextToResource = path
-                .relative(ctx.context, absolutePathToResource)
-                .split(path.sep)
-                .join('/');
+const resolvePossibleFiles = async (ctx: LoaderContext, file: string, pathToResource: string): Promise<string> => {
+    // Possibly relative to resource file, or alias
+    let [err, result] = await promisify(ctx)(file, pathToResource);
 
-            return match.replace(pathToResource, relativePathFromContextToResource);
-        })
-        .replace(regexUrl, (content: string, pathToResource?: string) => {
-            if (!pathToResource || /^(?:http|data:|~|\/)/u.test(pathToResource)) {
-                return content;
-            }
+    if (err) {
+        // Possibly relative to current file, or alias
+        [err, result] = await promisify(ctx)(ctx.context, pathToResource);
+    }
 
-            const absolutePathToResource = path.resolve(path.dirname(file), pathToResource);
+    if (err) {
+        // Not emit error because maybe there are async injector
+        result = path
+            .relative(ctx.context, path.resolve(path.dirname(file), pathToResource))
+            .split(path.sep)
+            .join('/');
+    }
 
-            const relativePathFromContextToResource = path
-                .relative(ctx.context, absolutePathToResource)
-                .split(path.sep)
-                .join('/');
+    return result;
+};
 
-            return content.replace(pathToResource, relativePathFromContextToResource);
-        }),
-});
+const asyncReplace = async (
+    str: string,
+    searchValue: RegExp,
+    replacer: (substring: string, ...args: any[]) => Promise<string>,
+) => {
+    const tasks: Promise<string>[] = [];
+
+    str.replace(searchValue, (match, ...args: unknown[]) => {
+        tasks.push(replacer(match, ...args));
+
+        return '';
+    });
+
+    const caches = await Promise.all(tasks);
+
+    return str.replace(searchValue, () => caches.shift() ?? '');
+};
+
+export const resolveImportUrl = async (ctx: LoaderContext, {file, content}: StyleResource): Promise<StyleResource> => {
+    let result = await asyncReplace(content, regexImport, async (match: string, pathToResource?: string) => {
+        if (!pathToResource || /^[~/]/u.test(pathToResource)) {
+            return match;
+        }
+
+        const filePath = await resolvePossibleFiles(ctx, file, pathToResource);
+
+        return match.replace(pathToResource, filePath);
+    });
+
+    result = await asyncReplace(result, regexUrl, async (match: string, pathToResource?: string) => {
+        if (!pathToResource || /^(?:http|data:|~|\/)/u.test(pathToResource)) {
+            return match;
+        }
+
+        const filePath = await resolvePossibleFiles(ctx, file, pathToResource);
+
+        return match.replace(pathToResource, filePath);
+    });
+
+    return {file, content: result};
+};

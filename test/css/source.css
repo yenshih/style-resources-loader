@@ -4,6 +4,9 @@ html {
 body {
     background: var(--body-background);
 }
+div {
+    background: var(--panel-background);
+}
 #root {
     @mixin size 100%;
 }
