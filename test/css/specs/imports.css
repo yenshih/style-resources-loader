@@ -1,13 +1,18 @@
-@import "mixins/size";
+@import "$CWD/test/css/mixins/size";
 @import '~bootstrap/mixins';
 @import "~@angular/material/theming";
-@import 'variables/color';
-@import "variables/font.css";
+@import "webpack/package.json";
+@import '$CWD/test/css/variables/color';
+@import "$CWD/test/css/variables/font.css";
+@import '$CWD/test/css/variables/urls.css';
 html {
     font-size: var(--html-font-size);
 }
 body {
     background: var(--body-background);
+}
+div {
+    background: var(--panel-background);
 }
 #root {
     @mixin size 100%;

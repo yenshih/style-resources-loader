@@ -1,5 +1,8 @@
 $body-background: #fff;
 $html-font-size: 100px;
+$panel-background: url('$CWD/test/scss/variables/a.png');
+$panel-background-alias: url('~@angular/material/theming/a.png');
+$panel-background-base64: url('data:image/jpeg;base64,bm90IGFjdHVhbGx5IGEganBlZyBmaWxlCg==');
 @mixin size($width, $height: $width) {
     width: $width;
     height: $height;
@@ -9,6 +12,9 @@ html {
 }
 body {
     background: $body-background;
+}
+div {
+    background: $panel-background;
 }
 #root {
     @include size(100%);

@@ -13,3 +13,5 @@ export const VALIDATION_BASE_DATA_PATH = 'options';
 export const SUPPORTED_FILE_FORMATS: StyleResourcesFileFormat[] = ['css', 'sass', 'scss', 'less', 'styl'];
 
 export const SUPPORTED_FILE_EXTS = SUPPORTED_FILE_FORMATS.map(type => `.${type}`);
+
+export const CWD = process.cwd();

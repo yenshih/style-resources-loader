@@ -1,13 +1,18 @@
 @import "../mixins/size";
 @import '~bootstrap/mixins';
 @import "~@angular/material/theming";
+@import "webpack/package.json";
 @import '../variables/color';
 @import "../variables/font.scss";
+@import "../variables/urls.sass";
 html {
     font-size: $html-font-size;
 }
 body {
     background: $body-background;
+}
+div {
+    background: $panel-background;
 }
 #root {
     @include size(100%);

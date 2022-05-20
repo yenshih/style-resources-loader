@@ -4,11 +4,16 @@ html {
 body {
     background: $body-background;
 }
+div {
+    background: $panel-background;
+}
 #root {
     @include size(100%);
 }
-@import "mixins/size";
+@import "$CWD/test/scss/mixins/size";
 @import '~bootstrap/mixins';
 @import "~@angular/material/theming";
-@import 'variables/color';
-@import "variables/font.scss";
+@import "webpack/package.json";
+@import '$CWD/test/scss/variables/color';
+@import "$CWD/test/scss/variables/font.scss";
+@import "$CWD/test/scss/variables/urls.sass";

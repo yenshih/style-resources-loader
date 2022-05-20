@@ -1,10 +1,13 @@
 @import "../mixins/size.styl"
 @require '~bootstrap/mixins'
 @import '~@angular/material/theming'
+@import "webpack/package.json";
 @import '../variables/*'
 html
     font-size html-font-size
 body
     background body-background
+div
+    background panel-background
 #root
     size 100%

@@ -7,5 +7,6 @@ export default (format: StyleResourcesFileFormat): StyleResourcesLoaderOptions =
         path.resolve(__dirname, `../${format}/mixins/size.${format}`),
         path.resolve(__dirname, `../${format}/variables/color.${format}`),
         path.resolve(__dirname, `../${format}/variables/font.${format}`),
+        path.resolve(__dirname, `../${format}/variables/urls.${format}`),
     ],
 });

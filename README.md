@@ -123,7 +123,7 @@ module.exports = {
 |**[`patterns`](#patterns)**|`string \| string[]`|`/`|Path to the resources you would like to inject|
 |**[`injector`](#injector)**|`Injector \| 'prepend' \| 'append'`|`'prepend'`|Controls the resources injection precisely|
 |**[`globOptions`](#globoptions)**|`GlobOptions`|`{}`|An options that can be passed to `glob(...)`|
-|**[`resolveUrl`](#resolveurl)**|`boolean`|`true`|Enable/Disable `@import` url to be resolved|
+|**[`resolveUrl`](#resolveurl)**|`boolean`|`true`|Enable/Disable `@import` url and `url()` to be resolved|
 
 See [the type definition file](https://github.com/yenshih/style-resources-loader/blob/master/src/types.ts) for more details.
 
@@ -190,9 +190,9 @@ Options that can be passed to `glob(...)`. See [node-glob options](https://githu
 
 ### `resolveUrl`
 
-A boolean which defaults to `true`. It represents whether the relative path in `@import` or `@require` statements should be resolved.
+A boolean which defaults to `true`. It represents whether the relative path in `@import` or `@require` and `url()` statements should be resolved.
 
-If you were to use `@import` or `@require` statements in style resource files, you should make sure that the URL is relative to that resource file, rather than the source file.
+If you were to use `@import` or `@require` or `url()` statements in style resource files, you should make sure that the URL is relative to that resource file, rather than the source file.
 
 You could disable this feature by setting `resolveUrl` to `false`.
 

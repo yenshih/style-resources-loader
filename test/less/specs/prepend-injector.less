@@ -1,13 +1,18 @@
-@import "mixins/size";
+@import "$CWD/test/less/mixins/size";
 @import (optional, once) '~bootstrap/mixins';
 @import "~@angular/material/theming";
-@import 'variables/color';
-@import "variables/font.less";
+@import "webpack/package.json";
+@import '$CWD/test/less/variables/color';
+@import "$CWD/test/less/variables/font.less";
+@import '$CWD/test/less/variables/urls.less';
 html {
     font-size: @html-font-size;
 }
 body {
     background: @body-background;
+}
+div {
+    background: @panel-background
 }
 #root {
     .size(100%);

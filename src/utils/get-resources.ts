@@ -18,7 +18,7 @@ export const getResources = async (ctx: LoaderContext, options: StyleResourcesLo
             const content = await util.promisify(fs.readFile)(file, 'utf8');
             const resource: StyleResource = {file, content};
 
-            return resolveUrl ? resolveImportUrl(ctx, resource) : resource;
+            return resolveUrl ? resolveImportUrl(resource) : resource;
         }),
     );
 

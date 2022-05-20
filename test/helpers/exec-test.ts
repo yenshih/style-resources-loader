@@ -2,9 +2,10 @@ import type {Configuration} from 'webpack';
 import merge from 'webpack-merge';
 
 import type {StyleResourcesFileFormat} from '../../src';
-import {isFunction} from '../../src/utils';
+import {CWD, isFunction} from '../../src/utils';
 
 import {createBaseConfigOf} from './create-base-config';
+import {injectVariable} from './inject-variable';
 import {readStyleOf} from './read-style';
 import {runWebpack} from './run-webpack';
 
@@ -39,7 +40,7 @@ export const execTestOf = (format: StyleResourcesFileFormat) => {
             }
 
             const actualStyle = ((await import(`../${format}/outputs/${testId}`)) as {default: string}).default;
-            const expectedStyle = await readStyle(testId);
+            const expectedStyle = injectVariable(await readStyle(testId), 'CWD', CWD);
 
             expect(actualStyle).toBe(expectedStyle);
         };
