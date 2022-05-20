@@ -6,10 +6,10 @@ div
     background: $panel-background
 #root
     +size(100%)
-@import mixins/size
+@import $CWD/test/sass/mixins/size
 @import ~bootstrap/mixins
 @import ~@angular/material/theming
-@import $CWD/node_modules/webpack/package.json
-@import variables/color
-@import variables/font.sass
-@import variables/urls.sass
+@import webpack/package.json
+@import $CWD/test/sass/variables/color
+@import $CWD/test/sass/variables/font.sass
+@import $CWD/test/sass/variables/urls.sass
